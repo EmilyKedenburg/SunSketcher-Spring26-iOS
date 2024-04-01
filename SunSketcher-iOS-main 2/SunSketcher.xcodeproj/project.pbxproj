@@ -1,0 +1,734 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8408892B2AD473A400F2A93C /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8408892A2AD473A400F2A93C /* CameraService.swift */; };
+		8408892D2AD477E500F2A93C /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8408892C2AD477E500F2A93C /* CameraView.swift */; };
+		84194DA92AE83FBB0057A0EB /* Sunset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84194DA82AE83FBB0057A0EB /* Sunset.swift */; };
+		8434D22A2A99221A0068D985 /* SunsketcherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434D2292A99221A0068D985 /* SunsketcherApp.swift */; };
+		8434D22C2A99221A0068D985 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434D22B2A99221A0068D985 /* ContentView.swift */; };
+		8434D22E2A99221B0068D985 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8434D22D2A99221B0068D985 /* Assets.xcassets */; };
+		8434D2312A99221B0068D985 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8434D2302A99221B0068D985 /* Preview Assets.xcassets */; };
+		848A5B482ABB3A64000DB76D /* CameraControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A5B472ABB3A64000DB76D /* CameraControl.swift */; };
+		84C307232AA8EC020052078B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C307222AA8EC020052078B /* LocationManager.swift */; };
+		84CDE40D2AB0C8560011ED23 /* LocToTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CDE40C2AB0C8560011ED23 /* LocToTime.swift */; };
+		84D07C7B2AD5A1D4001E1DD4 /* CustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D07C7A2AD5A1D4001E1DD4 /* CustomCameraView.swift */; };
+		D81784892B62B5C200922020 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81784882B62B5C200922020 /* MainScreen.swift */; };
+		D81B211F2B9F637900E21AE2 /* CountdownScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B211E2B9F637900E21AE2 /* CountdownScreen.swift */; };
+		D81B21212B9FAE3A00E21AE2 /* BackgroundTaskHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B21202B9FAE3A00E21AE2 /* BackgroundTaskHandler.swift */; };
+		D81B41DD2B7BCA4E0070A2FF /* CroppingImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B41DC2B7BCA4E0070A2FF /* CroppingImages.swift */; };
+		D81B41DF2B7BCA8D0070A2FF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81B41DE2B7BCA8D0070A2FF /* Launch Screen.storyboard */; };
+		D81B41E12B7BFAA70070A2FF /* TermAndConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B41E02B7BFAA70070A2FF /* TermAndConditions.swift */; };
+		D8230B232BBB48050038943E /* TutorialScreen3cont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8230B222BBB48050038943E /* TutorialScreen3cont.swift */; };
+		D8230B252BBB48290038943E /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8230B242BBB48290038943E /* opencv2.framework */; };
+		D84B73542B6C02AE008C21C2 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73422B6C02AE008C21C2 /* Montserrat-ExtraLight.ttf */; };
+		D84B73552B6C02AE008C21C2 /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73432B6C02AE008C21C2 /* Montserrat-Black.ttf */; };
+		D84B73582B6C02AE008C21C2 /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73462B6C02AE008C21C2 /* Montserrat-ExtraBold.ttf */; };
+		D84B73592B6C02AE008C21C2 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73472B6C02AE008C21C2 /* Montserrat-Light.ttf */; };
+		D84B735A2B6C02AE008C21C2 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73482B6C02AE008C21C2 /* Montserrat-Bold.ttf */; };
+		D84B735B2B6C02AE008C21C2 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73492B6C02AE008C21C2 /* Montserrat-Regular.ttf */; };
+		D84B735D2B6C02AE008C21C2 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B734B2B6C02AE008C21C2 /* Montserrat-Medium.ttf */; };
+		D84B735F2B6C02AE008C21C2 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B734D2B6C02AE008C21C2 /* Montserrat-SemiBold.ttf */; };
+		D84B73632B6C02AE008C21C2 /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73512B6C02AE008C21C2 /* Montserrat-Thin.ttf */; };
+		D84B736C2B6C02C5008C21C2 /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73662B6C02C5008C21C2 /* Oswald-Regular.ttf */; };
+		D84B736D2B6C02C5008C21C2 /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73672B6C02C5008C21C2 /* Oswald-Bold.ttf */; };
+		D84B736E2B6C02C5008C21C2 /* Oswald-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73682B6C02C5008C21C2 /* Oswald-Medium.ttf */; };
+		D84B736F2B6C02C5008C21C2 /* Oswald-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73692B6C02C5008C21C2 /* Oswald-SemiBold.ttf */; };
+		D84B73702B6C02C5008C21C2 /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B736A2B6C02C5008C21C2 /* Oswald-Light.ttf */; };
+		D84B73712B6C02C5008C21C2 /* Oswald-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B736B2B6C02C5008C21C2 /* Oswald-ExtraLight.ttf */; };
+		D84B73752B6C02D5008C21C2 /* Montserrat-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73722B6C02D5008C21C2 /* Montserrat-Italic-VariableFont_wght.ttf */; };
+		D84B73762B6C02D5008C21C2 /* Oswald-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73732B6C02D5008C21C2 /* Oswald-VariableFont_wght.ttf */; };
+		D84B73772B6C02D5008C21C2 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73742B6C02D5008C21C2 /* Montserrat-VariableFont_wght.ttf */; };
+		D85E62ED2B7424F900EB5806 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E62EC2B7424F900EB5806 /* Socket.swift */; };
+		D88692BF2B88F05D007CB7C9 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88692BE2B88F05D007CB7C9 /* AppViewModel.swift */; };
+		D88692C52B89016B007CB7C9 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = D88692C42B89016B007CB7C9 /* OpenCVWrapper.mm */; };
+		D88692C92B89061F007CB7C9 /* ImageCropping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88692C82B89061F007CB7C9 /* ImageCropping.swift */; };
+		D88E28AA2B767C5C00ABE837 /* YesSharePhotosResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E28A92B767C5C00ABE837 /* YesSharePhotosResponse.swift */; };
+		D88E28AD2B767CE700ABE837 /* ReaffirmNoDecision.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E28AC2B767CE700ABE837 /* ReaffirmNoDecision.swift */; };
+		D88E28B02B767D3300ABE837 /* NoSharePhotosResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E28AF2B767D3300ABE837 /* NoSharePhotosResponse.swift */; };
+		D88E28B22B767D4B00ABE837 /* SeeOrSkipTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E28B12B767D4B00ABE837 /* SeeOrSkipTutorial.swift */; };
+		D88E28B42B767D6700ABE837 /* LocationVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E28B32B767D6700ABE837 /* LocationVerification.swift */; };
+		D88E28B62B767D7D00ABE837 /* NotAtLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E28B52B767D7D00ABE837 /* NotAtLocation.swift */; };
+		D88E28B82B767D9700ABE837 /* AfterPhotosReceived.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E28B72B767D9700ABE837 /* AfterPhotosReceived.swift */; };
+		D88E28BA2B76916E00ABE837 /* MainScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E28B92B76916E00ABE837 /* MainScreenModel.swift */; };
+		D88E28BD2B76A7EB00ABE837 /* LearnMoreScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E28BC2B76A7EB00ABE837 /* LearnMoreScreen2.swift */; };
+		D88E28BF2B76A86700ABE837 /* LearnMoreScreen3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E28BE2B76A86700ABE837 /* LearnMoreScreen3.swift */; };
+		D88E28C12B76A88800ABE837 /* LearnMoreScreen4.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E28C02B76A88800ABE837 /* LearnMoreScreen4.swift */; };
+		D88E28C32B76A89E00ABE837 /* LearnMoreScreen5.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E28C22B76A89E00ABE837 /* LearnMoreScreen5.swift */; };
+		D88E28C62B76BE6300ABE837 /* SharePhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E28C52B76BE6300ABE837 /* SharePhotos.swift */; };
+		D89949FB2B72C98B00BD44C4 /* TutorialScreen4.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89949FA2B72C98B00BD44C4 /* TutorialScreen4.swift */; };
+		D89E1F2C2B719AD300240705 /* TutorialScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89E1F2B2B719AD300240705 /* TutorialScreen2.swift */; };
+		D89E1F2E2B719BBE00240705 /* TutorialScreen3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89E1F2D2B719BBE00240705 /* TutorialScreen3.swift */; };
+		D8A1B65C2B5EC9C70099B4C6 /* MetadataDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1B65B2B5EC9C70099B4C6 /* MetadataDB.swift */; };
+		D8A1B65F2B5ECCF50099B4C6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D8A1B65E2B5ECCF50099B4C6 /* libsqlite3.tbd */; settings = {ATTRIBUTES = (Required, ); }; };
+		D8B0951E2B73D99B0025FADE /* TutorialScreen5.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0951D2B73D99B0025FADE /* TutorialScreen5.swift */; };
+		D8B281992B6D4BA700D82E48 /* TutorialScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B281982B6D4BA700D82E48 /* TutorialScreen1.swift */; };
+		D8B2819B2B6D4BB600D82E48 /* LearnMoreScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B2819A2B6D4BB600D82E48 /* LearnMoreScreen1.swift */; };
+		D8F3A06F2B9274E7001045E1 /* ClientConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F3A06E2B9274E7001045E1 /* ClientConnection.swift */; };
+		D8F3A0712B9274EE001045E1 /* UnsecureTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F3A0702B9274EE001045E1 /* UnsecureTransfer.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8408892A2AD473A400F2A93C /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraService.swift; path = Sunsketcher/CameraFunctionality/CameraService.swift; sourceTree = SOURCE_ROOT; };
+		8408892C2AD477E500F2A93C /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraView.swift; path = Sunsketcher/CameraFunctionality/CameraView.swift; sourceTree = SOURCE_ROOT; };
+		84194DA82AE83FBB0057A0EB /* Sunset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Sunset.swift; path = Sunsketcher/Location/Sunset.swift; sourceTree = SOURCE_ROOT; };
+		8434D2262A99221A0068D985 /* Sunsketcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sunsketcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8434D2292A99221A0068D985 /* SunsketcherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunsketcherApp.swift; sourceTree = "<group>"; };
+		8434D22B2A99221A0068D985 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8434D22D2A99221B0068D985 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8434D2302A99221B0068D985 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		846E32A52ABA28E1004FEF60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		848A5B472ABB3A64000DB76D /* CameraControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraControl.swift; path = Sunsketcher/CameraFunctionality/CameraControl.swift; sourceTree = SOURCE_ROOT; };
+		84C307222AA8EC020052078B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		84CDE40C2AB0C8560011ED23 /* LocToTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocToTime.swift; path = Sunsketcher/Location/LocToTime.swift; sourceTree = SOURCE_ROOT; };
+		84D07C7A2AD5A1D4001E1DD4 /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomCameraView.swift; path = Sunsketcher/CameraFunctionality/CustomCameraView.swift; sourceTree = SOURCE_ROOT; };
+		D81784882B62B5C200922020 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainScreen.swift; path = Sunsketcher/Screens/MainScreen.swift; sourceTree = SOURCE_ROOT; };
+		D81B211E2B9F637900E21AE2 /* CountdownScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CountdownScreen.swift; path = SunSketcher/Screens/ScreensAfterStartBtn/CountdownScreen.swift; sourceTree = SOURCE_ROOT; };
+		D81B21202B9FAE3A00E21AE2 /* BackgroundTaskHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BackgroundTaskHandler.swift; path = SunSketcher/Models/BackgroundTaskHandler.swift; sourceTree = SOURCE_ROOT; };
+		D81B41DC2B7BCA4E0070A2FF /* CroppingImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CroppingImages.swift; path = SunSketcher/Screens/ScreensAfterStartBtn/CroppingImages.swift; sourceTree = SOURCE_ROOT; };
+		D81B41DE2B7BCA8D0070A2FF /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "SunSketcher/Screens/Launch Screen.storyboard"; sourceTree = SOURCE_ROOT; };
+		D81B41E02B7BFAA70070A2FF /* TermAndConditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TermAndConditions.swift; path = SunSketcher/Screens/TermAndConditions.swift; sourceTree = SOURCE_ROOT; };
+		D8230B222BBB48050038943E /* TutorialScreen3cont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TutorialScreen3cont.swift; path = "../../../../../Documents/GitHub/SunSketcher-iOS/SunSketcher/Screens/Tutorial/TutorialScreen3cont.swift"; sourceTree = "<group>"; };
+		D8230B242BBB48290038943E /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		D84B73422B6C02AE008C21C2 /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
+		D84B73432B6C02AE008C21C2 /* Montserrat-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.ttf"; sourceTree = "<group>"; };
+		D84B73462B6C02AE008C21C2 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
+		D84B73472B6C02AE008C21C2 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
+		D84B73482B6C02AE008C21C2 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		D84B73492B6C02AE008C21C2 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		D84B734B2B6C02AE008C21C2 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		D84B734D2B6C02AE008C21C2 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		D84B73512B6C02AE008C21C2 /* Montserrat-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Thin.ttf"; sourceTree = "<group>"; };
+		D84B73662B6C02C5008C21C2 /* Oswald-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Regular.ttf"; sourceTree = "<group>"; };
+		D84B73672B6C02C5008C21C2 /* Oswald-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Bold.ttf"; sourceTree = "<group>"; };
+		D84B73682B6C02C5008C21C2 /* Oswald-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Medium.ttf"; sourceTree = "<group>"; };
+		D84B73692B6C02C5008C21C2 /* Oswald-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-SemiBold.ttf"; sourceTree = "<group>"; };
+		D84B736A2B6C02C5008C21C2 /* Oswald-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Light.ttf"; sourceTree = "<group>"; };
+		D84B736B2B6C02C5008C21C2 /* Oswald-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-ExtraLight.ttf"; sourceTree = "<group>"; };
+		D84B73722B6C02D5008C21C2 /* Montserrat-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		D84B73732B6C02D5008C21C2 /* Oswald-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		D84B73742B6C02D5008C21C2 /* Montserrat-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		D85E62EC2B7424F900EB5806 /* Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
+		D87CFCD52B6AD0EE00E13EA1 /* Sunsketcher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sunsketcher.entitlements; sourceTree = "<group>"; };
+		D88692BE2B88F05D007CB7C9 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppViewModel.swift; path = Sunsketcher/Models/AppViewModel.swift; sourceTree = SOURCE_ROOT; };
+		D88692C22B89016B007CB7C9 /* Sunsketcher-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sunsketcher-Bridging-Header.h"; sourceTree = "<group>"; };
+		D88692C32B89016B007CB7C9 /* OpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OpenCVWrapper.h; path = SunSketcher/OpenCVWrapper.h; sourceTree = SOURCE_ROOT; };
+		D88692C42B89016B007CB7C9 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = OpenCVWrapper.mm; path = Sunsketcher/OpenCVWrapper.mm; sourceTree = SOURCE_ROOT; };
+		D88692C62B8901CF007CB7C9 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = SunSketcher/PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
+		D88692C82B89061F007CB7C9 /* ImageCropping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImageCropping.swift; path = Sunsketcher/ImageCropping.swift; sourceTree = SOURCE_ROOT; };
+		D88E28A92B767C5C00ABE837 /* YesSharePhotosResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = YesSharePhotosResponse.swift; path = Sunsketcher/Screens/ScreensAfterStartBtn/YesSharePhotosResponse.swift; sourceTree = SOURCE_ROOT; };
+		D88E28AC2B767CE700ABE837 /* ReaffirmNoDecision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReaffirmNoDecision.swift; path = Sunsketcher/Screens/ScreensAfterStartBtn/ReaffirmNoDecision.swift; sourceTree = SOURCE_ROOT; };
+		D88E28AF2B767D3300ABE837 /* NoSharePhotosResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NoSharePhotosResponse.swift; path = SunSketcher/Screens/ScreensAfterStartBtn/NoSharePhotosResponse.swift; sourceTree = SOURCE_ROOT; };
+		D88E28B12B767D4B00ABE837 /* SeeOrSkipTutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeeOrSkipTutorial.swift; path = SunSketcher/Screens/ScreensAfterStartBtn/SeeOrSkipTutorial.swift; sourceTree = SOURCE_ROOT; };
+		D88E28B32B767D6700ABE837 /* LocationVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationVerification.swift; path = SunSketcher/Screens/ScreensAfterStartBtn/LocationVerification.swift; sourceTree = SOURCE_ROOT; };
+		D88E28B52B767D7D00ABE837 /* NotAtLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotAtLocation.swift; path = SunSketcher/Screens/ScreensAfterStartBtn/NotAtLocation.swift; sourceTree = SOURCE_ROOT; };
+		D88E28B72B767D9700ABE837 /* AfterPhotosReceived.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AfterPhotosReceived.swift; path = SunSketcher/Screens/ScreensAfterStartBtn/AfterPhotosReceived.swift; sourceTree = SOURCE_ROOT; };
+		D88E28B92B76916E00ABE837 /* MainScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainScreenModel.swift; path = Sunsketcher/Models/MainScreenModel.swift; sourceTree = SOURCE_ROOT; };
+		D88E28BC2B76A7EB00ABE837 /* LearnMoreScreen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LearnMoreScreen2.swift; path = SunSketcher/Screens/LearnMore/LearnMoreScreen2.swift; sourceTree = SOURCE_ROOT; };
+		D88E28BE2B76A86700ABE837 /* LearnMoreScreen3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LearnMoreScreen3.swift; path = SunSketcher/Screens/LearnMore/LearnMoreScreen3.swift; sourceTree = SOURCE_ROOT; };
+		D88E28C02B76A88800ABE837 /* LearnMoreScreen4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LearnMoreScreen4.swift; path = SunSketcher/Screens/LearnMore/LearnMoreScreen4.swift; sourceTree = SOURCE_ROOT; };
+		D88E28C22B76A89E00ABE837 /* LearnMoreScreen5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LearnMoreScreen5.swift; path = SunSketcher/Screens/LearnMore/LearnMoreScreen5.swift; sourceTree = SOURCE_ROOT; };
+		D88E28C52B76BE6300ABE837 /* SharePhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SharePhotos.swift; path = SunSketcher/Screens/ScreensAfterStartBtn/SharePhotos.swift; sourceTree = SOURCE_ROOT; };
+		D89949FA2B72C98B00BD44C4 /* TutorialScreen4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TutorialScreen4.swift; path = Sunsketcher/Screens/Tutorial/TutorialScreen4.swift; sourceTree = SOURCE_ROOT; };
+		D89E1F2B2B719AD300240705 /* TutorialScreen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TutorialScreen2.swift; path = Sunsketcher/Screens/Tutorial/TutorialScreen2.swift; sourceTree = SOURCE_ROOT; };
+		D89E1F2D2B719BBE00240705 /* TutorialScreen3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TutorialScreen3.swift; path = Sunsketcher/Screens/Tutorial/TutorialScreen3.swift; sourceTree = SOURCE_ROOT; };
+		D8A1B65B2B5EC9C70099B4C6 /* MetadataDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MetadataDB.swift; path = SunSketcher/Database/MetadataDB.swift; sourceTree = SOURCE_ROOT; };
+		D8A1B65E2B5ECCF50099B4C6 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		D8B0951D2B73D99B0025FADE /* TutorialScreen5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TutorialScreen5.swift; path = Sunsketcher/Screens/Tutorial/TutorialScreen5.swift; sourceTree = SOURCE_ROOT; };
+		D8B281982B6D4BA700D82E48 /* TutorialScreen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TutorialScreen1.swift; path = Sunsketcher/Screens/Tutorial/TutorialScreen1.swift; sourceTree = SOURCE_ROOT; };
+		D8B2819A2B6D4BB600D82E48 /* LearnMoreScreen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LearnMoreScreen1.swift; path = Sunsketcher/Screens/LearnMore/LearnMoreScreen1.swift; sourceTree = SOURCE_ROOT; };
+		D8F3A06E2B9274E7001045E1 /* ClientConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClientConnection.swift; path = SunSketcher/Networking/ClientConnection.swift; sourceTree = SOURCE_ROOT; };
+		D8F3A0702B9274EE001045E1 /* UnsecureTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnsecureTransfer.swift; path = SunSketcher/Networking/UnsecureTransfer.swift; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8434D2232A99221A0068D985 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8230B252BBB48290038943E /* opencv2.framework in Frameworks */,
+				D8A1B65F2B5ECCF50099B4C6 /* libsqlite3.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8434D21D2A99221A0068D985 = {
+			isa = PBXGroup;
+			children = (
+				8434D2282A99221A0068D985 /* Sunsketcher */,
+				D8A1B65D2B5ECCF50099B4C6 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8434D2272A99221A0068D985 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8434D2262A99221A0068D985 /* Sunsketcher.app */,
+			);
+			name = Products;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		8434D2282A99221A0068D985 /* Sunsketcher */ = {
+			isa = PBXGroup;
+			children = (
+				D8B281952B6D45D500D82E48 /* Screens */,
+				D80F2A522B6BFFD400B36C7D /* Fonts */,
+				D87CFCD52B6AD0EE00E13EA1 /* Sunsketcher.entitlements */,
+				848B1B482B3B429000DE9856 /* Database */,
+				D87DAD642B7D5F9400447E40 /* Networking */,
+				848B1B472B3B428700DE9856 /* Location */,
+				848B1B462B3B427A00DE9856 /* CameraFunctionality */,
+				849D0FCB2B8E4AB700D4A57A /* Models */,
+				846E32A52ABA28E1004FEF60 /* Info.plist */,
+				8434D2292A99221A0068D985 /* SunsketcherApp.swift */,
+				D88692C82B89061F007CB7C9 /* ImageCropping.swift */,
+				8434D22B2A99221A0068D985 /* ContentView.swift */,
+				8434D22D2A99221B0068D985 /* Assets.xcassets */,
+				8434D22F2A99221B0068D985 /* Preview Content */,
+				D88692C32B89016B007CB7C9 /* OpenCVWrapper.h */,
+				D88692C22B89016B007CB7C9 /* Sunsketcher-Bridging-Header.h */,
+				D88692C62B8901CF007CB7C9 /* PrefixHeader.pch */,
+				8434D2272A99221A0068D985 /* Products */,
+				D88692C42B89016B007CB7C9 /* OpenCVWrapper.mm */,
+			);
+			path = Sunsketcher;
+			sourceTree = "<group>";
+		};
+		8434D22F2A99221B0068D985 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				8434D2302A99221B0068D985 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		848B1B462B3B427A00DE9856 /* CameraFunctionality */ = {
+			isa = PBXGroup;
+			children = (
+				8408892A2AD473A400F2A93C /* CameraService.swift */,
+				8408892C2AD477E500F2A93C /* CameraView.swift */,
+				84D07C7A2AD5A1D4001E1DD4 /* CustomCameraView.swift */,
+				848A5B472ABB3A64000DB76D /* CameraControl.swift */,
+			);
+			path = CameraFunctionality;
+			sourceTree = "<group>";
+		};
+		848B1B472B3B428700DE9856 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				84CDE40C2AB0C8560011ED23 /* LocToTime.swift */,
+				84C307222AA8EC020052078B /* LocationManager.swift */,
+				84194DA82AE83FBB0057A0EB /* Sunset.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		848B1B482B3B429000DE9856 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				D8A1B65B2B5EC9C70099B4C6 /* MetadataDB.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		849D0FCB2B8E4AB700D4A57A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D88692BE2B88F05D007CB7C9 /* AppViewModel.swift */,
+				D88E28B92B76916E00ABE837 /* MainScreenModel.swift */,
+				D81B21202B9FAE3A00E21AE2 /* BackgroundTaskHandler.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D80F2A522B6BFFD400B36C7D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D84B73722B6C02D5008C21C2 /* Montserrat-Italic-VariableFont_wght.ttf */,
+				D84B73742B6C02D5008C21C2 /* Montserrat-VariableFont_wght.ttf */,
+				D84B73732B6C02D5008C21C2 /* Oswald-VariableFont_wght.ttf */,
+				D84B73672B6C02C5008C21C2 /* Oswald-Bold.ttf */,
+				D84B736B2B6C02C5008C21C2 /* Oswald-ExtraLight.ttf */,
+				D84B736A2B6C02C5008C21C2 /* Oswald-Light.ttf */,
+				D84B73682B6C02C5008C21C2 /* Oswald-Medium.ttf */,
+				D84B73662B6C02C5008C21C2 /* Oswald-Regular.ttf */,
+				D84B73692B6C02C5008C21C2 /* Oswald-SemiBold.ttf */,
+				D84B73432B6C02AE008C21C2 /* Montserrat-Black.ttf */,
+				D84B73482B6C02AE008C21C2 /* Montserrat-Bold.ttf */,
+				D84B73462B6C02AE008C21C2 /* Montserrat-ExtraBold.ttf */,
+				D84B73422B6C02AE008C21C2 /* Montserrat-ExtraLight.ttf */,
+				D84B73472B6C02AE008C21C2 /* Montserrat-Light.ttf */,
+				D84B734B2B6C02AE008C21C2 /* Montserrat-Medium.ttf */,
+				D84B73492B6C02AE008C21C2 /* Montserrat-Regular.ttf */,
+				D84B734D2B6C02AE008C21C2 /* Montserrat-SemiBold.ttf */,
+				D84B73512B6C02AE008C21C2 /* Montserrat-Thin.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		D87DAD642B7D5F9400447E40 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D8F3A0702B9274EE001045E1 /* UnsecureTransfer.swift */,
+				D8F3A06E2B9274E7001045E1 /* ClientConnection.swift */,
+				D85E62EC2B7424F900EB5806 /* Socket.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		D88E28AB2B767CAB00ABE837 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				D8B281982B6D4BA700D82E48 /* TutorialScreen1.swift */,
+				D89E1F2B2B719AD300240705 /* TutorialScreen2.swift */,
+				D89E1F2D2B719BBE00240705 /* TutorialScreen3.swift */,
+				D8230B222BBB48050038943E /* TutorialScreen3cont.swift */,
+				D89949FA2B72C98B00BD44C4 /* TutorialScreen4.swift */,
+				D8B0951D2B73D99B0025FADE /* TutorialScreen5.swift */,
+			);
+			path = Tutorial;
+			sourceTree = "<group>";
+		};
+		D88E28AE2B767CF900ABE837 /* ScreensAfterStartBtn */ = {
+			isa = PBXGroup;
+			children = (
+				D88E28B12B767D4B00ABE837 /* SeeOrSkipTutorial.swift */,
+				D88E28B32B767D6700ABE837 /* LocationVerification.swift */,
+				D88E28B52B767D7D00ABE837 /* NotAtLocation.swift */,
+				D81B211E2B9F637900E21AE2 /* CountdownScreen.swift */,
+				D81B41DC2B7BCA4E0070A2FF /* CroppingImages.swift */,
+				D88E28C52B76BE6300ABE837 /* SharePhotos.swift */,
+				D88E28A92B767C5C00ABE837 /* YesSharePhotosResponse.swift */,
+				D88E28AC2B767CE700ABE837 /* ReaffirmNoDecision.swift */,
+				D88E28AF2B767D3300ABE837 /* NoSharePhotosResponse.swift */,
+				D88E28B72B767D9700ABE837 /* AfterPhotosReceived.swift */,
+			);
+			path = ScreensAfterStartBtn;
+			sourceTree = "<group>";
+		};
+		D88E28BB2B76A7BA00ABE837 /* LearnMore */ = {
+			isa = PBXGroup;
+			children = (
+				D8B2819A2B6D4BB600D82E48 /* LearnMoreScreen1.swift */,
+				D88E28BC2B76A7EB00ABE837 /* LearnMoreScreen2.swift */,
+				D88E28BE2B76A86700ABE837 /* LearnMoreScreen3.swift */,
+				D88E28C02B76A88800ABE837 /* LearnMoreScreen4.swift */,
+				D88E28C22B76A89E00ABE837 /* LearnMoreScreen5.swift */,
+			);
+			path = LearnMore;
+			sourceTree = "<group>";
+		};
+		D8A1B65D2B5ECCF50099B4C6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D8230B242BBB48290038943E /* opencv2.framework */,
+				D8A1B65E2B5ECCF50099B4C6 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D8B281952B6D45D500D82E48 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				D88E28AE2B767CF900ABE837 /* ScreensAfterStartBtn */,
+				D88E28AB2B767CAB00ABE837 /* Tutorial */,
+				D88E28BB2B76A7BA00ABE837 /* LearnMore */,
+				D81784882B62B5C200922020 /* MainScreen.swift */,
+				D81B41DE2B7BCA8D0070A2FF /* Launch Screen.storyboard */,
+				D81B41E02B7BFAA70070A2FF /* TermAndConditions.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8434D2252A99221A0068D985 /* Sunsketcher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8434D2342A99221B0068D985 /* Build configuration list for PBXNativeTarget "Sunsketcher" */;
+			buildPhases = (
+				8434D2222A99221A0068D985 /* Sources */,
+				8434D2232A99221A0068D985 /* Frameworks */,
+				8434D2242A99221A0068D985 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Sunsketcher;
+			productName = Sunsketcher;
+			productReference = 8434D2262A99221A0068D985 /* Sunsketcher.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8434D21E2A99221A0068D985 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					8434D2252A99221A0068D985 = {
+						CreatedOnToolsVersion = 14.3.1;
+						LastSwiftMigration = 1500;
+					};
+				};
+			};
+			buildConfigurationList = 8434D2212A99221A0068D985 /* Build configuration list for PBXProject "SunSketcher" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8434D21D2A99221A0068D985;
+			productRefGroup = 8434D2272A99221A0068D985 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8434D2252A99221A0068D985 /* Sunsketcher */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8434D2242A99221A0068D985 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D84B73752B6C02D5008C21C2 /* Montserrat-Italic-VariableFont_wght.ttf in Resources */,
+				D84B73762B6C02D5008C21C2 /* Oswald-VariableFont_wght.ttf in Resources */,
+				D84B73772B6C02D5008C21C2 /* Montserrat-VariableFont_wght.ttf in Resources */,
+				D84B736C2B6C02C5008C21C2 /* Oswald-Regular.ttf in Resources */,
+				D84B736D2B6C02C5008C21C2 /* Oswald-Bold.ttf in Resources */,
+				D84B736E2B6C02C5008C21C2 /* Oswald-Medium.ttf in Resources */,
+				D81B41DF2B7BCA8D0070A2FF /* Launch Screen.storyboard in Resources */,
+				D84B736F2B6C02C5008C21C2 /* Oswald-SemiBold.ttf in Resources */,
+				D84B73702B6C02C5008C21C2 /* Oswald-Light.ttf in Resources */,
+				D84B73712B6C02C5008C21C2 /* Oswald-ExtraLight.ttf in Resources */,
+				D84B73542B6C02AE008C21C2 /* Montserrat-ExtraLight.ttf in Resources */,
+				D84B73552B6C02AE008C21C2 /* Montserrat-Black.ttf in Resources */,
+				D84B73582B6C02AE008C21C2 /* Montserrat-ExtraBold.ttf in Resources */,
+				D84B73592B6C02AE008C21C2 /* Montserrat-Light.ttf in Resources */,
+				D84B735A2B6C02AE008C21C2 /* Montserrat-Bold.ttf in Resources */,
+				D84B735B2B6C02AE008C21C2 /* Montserrat-Regular.ttf in Resources */,
+				D84B735D2B6C02AE008C21C2 /* Montserrat-Medium.ttf in Resources */,
+				D84B735F2B6C02AE008C21C2 /* Montserrat-SemiBold.ttf in Resources */,
+				D84B73632B6C02AE008C21C2 /* Montserrat-Thin.ttf in Resources */,
+				8434D2312A99221B0068D985 /* Preview Assets.xcassets in Resources */,
+				8434D22E2A99221B0068D985 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8434D2222A99221A0068D985 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8408892B2AD473A400F2A93C /* CameraService.swift in Sources */,
+				D88E28B42B767D6700ABE837 /* LocationVerification.swift in Sources */,
+				D88692BF2B88F05D007CB7C9 /* AppViewModel.swift in Sources */,
+				D81B41DD2B7BCA4E0070A2FF /* CroppingImages.swift in Sources */,
+				D88E28B82B767D9700ABE837 /* AfterPhotosReceived.swift in Sources */,
+				D88E28AA2B767C5C00ABE837 /* YesSharePhotosResponse.swift in Sources */,
+				D88692C52B89016B007CB7C9 /* OpenCVWrapper.mm in Sources */,
+				D88E28AD2B767CE700ABE837 /* ReaffirmNoDecision.swift in Sources */,
+				D88E28C32B76A89E00ABE837 /* LearnMoreScreen5.swift in Sources */,
+				8434D22C2A99221A0068D985 /* ContentView.swift in Sources */,
+				D8A1B65C2B5EC9C70099B4C6 /* MetadataDB.swift in Sources */,
+				D81B211F2B9F637900E21AE2 /* CountdownScreen.swift in Sources */,
+				D81784892B62B5C200922020 /* MainScreen.swift in Sources */,
+				D88E28BF2B76A86700ABE837 /* LearnMoreScreen3.swift in Sources */,
+				D81B41E12B7BFAA70070A2FF /* TermAndConditions.swift in Sources */,
+				D85E62ED2B7424F900EB5806 /* Socket.swift in Sources */,
+				D81B21212B9FAE3A00E21AE2 /* BackgroundTaskHandler.swift in Sources */,
+				D8F3A0712B9274EE001045E1 /* UnsecureTransfer.swift in Sources */,
+				D89E1F2C2B719AD300240705 /* TutorialScreen2.swift in Sources */,
+				D88E28C62B76BE6300ABE837 /* SharePhotos.swift in Sources */,
+				D8B281992B6D4BA700D82E48 /* TutorialScreen1.swift in Sources */,
+				D89949FB2B72C98B00BD44C4 /* TutorialScreen4.swift in Sources */,
+				84D07C7B2AD5A1D4001E1DD4 /* CustomCameraView.swift in Sources */,
+				D8F3A06F2B9274E7001045E1 /* ClientConnection.swift in Sources */,
+				D88E28BA2B76916E00ABE837 /* MainScreenModel.swift in Sources */,
+				84CDE40D2AB0C8560011ED23 /* LocToTime.swift in Sources */,
+				D88692C92B89061F007CB7C9 /* ImageCropping.swift in Sources */,
+				8408892D2AD477E500F2A93C /* CameraView.swift in Sources */,
+				D88E28B02B767D3300ABE837 /* NoSharePhotosResponse.swift in Sources */,
+				D8B2819B2B6D4BB600D82E48 /* LearnMoreScreen1.swift in Sources */,
+				D88E28B22B767D4B00ABE837 /* SeeOrSkipTutorial.swift in Sources */,
+				D88E28C12B76A88800ABE837 /* LearnMoreScreen4.swift in Sources */,
+				8434D22A2A99221A0068D985 /* SunsketcherApp.swift in Sources */,
+				D89E1F2E2B719BBE00240705 /* TutorialScreen3.swift in Sources */,
+				D8B0951E2B73D99B0025FADE /* TutorialScreen5.swift in Sources */,
+				84C307232AA8EC020052078B /* LocationManager.swift in Sources */,
+				84194DA92AE83FBB0057A0EB /* Sunset.swift in Sources */,
+				D8230B232BBB48050038943E /* TutorialScreen3cont.swift in Sources */,
+				848A5B482ABB3A64000DB76D /* CameraControl.swift in Sources */,
+				D88E28B62B767D7D00ABE837 /* NotAtLocation.swift in Sources */,
+				D88E28BD2B76A7EB00ABE837 /* LearnMoreScreen2.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		8434D2322A99221B0068D985 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8434D2332A99221B0068D985 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8434D2352A99221B0068D985 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++23";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Sunsketcher/Sunsketcher.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_ASSET_PATHS = "\"Sunsketcher/Preview Content\"";
+				DEVELOPMENT_TEAM = C6MX229DZ7;
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PREFIX_HEADER = "$(SRCROOT)/SunSketcher/PrefixHeader.pch";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Sunsketcher/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SunSketcher;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to capture photos of the eclipse only if you are in the path of totality and the eclipse is about to begin.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app requires access to the device's location to determine the time of the eclipse and whether you are in the path of totality. This data will not be linked to your identity or for tracking purposes. The app will send this data to our secure server to be used when evaluating your images to help us reveal the true shape of the sun if you choose to share your images taken with this app. Note sending your images and data is optional.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires access to the device's location to determine the time of the eclipse and whether you are in the path of totality. This data will not be linked to your identity or for tracking purposes. The app will send this data to our secure server to be used when evaluating your images to help us reveal the true shape of the sun if you choose to share your images taken with this app. Note sending your images and data is optional.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to save and manage photos in the 'SunSketcher' album.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.wku.sunsketcher;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Sunsketcher/Sunsketcher-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8434D2362A99221B0068D985 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++23";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Sunsketcher/Sunsketcher.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_ASSET_PATHS = "\"Sunsketcher/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = C6MX229DZ7;
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PREFIX_HEADER = "$(SRCROOT)/SunSketcher/PrefixHeader.pch";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Sunsketcher/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SunSketcher;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to capture photos of the eclipse only if you are in the path of totality and the eclipse is about to begin.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app requires access to the device's location to determine the time of the eclipse and whether you are in the path of totality. This data will not be linked to your identity or for tracking purposes. The app will send this data to our secure server to be used when evaluating your images to help us reveal the true shape of the sun if you choose to share your images taken with this app. Note sending your images and data is optional.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires access to the device's location to determine the time of the eclipse and whether you are in the path of totality. This data will not be linked to your identity or for tracking purposes. The app will send this data to our secure server to be used when evaluating your images to help us reveal the true shape of the sun if you choose to share your images taken with this app. Note sending your images and data is optional.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to save and manage photos in the 'SunSketcher' album.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.wku.sunsketcher;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SunSketcher;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Sunsketcher/Sunsketcher-Bridging-Header.h";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8434D2212A99221A0068D985 /* Build configuration list for PBXProject "SunSketcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8434D2322A99221B0068D985 /* Debug */,
+				8434D2332A99221B0068D985 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8434D2342A99221B0068D985 /* Build configuration list for PBXNativeTarget "Sunsketcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8434D2352A99221B0068D985 /* Debug */,
+				8434D2362A99221B0068D985 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8434D21E2A99221A0068D985 /* Project object */;
+}

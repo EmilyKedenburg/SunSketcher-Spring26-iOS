@@ -1,0 +1,320 @@
+//
+//  ContentView3.swift
+//  iOS-Server
+//
+//  Created by ADMIN on 2/24/24.
+//
+import SwiftUI
+import Security
+import Foundation
+import CryptoKit
+
+
+extension Data {
+    init?(hexadecimalString: String) {
+        var hexString = hexadecimalString
+        guard let regex = try? NSRegularExpression(pattern: "[0-9a-f]{2}", options: .caseInsensitive) else {
+            return nil
+        }
+
+        let range = NSRange(hexString.startIndex..., in: hexString)
+        let matches = regex.matches(in: hexString, options: [], range: range)
+        let hexArray = matches.map {
+            String(hexString[Range($0.range, in: hexString)!])
+        }
+
+        var bytes = [UInt8]()
+        bytes.reserveCapacity(hexArray.count)
+        for hex in hexArray {
+            if let byte = UInt8(hex, radix: 16) {
+                bytes.append(byte)
+            } else {
+                return nil
+            }
+        }
+
+        self.init(bytes: bytes)
+    }
+}
+
+
+
+
+class Socket3: NSObject, StreamDelegate {
+    var inputStream: InputStream!
+    var outputStream: OutputStream!
+    var publicKey: SecKey?
+    var privateKey: SecKey?
+
+    func setupNetworkCommunication() {
+        var readStream: Unmanaged<CFReadStream>?
+        var writeStream: Unmanaged<CFWriteStream>?
+
+        CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault, "161.6.109.198" as CFString, 10000, &readStream, &writeStream)
+
+        inputStream = readStream!.takeRetainedValue()
+        outputStream = writeStream!.takeRetainedValue()
+
+        inputStream.delegate = self
+        outputStream.delegate = self
+
+        inputStream.schedule(in: .current, forMode: .common)
+        outputStream.schedule(in: .current, forMode: .common)
+
+        inputStream.open()
+        outputStream.open()
+    }
+
+    func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
+        switch eventCode {
+        case .openCompleted:
+            if aStream == inputStream {
+                print("Input stream connected")
+            } else if aStream == outputStream {
+                print("Output stream connected")
+            }
+        case .errorOccurred:
+            print("Error occurred")
+        case .endEncountered:
+            print("End encountered")
+        case .hasBytesAvailable:
+            print("Has bytes available")
+        case .hasSpaceAvailable:
+            print("Has space available")
+        default:
+            break
+        }
+    }
+
+    func readLineFromServer() -> String? {
+        var buffer = [UInt8](repeating: 0, count: 1024)
+        let bytesRead = inputStream.read(&buffer, maxLength: Int(buffer.count))
+        print(buffer)
+
+        if bytesRead < 0 {
+            print("Error reading from input stream")
+            return nil
+        }
+
+        let receivedData = Data(bytes: buffer, count: bytesRead)
+        print("Received data from server: \(receivedData)")
+
+        if let receivedString = String(data: receivedData, encoding: .utf8) {
+            return receivedString
+        } else {
+            print("Error decoding data to string")
+            return nil
+        }
+    }
+
+    func generateRSAKeyPair(keySize: Int) throws -> (SecKey, SecKey) {
+        var publicKey, privateKey: SecKey?
+
+        let parameters: [String: Any] = [
+            kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
+            kSecAttrKeySizeInBits as String: keySize,
+        ]
+
+        let status = SecKeyGeneratePair(parameters as CFDictionary, &publicKey, &privateKey)
+        guard status == errSecSuccess, let publicKey = publicKey, let privateKey = privateKey else {
+            throw NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
+        }
+
+        self.publicKey = publicKey
+        self.privateKey = privateKey
+
+        return (publicKey, privateKey)
+    }
+    
+    
+    func encryptPassword(_ password: String, using aesKey: Data) throws -> String {
+        let passwordData = password.data(using: .utf8)!
+        let nonce = AES.GCM.Nonce()
+        let sealedBox = try AES.GCM.seal(passwordData, using: SymmetricKey(data: aesKey), nonce: nonce)
+        let encryptedPassword = sealedBox.combined
+        let encryptedPasswordHex: [String] = encryptedPassword!.compactMap { byte in
+            
+            if byte == byte { return nil }
+            return String(format: "%02x", byte)
+        }
+        let joinedHex = encryptedPasswordHex.joined(separator: "")
+
+        return joinedHex
+    }
+
+    
+    
+    func sendEncryptedPassword(_ encryptedPasswordHex: String) {
+        let encryptedPasswordData = Data(hexadecimalString: encryptedPasswordHex)!
+        let bytesWritten = outputStream.write((encryptedPasswordData as NSData).bytes.bindMemory(to: UInt8.self, capacity: encryptedPasswordData.count), maxLength: encryptedPasswordData.count)
+        
+        if bytesWritten < 0 {
+            print("Error sending encrypted password")
+        } else {
+            print("Encrypted password sent successfully")
+        }
+    }
+    
+    func receiveClientID() -> String? {
+        var buffer = [UInt8](repeating: 0, count: 1024)
+        let bytesRead = inputStream.read(&buffer, maxLength: buffer.count)
+        
+        if bytesRead < 0 {
+            print("Error reading from input stream")
+            return nil
+        }
+        
+        let receivedData = Data(bytes: buffer, count: bytesRead)
+        print("Received client ID data from server: \(receivedData)")
+        
+        if let clientID = String(data: receivedData, encoding: .utf8) {
+            return clientID
+        } else {
+            print("Error decoding client ID data to string")
+            return nil
+        }
+    }
+
+
+    
+    func sendPublicKey(_ publicKeyData: Data) {
+        // Get a pointer to the bytes of the public key data
+        guard let ptr = CFDataGetBytePtr(publicKeyData as CFData) else {
+            print("Error getting byte pointer")
+            return
+        }
+
+        // Write data containing the public key to the output stream
+        let bytesWritten = outputStream.write(ptr, maxLength: CFDataGetLength(publicKeyData as CFData))
+
+        if bytesWritten < 0 {
+            print("Error sending public key")
+        } else {
+            print("Public key sent successfully")
+        }
+    }
+
+    func receiveEncryptedAESKey() -> Data? {
+        var buffer = [UInt8](repeating: 0, count: 1024)
+        let bytesRead = inputStream.read(&buffer, maxLength: buffer.count)
+
+        if bytesRead < 0 {
+            print("Error reading from input stream")
+            return nil
+        }
+
+        let receivedData = Data(bytes: buffer, count: bytesRead)
+        print("Received encrypted AES key data: \(receivedData)")
+
+        return receivedData
+    }
+
+    func decryptAESKey(encryptedKeyData: Data) -> Data? {
+        guard let privateKey = privateKey else {
+            print("Private key not available")
+            return nil
+        }
+
+        // Decrypt the received AES key using the private key
+        var error: Unmanaged<CFError>?
+        guard let decryptedKeyData = SecKeyCreateDecryptedData(privateKey, .rsaEncryptionOAEPSHA256, encryptedKeyData as CFData, &error) as Data? else {
+            print("Error decrypting AES key:", error!.takeRetainedValue() as Error)
+            return nil
+        }
+        return decryptedKeyData
+    }
+
+    func receiveAndDecryptAESKey() -> Data? {
+        guard let encryptedAESKeyData = receiveEncryptedAESKey() else {
+            return nil
+        }
+
+        print("Received encrypted AES key:")
+        let encryptedAESKeyHex = encryptedAESKeyData.map { String(format: "%02x", $0) }.joined()
+        print(encryptedAESKeyHex)
+
+        guard let decryptedAESKeyData = decryptAESKey(encryptedKeyData: encryptedAESKeyData) else {
+            print("Error decrypting AES key")
+            return nil
+        }
+
+        return decryptedAESKeyData
+    }
+}
+
+
+struct ContentView: View {
+    @State private var privateKey: SecKey?
+
+    var body: some View {
+        VStack {
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundStyle(.tint)
+            Text("Hello, world!")
+        }
+        .padding()
+        .onAppear {
+            let main = Socket3()
+            DispatchQueue.global().async {
+                main.setupNetworkCommunication()
+                if let line = main.readLineFromServer() {
+                    if line.contains("true") {
+                        do {
+                            let (publicKey, privateKey) = try main.generateRSAKeyPair(keySize: 2048)
+                            print("Public Key: \(publicKey)")
+                            print("Private Key: \(privateKey)")
+
+                            if let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, nil) as Data? {
+                                let publicKeyBase64 = publicKeyData.base64EncodedString()
+                                if let publicKeyBase64Data = publicKeyBase64.data(using: .utf8) {
+                                    DispatchQueue.main.async {
+                                        // Send public key to the server
+                                        main.sendPublicKey(publicKeyBase64Data)
+                                    }
+                                }
+                            }
+
+                            // Receive encrypted AES key from server
+                                if let encryptedAESKeyData = main.receiveEncryptedAESKey() {
+                                    let encryptedAESKeyHex = encryptedAESKeyData.map { String(format: "%02x", $0) }.joined()
+
+                                    // Decrypt AES key
+                                    let decryptedAESKeyData = Data(hexadecimalString: encryptedAESKeyHex)
+                                    guard let aesKey = main.decryptAESKey(encryptedKeyData: decryptedAESKeyData!) else {
+                                        print("Error decrypting AES key")
+                                        return
+                                    }
+
+
+                                    // Encrypt password with AES key
+                                    let password = "SarahSketcher2024"
+                                    let encryptedPasswordHex = try main.encryptPassword(password, using: aesKey)
+
+
+                                    DispatchQueue.main.async {
+                                        // Send encrypted password to server
+                                        main.sendEncryptedPassword(encryptedPasswordHex)
+
+                                        // Receive client ID from server
+                                        if let clientID = main.receiveClientID() {
+                                            // Save client ID to local storage
+                                            UserDefaults.standard.set(clientID, forKey: "clientID")
+                                            print("Client ID saved: \(clientID)")
+                                        }
+                                    }
+                                }
+
+                        } catch {
+                            print("Error: \(error)")
+                        }
+                    } else {
+                        print("Server response does not contain 'true'")
+                    }
+                }
+            }
+        }
+    }
+}
+
+

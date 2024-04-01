@@ -1,0 +1,15 @@
+//
+//  PrefixHeader.pch
+//  Sunsketcher
+//
+//  Created by Ferguson, Tameka on 2/23/24.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#ifdef __cplusplus
+#include <opencv2/opencv.hpp>
+#endif
+
+#endif
