@@ -226,7 +226,7 @@ struct CountdownScreen: View {
         // TODO: for actual release
         let eclipseData: [String] = locToTime.calculatefor(lat: lat, lon: lon, alt: alt);
         
-        //Okay update Okylet eclipseData: [String] = locToTime.calculatefor(lat: 47.6683, lon: -60.745, alt: alt);
+        //let eclipseData: [String] = locToTime.calculatefor(lat: 47.6683, lon: -60.745, alt: alt);
         
         print("Eclipse data \(eclipseData)")
         
@@ -263,7 +263,7 @@ struct CountdownScreen: View {
         } else {
             // Do something if the user isn't in the eclipse path
             countdownTimeString = "You're not in the path of totality."
-            print("Not in eclipse path.")
+            print("Not in totality path.")
         
             
         }

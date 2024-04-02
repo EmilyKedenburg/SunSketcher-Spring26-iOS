@@ -119,7 +119,7 @@ struct TutorialScreen4: View {
                                 // For buttons
                                 HStack {
                                     
-                                    NavigationLink(destination: TutorialScreen3cont(shouldRefreshView:$shouldRefreshView), label: {
+                                    NavigationLink(destination: TutorialScreen3(shouldRefreshView:$shouldRefreshView), label: {
                                         EmptyView()
                                     })
                                     .navigationBarBackButtonHidden(true)

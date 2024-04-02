@@ -132,7 +132,7 @@ struct TutorialScreen3: View {
                                     }
                                     
                                     
-                                    NavigationLink(destination: TutorialScreen3cont(shouldRefreshView:$shouldRefreshView), label: {
+                                    NavigationLink(destination: TutorialScreen4(shouldRefreshView:$shouldRefreshView), label: {
                                         Image("ic-rightarrow")
                                             .frame(width: geo.size.width * 0.10, height: geo.size.width * 0.08)
                                            .padding(.leading, geo.size.width * 0.6)

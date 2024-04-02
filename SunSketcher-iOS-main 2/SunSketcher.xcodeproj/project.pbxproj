@@ -14,6 +14,7 @@
 		8434D22C2A99221A0068D985 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434D22B2A99221A0068D985 /* ContentView.swift */; };
 		8434D22E2A99221B0068D985 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8434D22D2A99221B0068D985 /* Assets.xcassets */; };
 		8434D2312A99221B0068D985 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8434D2302A99221B0068D985 /* Preview Assets.xcassets */; };
+		847ECB542BBB670F00C70190 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847ECB532BBB670F00C70190 /* opencv2.framework */; };
 		848A5B482ABB3A64000DB76D /* CameraControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A5B472ABB3A64000DB76D /* CameraControl.swift */; };
 		84C307232AA8EC020052078B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C307222AA8EC020052078B /* LocationManager.swift */; };
 		84CDE40D2AB0C8560011ED23 /* LocToTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CDE40C2AB0C8560011ED23 /* LocToTime.swift */; };
@@ -24,8 +25,6 @@
 		D81B41DD2B7BCA4E0070A2FF /* CroppingImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B41DC2B7BCA4E0070A2FF /* CroppingImages.swift */; };
 		D81B41DF2B7BCA8D0070A2FF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81B41DE2B7BCA8D0070A2FF /* Launch Screen.storyboard */; };
 		D81B41E12B7BFAA70070A2FF /* TermAndConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B41E02B7BFAA70070A2FF /* TermAndConditions.swift */; };
-		D8230B252BBB48290038943E /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8230B242BBB48290038943E /* opencv2.framework */; };
-		D8230B2B2BBB50490038943E /* TutorialScreen3cont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8230B2A2BBB50490038943E /* TutorialScreen3cont.swift */; };
 		D84B73542B6C02AE008C21C2 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73422B6C02AE008C21C2 /* Montserrat-ExtraLight.ttf */; };
 		D84B73552B6C02AE008C21C2 /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73432B6C02AE008C21C2 /* Montserrat-Black.ttf */; };
 		D84B73582B6C02AE008C21C2 /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D84B73462B6C02AE008C21C2 /* Montserrat-ExtraBold.ttf */; };
@@ -83,6 +82,7 @@
 		8434D22D2A99221B0068D985 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8434D2302A99221B0068D985 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		846E32A52ABA28E1004FEF60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		847ECB532BBB670F00C70190 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		848A5B472ABB3A64000DB76D /* CameraControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraControl.swift; path = Sunsketcher/CameraFunctionality/CameraControl.swift; sourceTree = SOURCE_ROOT; };
 		84C307222AA8EC020052078B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		84CDE40C2AB0C8560011ED23 /* LocToTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocToTime.swift; path = Sunsketcher/Location/LocToTime.swift; sourceTree = SOURCE_ROOT; };
@@ -93,8 +93,6 @@
 		D81B41DC2B7BCA4E0070A2FF /* CroppingImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CroppingImages.swift; path = SunSketcher/Screens/ScreensAfterStartBtn/CroppingImages.swift; sourceTree = SOURCE_ROOT; };
 		D81B41DE2B7BCA8D0070A2FF /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "SunSketcher/Screens/Launch Screen.storyboard"; sourceTree = SOURCE_ROOT; };
 		D81B41E02B7BFAA70070A2FF /* TermAndConditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TermAndConditions.swift; path = SunSketcher/Screens/TermAndConditions.swift; sourceTree = SOURCE_ROOT; };
-		D8230B242BBB48290038943E /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
-		D8230B2A2BBB50490038943E /* TutorialScreen3cont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TutorialScreen3cont.swift; path = "../../../../../../SunSketcher-iOS/SunSketcher/Screens/Tutorial/TutorialScreen3cont.swift"; sourceTree = "<group>"; };
 		D84B73422B6C02AE008C21C2 /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
 		D84B73432B6C02AE008C21C2 /* Montserrat-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.ttf"; sourceTree = "<group>"; };
 		D84B73462B6C02AE008C21C2 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -151,7 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8230B252BBB48290038943E /* opencv2.framework in Frameworks */,
+				847ECB542BBB670F00C70190 /* opencv2.framework in Frameworks */,
 				D8A1B65F2B5ECCF50099B4C6 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,7 +288,6 @@
 				D8B281982B6D4BA700D82E48 /* TutorialScreen1.swift */,
 				D89E1F2B2B719AD300240705 /* TutorialScreen2.swift */,
 				D89E1F2D2B719BBE00240705 /* TutorialScreen3.swift */,
-				D8230B2A2BBB50490038943E /* TutorialScreen3cont.swift */,
 				D89949FA2B72C98B00BD44C4 /* TutorialScreen4.swift */,
 				D8B0951D2B73D99B0025FADE /* TutorialScreen5.swift */,
 			);
@@ -329,7 +326,7 @@
 		D8A1B65D2B5ECCF50099B4C6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D8230B242BBB48290038943E /* opencv2.framework */,
+				847ECB532BBB670F00C70190 /* opencv2.framework */,
 				D8A1B65E2B5ECCF50099B4C6 /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
@@ -475,7 +472,6 @@
 				D8B0951E2B73D99B0025FADE /* TutorialScreen5.swift in Sources */,
 				84C307232AA8EC020052078B /* LocationManager.swift in Sources */,
 				84194DA92AE83FBB0057A0EB /* Sunset.swift in Sources */,
-				D8230B2B2BBB50490038943E /* TutorialScreen3cont.swift in Sources */,
 				848A5B482ABB3A64000DB76D /* CameraControl.swift in Sources */,
 				D88E28B62B767D7D00ABE837 /* NotAtLocation.swift in Sources */,
 				D88E28BD2B76A7EB00ABE837 /* LearnMoreScreen2.swift in Sources */,
