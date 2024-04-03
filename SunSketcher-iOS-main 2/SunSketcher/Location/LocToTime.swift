@@ -1,9 +1,45 @@
 //
-//  swift
+//  LocToTime.swift
 //  Sunsketcher
 //
-//  Created by ADMIN on 9/12/23.
+//  Created by Tameka Ferguson on 9/12/23.
 //
+
+
+/*
+// Swift Solar Eclipse Calculator
+ This code was translated to Swift from Java by Tameka Ferguson.
+ 
+ For the original code this was based on:
+ // This code is being released under the terms of the GNU General Public
+ // License (http://www.gnu.org/copyleft/gpl.html).
+ // The source code this file is based on was created by
+ // chris@obyrne.com  and  fred.espenak@nasa.gov
+ // If you would like to use or modify this code, send them,
+ // as well as travis.peden194@topper.wku.edu, an email about it.
+ //
+ // Code obtained from http://eclipse.gsfc.nasa.gov/JSEX/JSEX-index.html
+ // and http://www.chris.obyrne.com:80/Eclipses/calculator.html (now 404'd,
+ // can be found at http://web.archive.org/web/20071006051658/http://www.chris.obyrne.com:80/Eclipses/calculator.html
+ //
+ 
+ Java Solar Eclipse Explorer
+ Java Version 1 by Travis Peden - 2022.
+ Javascript Version 1 by Chris O'Byrne and Fred Espenak - 2007.
+ (based on "Eclipse Calculator" by Chris O'Byrne and Stephen McCann - 2003)
+
+ This file (LocToTime.swift) is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ */
+
 
 import Foundation
 import SwiftUI
@@ -35,6 +71,56 @@ public class LocToTime {
                                       0.5358323,    0.0000618, -1.276e-05,                                            //l1
                                      -0.0102736,    0.0000615, -1.269e-05,                                            //l2
                                       0.0046683,    0.0046450]
+    
+    //
+    // Eclipse circumstances
+    //  (0) Event type (C1=-2, C2=-1, Mid=0, C3=1, C4=2)
+    //  (1) t
+    // -- time-only dependent circumstances (and their per-hour derivatives) follow --
+    //  (2) x
+    //  (3) y
+    //  (4) d
+    //  (5) sin d
+    //  (6) cos d
+    //  (7) mu
+    //  (8) l1
+    //  (9) l2
+    // (10) dx
+    // (11) dy
+    // (12) dd
+    // (13) dmu
+    // (14) dl1
+    // (15) dl2
+    // -- time and location dependent circumstances follow --
+    // (16) h
+    // (17) sin h
+    // (18) cos h
+    // (19) xi
+    // (20) eta
+    // (21) zeta
+    // (22) dxi
+    // (23) deta
+    // (24) u
+    // (25) v
+    // (26) a
+    // (27) b
+    // (28) l1'
+    // (29) l2'
+    // (30) n^2
+    // -- observational circumstances follow --
+    // (31) p
+    // (32) alt
+    // (33) q
+    // (34) v
+    // (35) azi
+    // (36) m (mid eclipse only) or limb correction applied (where available!)
+    // (37) magnitude (mid eclipse only)
+    // (38) moon/sun (mid eclipse only)
+    // (39) calculated local event type for a transparent earth (mid eclipse only)
+    //      (0 = none, 1 = partial, 2 = annular, 3 = total)
+    // (40) event visibility
+    //      (0 = above horizon, 1 = below horizon, 2 = sunrise, 3 = sunset, 4 = below horizon, disregard)
+    //
     
     //static var month: [String] = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
     

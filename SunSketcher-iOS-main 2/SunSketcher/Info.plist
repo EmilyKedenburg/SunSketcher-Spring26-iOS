@@ -32,5 +32,9 @@
 		<key>UIImageName</key>
 		<string>launch-img</string>
 	</dict>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
 </dict>
 </plist>

@@ -5,6 +5,12 @@
 //  Created by ADMIN on 10/24/23.
 //
 
+/*
+ This file was not used in the SunSketcher app release in March 2024 and it was never tested to see if it actually works.
+ This was being translated from Java to Swift which was written by Travis Peden. He translated the origal source from JS
+ to Java; Source is https://gml.noaa.gov/grad/solcalc/sunrise.html (Travis has a backup of the JS if site goes down for some reason)
+*/
+
 import Foundation
 
 

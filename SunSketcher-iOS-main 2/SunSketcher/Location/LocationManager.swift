@@ -2,8 +2,14 @@
 //  LocationManager.swift
 //  Sunsketcher
 //
-//  Created by ADMIN on 9/6/23.
+//  Created by Tameka Ferguson on 9/6/23.
 //
+
+
+/*
+ This file is done to retrieve the location of the user as well for requesting  permission to
+ use the user's location. From this you can get the user's latitude, longitude, and altitude.
+ */
 
 import Foundation
 import MapKit
@@ -25,8 +31,11 @@ class LocationManager: NSObject, ObservableObject {
     override init() {
         super.init()
         
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest // chooses how accurate you want the location to be
+        locationManager.distanceFilter = kCLDistanceFilterNone // this is used to track all movements of the phone.
+        //Note: that within the app the location is only saved in the database once so it doesn't keep changing.
+        //The lat | lon keeps updating on the countdown screen but that does not alter what is recorded.
+        
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation() // Remember to update Info.plist
         locationManager.delegate = self
@@ -50,11 +59,6 @@ class LocationManager: NSObject, ObservableObject {
 extension LocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        //guard let location = locations.last else {return}
-        //self.location = location
-        //self.region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)
-        //let altitude = location.altitude
-        //let altitude = self.location?.altitude
         
         if let lastLocation = locations.last {
             let altitude = lastLocation.altitude
