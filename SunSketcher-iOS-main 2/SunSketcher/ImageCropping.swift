@@ -2,8 +2,9 @@
 //  ImageCropping.swift
 //  Sunsketcher
 //
-//  Created by Ferguson, Tameka on 2/23/24.
+//  Created by Kelly Miller on 2/23/24.
 //
+
 
 import Foundation
 
@@ -67,6 +68,7 @@ class ImageCropping {
         return uiImage
     }
     
+    // finds center image in db and returns metadata for that image
     func findCenterImg(metadataArray: [ImageMetadata]) -> ImageMetadata? {
         
         var cnt = 0

@@ -2,8 +2,13 @@
 //  SQLiteManager.swift
 //  Sunsketcher
 //
-//  Created by Ferguson, Tameka on 1/22/24.
+//  Created by Tameka Ferguson on 1/22/24.
 //
+
+/*
+ This file is for the app database. It holds the latitude, longitude, altitude, filepath, capture time, aperture, iso, exposure time, white balance, focal distance and if the images are cropped (0/1) values.
+ It uses SQLite/SQL for the query language.
+ */
 
 import Foundation
 import SQLite3

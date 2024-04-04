@@ -2,7 +2,7 @@
 //  AppViewModel.swift
 //  Sunsketcher
 //
-//  Created by Ferguson, Tameka on 2/23/24.
+//  Created by Tameka Ferguson on 2/23/24.
 //
 
 import SwiftUI

@@ -2,8 +2,10 @@
 //  ContentView.swift
 //  Sunsketcher
 //
-//  Created by ADMIN on 8/25/23.
+//  Created by Tameka Ferguson on 8/25/23.
 //
+
+// This file uses the app view model to determine which screen to show once the app is completely closed and reopened. 
 
 import SwiftUI
 import AVFoundation

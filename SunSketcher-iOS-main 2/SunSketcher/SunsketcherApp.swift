@@ -2,10 +2,12 @@
 //  SunSketcherApp.swift
 //  SunSketcher
 //
-//  Created by ADMIN on 8/25/23.
+//  Created by Tameka Ferguson on 8/25/23.
 //
 
 // This the main .swift file for the app.
+// In the views, GeometryReader is used because we want the app to be optimized for different screen sizes so this adjsuts all of the
+// measurements to accommodate the screen.
 
 import SwiftUI
 
@@ -19,7 +21,6 @@ struct SunSketcherApp: App {
     
     var body: some Scene {
         WindowGroup {
-            //MainScreen(viewModel: MainScreenModel())
             ContentView()
                 .environmentObject(locationManager)
         }
@@ -39,7 +40,7 @@ struct SunSketcherApp: App {
         return [startUnix, endUnix]
     }
     
-    func testConvertTimes(data: [String]) -> [Int64] {
+    /*func testConvertTimes(data: [String]) -> [Int64] {
         let start = data[0].split(separator: ":").compactMap { Int($0) }
         let end = data[1].split(separator: ":").compactMap { Int($0) }
         
@@ -61,8 +62,7 @@ struct SunSketcherApp: App {
         
         return [startUnix, endUnix]
         
-    }
-    
+    }*/
     
 }
 

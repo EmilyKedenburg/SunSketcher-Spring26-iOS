@@ -32,8 +32,6 @@ struct CountdownScreen: View {
         
         // This if statement is used to change the view to the camera once the countdown timer hits 0.
         if !countdownDone {
-            // GeometryReader is used because we want the app to be optimized for different screen sizes so this adjsuts all of the
-            // measurements to accommodate the screen.
             GeometryReader { geo in
                 NavigationStack {
                     ZStack {
@@ -226,6 +224,7 @@ struct CountdownScreen: View {
         // TODO: for actual release
         let eclipseData: [String] = locToTime.calculatefor(lat: lat, lon: lon, alt: alt);
         
+        // TODO: for testing
         //let eclipseData: [String] = locToTime.calculatefor(lat: 47.6683, lon: -60.745, alt: alt);
         
         print("Eclipse data \(eclipseData)")
@@ -237,6 +236,7 @@ struct CountdownScreen: View {
             //let times: Int = main.convertTimes(data: eclipseData) // for April 8th
             let times = main.convertTimes(data: eclipseData) // for testing
             print("Start time: \(times[0]) \n End time: \(times[1])")
+            
             // Create a countdown timer here that will be passed to a swiftui view
             countdownTimeDiff = ((times[0]) - 60) - (Int64(Date().timeIntervalSince1970))
             
@@ -299,7 +299,7 @@ struct CountdownScreen: View {
         }
     }
     
-    
+    // TODO: for testing
     /*private func startTimerTesting() {
         timer?.invalidate()
         

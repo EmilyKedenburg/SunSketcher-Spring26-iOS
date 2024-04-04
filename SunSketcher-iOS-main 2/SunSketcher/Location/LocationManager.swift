@@ -19,7 +19,6 @@ import CoreLocation
 class LocationManager: NSObject, ObservableObject {
     @Published var location: CLLocation?
     @Published var region = MKCoordinateRegion()
-    //@Published var altitude: CLLocationDistance {get}
     
     static let shared = LocationManager()
     

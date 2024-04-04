@@ -2,7 +2,7 @@
 //  OpenCVWrapper.mm
 //  Sunsketcher
 //
-//  Created by Ferguson, Tameka on 2/23/24.
+//  Created by Kelly Miller on 2/23/24.
 //
 
 #import <opencv2/opencv.hpp>
@@ -126,16 +126,6 @@ NSArray<NSNumber *> *convertRectToCoords(cv::Rect cropBox) {
     // Convert the NSMutableArray to NSArray
     NSArray<NSNumber *> *boxCoords = [numberArray copy];
     
-    // Print the values being copied to boxCoords
-    for (NSNumber *number in boxCoords) {
-        NSLog(@"Value: %f", [number doubleValue]);
-    }
-    
-//    // Print the values being copied to boxCoords
-//    for (NSNumber *number in boxCoords) {
-//        NSLog(@"Value: %f", [*number doubleValue]);
-//    }
-    
     return boxCoords;
 }
 
@@ -190,6 +180,7 @@ NSArray<NSNumber *> *convertRectToCoords(cv::Rect cropBox) {
 }
 
 
+// checks if given point is within the given image boundaries
 cv::Point boundaryCheck(cv::Point pt, int maxX, int maxY) {
     if (pt.x < 0) {
         pt.x = 0.0;
@@ -220,24 +211,6 @@ cv::Point boundaryCheck(cv::Point pt, int maxX, int maxY) {
     
     return MatToUIImage(imgMatCropped);
 }
-
-//+ (UIImage *)cropUIImage:(UIImage *)image {
-//    
-//    // cv::Rect cropBox = getEclipseBox(image);
-//    
-//    cv::Mat imgMat;
-//    
-//    // convert the UIImage to an OpenCV Mat for processing
-//    [image convertToMat: &imgMat :false];
-//    
-//    // crop the mat
-//    // cv::Mat imgMatCropped = imgMat(cropBox);
-//    
-//    // return the cropped UIImage
-////    return MatToUIImage(imgMatCropped);
-//    return MatToUIImage(imgMat);
-//    
-//}
 
 
 @end

@@ -184,6 +184,7 @@
 				D87DAD642B7D5F9400447E40 /* Networking */,
 				848B1B472B3B428700DE9856 /* Location */,
 				848B1B462B3B427A00DE9856 /* CameraFunctionality */,
+				D86AD3332BBF385400BB993C /* Cropping */,
 				849D0FCB2B8E4AB700D4A57A /* Models */,
 				846E32A52ABA28E1004FEF60 /* Info.plist */,
 				8434D2292A99221A0068D985 /* SunsketcherApp.swift */,
@@ -270,6 +271,13 @@
 				D84B73512B6C02AE008C21C2 /* Montserrat-Thin.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		D86AD3332BBF385400BB993C /* Cropping */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cropping;
 			sourceTree = "<group>";
 		};
 		D87DAD642B7D5F9400447E40 /* Networking */ = {
