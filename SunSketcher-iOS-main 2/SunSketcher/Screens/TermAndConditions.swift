@@ -105,6 +105,7 @@ struct TermAndConditions: View {
                     
                 
                     VStack {
+                        // This is for the top white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)
@@ -144,11 +145,12 @@ struct TermAndConditions: View {
                                 }
                             }
                             .frame(width: geo.size.width, height: geo.size.height * 0.8)
-                            //.offset(x: 0, y: -geo.size.height * 0.1)
                             
                             
                         }// ZStack
                         .padding(.top, geo.size.width * 0.0)
+                        
+                        // This is for the bottom white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)

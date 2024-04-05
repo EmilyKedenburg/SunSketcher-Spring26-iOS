@@ -2,8 +2,12 @@
 //  CameraView.swift
 //  Sunsketcher
 //
-//  Created by ADMIN on 10/9/23.
+//  Created by Tameka Ferguson on 10/9/23.
 //
+
+/*
+ This file deals with
+ */
 
 import SwiftUI
 import AVFoundation

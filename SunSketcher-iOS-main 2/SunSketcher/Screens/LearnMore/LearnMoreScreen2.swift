@@ -55,6 +55,7 @@ struct LearnMoreScreen2: View {
                     
                 
                     VStack {
+                        // This is for the top white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)
@@ -81,16 +82,6 @@ struct LearnMoreScreen2: View {
                                       .frame(maxWidth: .infinity)
                                       .padding(.top, -geo.size.height * 0.0)
                                 }.frame(width: geo.size.width * 1, height: geo.size.height * 0.15, alignment: .top)
-                                
-                                /*Text("How does the app help?")
-                                  .font(
-                                    Font.custom("Oswald", size: geo.size.width * 0.1)
-                                      .weight(.bold)
-                                  )
-                                  .multilineTextAlignment(.center)
-                                  .foregroundColor(.white)
-                                  .frame(width: geo.size.width * 1, alignment: .top)
-                                  //.padding(.top, -geo.size.height * 0)*/
                                 
                                 // For image
                                 Rectangle()
@@ -143,6 +134,8 @@ struct LearnMoreScreen2: View {
                             }// VStack
                         }// ZStack
                         .padding(.top, geo.size.width * 0.01)
+                        
+                        // This is for the bottom white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)

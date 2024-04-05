@@ -55,6 +55,7 @@ struct NoSharePhotosResponse: View {
                     
                 
                     VStack {
+                        // This is for the top white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)
@@ -91,35 +92,6 @@ struct NoSharePhotosResponse: View {
                                         .frame(maxWidth: .infinity)
                                 }.frame(width: geo.size.width * 1, height: geo.size.height * 0.4)
                                 
-                                /*Text("Your photos will not be sent for analysis.")
-                                  .font(
-                                    Font.custom("Montserrat", size: geo.size.width * 0.05)
-                                      .weight(.semibold)
-                                  )
-                                  .multilineTextAlignment(.center)
-                                  .foregroundColor(.white)
-                                  .frame(width: geo.size.width * 0.9, alignment: .top)
-                                  .padding(.bottom, geo.size.height * 0.01)
-                                
-                                Text("You may now return your phone to its prior settings!")
-                                  .font(
-                                    Font.custom("Montserrat", size: geo.size.width * 0.05)
-                                      .weight(.semibold)
-                                  )
-                                  .multilineTextAlignment(.center)
-                                  .foregroundColor(.white)
-                                  .frame(width: geo.size.width * 0.9, alignment: .top)
-                                  .padding(.bottom, geo.size.height * 0.01)
-                                
-                                Text("Make it count! If you're a member of SciStarter, log your participation here to be included in #OneMillionActsofScience.")
-                                  .font(
-                                    Font.custom("Montserrat", size: geo.size.width * 0.05)
-                                      .weight(.semibold)
-                                  )
-                                  .multilineTextAlignment(.center)
-                                  .foregroundColor(.white)
-                                  .frame(width: geo.size.width * 0.8, alignment: .top)
-                                  .padding(.bottom, geo.size.height * 0.02)*/
                                 
                                 // SciStarter button
                                 Button(action: {
@@ -161,6 +133,8 @@ struct NoSharePhotosResponse: View {
                             }// VStack
                         }// ZStack
                         .padding(.top, geo.size.width * 0.01)
+                        
+                        // This is for the bottom white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)
@@ -172,8 +146,12 @@ struct NoSharePhotosResponse: View {
             }// Navigation stack
             .navigationBarBackButtonHidden()
             .onAppear {
+                // I am setting these so that if the app is closed and reopened it will take the user to the correct screen they
+                // should be on.
                 viewModel.NoShareScreen = true
                 viewModel.SharePhotosScreen = false
+                
+                // make sure to re-enable so that the app can sleep
                 UIApplication.shared.isIdleTimerDisabled = false
             }
             

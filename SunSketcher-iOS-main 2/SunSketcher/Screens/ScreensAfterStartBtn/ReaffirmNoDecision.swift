@@ -53,6 +53,7 @@ struct ReaffirmNoDecision: View {
                     
                 
                     VStack {
+                        // This is for the top white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)
@@ -125,6 +126,8 @@ struct ReaffirmNoDecision: View {
                             }// VStack
                         }// ZStack
                         .padding(.top, geo.size.width * 0.01)
+                        
+                        // This is for the bottom white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)

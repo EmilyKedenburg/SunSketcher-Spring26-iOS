@@ -13,9 +13,6 @@ struct SharePhotos: View {
     let metadataArray = MetadataDB.shared.retrieveImageMeta()
     @StateObject private var viewModel = AppViewModel()
     
-    // TODO: Remove; for testing
-    //private let images: [String] = ["crop image 1", "crop image 2", "crop image 3"]
-    
     
     var body: some View {
         GeometryReader { geo in
@@ -59,6 +56,7 @@ struct SharePhotos: View {
                     
                 
                     VStack {
+                        // This is for the top white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)
@@ -96,7 +94,6 @@ struct SharePhotos: View {
                                 
                                 
                                 // Cropped Image display
-                        
                                 ScrollView(.horizontal) {
                                     LazyHStack(spacing: 5) {
                                         ForEach(metadataArray, id: \.id) { metadata in
@@ -106,7 +103,6 @@ struct SharePhotos: View {
                                                     .scaledToFit()
                                                     .frame(width: geo.size.width * 1, height: geo.size.height * 0.3) 
                                                     .padding()
-                                                    //.offset(x: CGFloat(metadataArray.firstIndex(of: metadata)! - metadataArray.count / 2) * -15)
                                             }
                                         }
                                         
@@ -154,6 +150,8 @@ struct SharePhotos: View {
                             }// VStack
                         }// ZStack
                         .padding(.top, geo.size.width * 0.01)
+                        
+                        // This is for the bottom white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)
@@ -165,6 +163,8 @@ struct SharePhotos: View {
             }// Navigation stack
             .navigationBarBackButtonHidden()
             .onAppear {
+                // I am setting these so that if the app is closed and reopened it will take the user to the correct screen they
+                // should be on.
                 viewModel.SharePhotosScreen = true
             }
             

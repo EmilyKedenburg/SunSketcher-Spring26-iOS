@@ -54,7 +54,9 @@ struct TutorialScreen2: View {
                             
                         )
                         .offset(x: 0, y: geo.size.height * 0.22)
+                    
                     VStack {
+                        // This is for the top white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)
@@ -80,16 +82,6 @@ struct TutorialScreen2: View {
                                       .frame(maxWidth: .infinity)
                                       .padding(.top, -geo.size.height * 0)
                                 }.frame(width: geo.size.width * 1, height: geo.size.height * 0.15, alignment: .top)
-                                
-                                /*Text("Step one")
-                                  .font(
-                                    Font.custom("Oswald", size: geo.size.width * 0.14)
-                                      .weight(.bold)
-                                  )
-                                  .multilineTextAlignment(.center)
-                                  .foregroundColor(.white)
-                                  .frame(width: geo.size.width * 1, alignment: .top)
-                                  .padding(.top, -geo.size.height * 0.05)*/
                                 
                                 // For image
                                 Rectangle()
@@ -143,6 +135,7 @@ struct TutorialScreen2: View {
                             }// VStack
                             
                         }// Zstack
+                        // This is for the bottom white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)

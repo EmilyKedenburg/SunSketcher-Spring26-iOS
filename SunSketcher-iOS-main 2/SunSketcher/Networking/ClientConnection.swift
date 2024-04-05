@@ -2,8 +2,13 @@
 //  ClientConnection.swift
 //  iOS-Server
 //
-//  Created by ADMIN on 2/25/24.
+//  Created by Travis Peden & Yegor Lushpin on 2/25/24.
 //
+
+/*
+ This file is for forming the connection between the client and the server.
+ */
+
 import Foundation
 import Network
 import Combine
@@ -334,24 +339,10 @@ class ClientConnection: ObservableObject {
         objectWillChange.send()
         self.nwConnection.stateUpdateHandler = nil
         self.nwConnection.cancel()
-        /*if let didStopCallback = self.didStopCallback {
-            self.didStopCallback = nil
-            didStopCallback(error)
-        }*/
-        
-        // Using optional chaining to call didStopCallback if it's not nil
-        //self.didStopCallback?(error)
         prefs.set(false, forKey: "Socket open")
         print("end")
     }
     
-//    private func transferComplete() -> Bool {
-//        if prefs.bool(forKey: "Transfer done") {
-//            return true
-//        } else {
-//            return false
-//        }
-//    }
     
 
 }

@@ -15,7 +15,6 @@ import SQLite3
 
 struct ImageMetadata {
     let id: Int
-    //let clientID: Int
     let latitude: Double
     let longitude: Double
     let altitude: Double
@@ -88,11 +87,9 @@ class MetadataDB {
         let insertSQL = "INSERT INTO Metadata (latitude, longitude, altitude, filepath, captureTime, aperture, iso, exposureTime, whiteBalance, focalDistance, isCropped) VALUES (?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?);"
         
         let tempFilepath: NSString = NSString(string: filepath)
-        //let whiteBal: NSString = NSString(string: whiteBalance)
 
         var statement: OpaquePointer?
         if sqlite3_prepare_v2(db, insertSQL, -1, &statement, nil) == SQLITE_OK {
-            //sqlite3_bind_int64(statement, 1, clientID)
             sqlite3_bind_double(statement, 1, latitude)
             sqlite3_bind_double(statement, 2, longitude)
             sqlite3_bind_double(statement, 3, altitude)
@@ -147,7 +144,6 @@ class MetadataDB {
         if sqlite3_prepare_v2(db, querySQL, -1, &statement, nil) == SQLITE_OK {
             while sqlite3_step(statement) == SQLITE_ROW {
                 let id = Int(sqlite3_column_int(statement, 0))
-                //let clientID = Int64(sqlite3_column_int(statement, 1))
                 let latitude = Double(sqlite3_column_double(statement, 1))
                 let longitude = Double(sqlite3_column_double(statement, 2))
                 let altitude = Double(sqlite3_column_double(statement, 3))
@@ -172,23 +168,23 @@ class MetadataDB {
         return metadataArray
     }
     
-    func dropTable() {
-        let dropSQL = "DROP TABLE IF EXISTS Metadata;"
-
-        var statement: OpaquePointer?
-        if sqlite3_prepare_v2(db, dropSQL, -1, &statement, nil) == SQLITE_OK {
-            if sqlite3_step(statement) != SQLITE_DONE {
-                print("Error dropping Metadata table: \(String(cString: sqlite3_errmsg(db)))")
-            }
-            
-            print("Database dropped")
-            sqlite3_finalize(statement)
-        } else {
-            print("Error preparing SQL statement: \(String(cString: sqlite3_errmsg(db)))")
-        }
-        
-        createMetadataTable()
-    }
+//    func dropTable() {
+//        let dropSQL = "DROP TABLE IF EXISTS Metadata;"
+//
+//        var statement: OpaquePointer?
+//        if sqlite3_prepare_v2(db, dropSQL, -1, &statement, nil) == SQLITE_OK {
+//            if sqlite3_step(statement) != SQLITE_DONE {
+//                print("Error dropping Metadata table: \(String(cString: sqlite3_errmsg(db)))")
+//            }
+//            
+//            print("Database dropped")
+//            sqlite3_finalize(statement)
+//        } else {
+//            print("Error preparing SQL statement: \(String(cString: sqlite3_errmsg(db)))")
+//        }
+//        
+//        createMetadataTable()
+//    }
 
 
 

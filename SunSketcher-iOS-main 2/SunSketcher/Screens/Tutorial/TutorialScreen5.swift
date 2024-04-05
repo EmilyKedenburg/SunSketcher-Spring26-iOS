@@ -16,9 +16,6 @@ struct TutorialScreen5: View {
     
     let txt = "Press “YES” when asked if it is ok to share photos. To make sure we receive your data, please don’t delete the app until you are notified your data has been sent."
     
-    //@EnvironmentObject var navigationStackManager: NavigationStackManager
-    //@State var back: String
-    
     
     var body: some View {
         GeometryReader { geo in
@@ -64,6 +61,7 @@ struct TutorialScreen5: View {
                         )
                         .offset(x: 0, y: geo.size.height * 0.22)
                     VStack {
+                        // This is for the top white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)
@@ -90,15 +88,6 @@ struct TutorialScreen5: View {
                                       .padding(.top, -geo.size.height * 0.0)
                                 }.frame(width: geo.size.width * 1, height: geo.size.height * 0.15, alignment: .top)
                                 
-                                /*Text("Step four")
-                                  .font(
-                                    Font.custom("Oswald", size: geo.size.width * 0.14)
-                                      .weight(.bold)
-                                  )
-                                  .multilineTextAlignment(.center)
-                                  .foregroundColor(.white)
-                                  .frame(width: geo.size.width * 1, alignment: .top)
-                                  .padding(.top, -geo.size.height * 0.05)*/
                                 
                                 // For image
                                 Rectangle()
@@ -160,6 +149,7 @@ struct TutorialScreen5: View {
                             }// VStack
                             
                         }// Zstack
+                        // This is for the bottom white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)

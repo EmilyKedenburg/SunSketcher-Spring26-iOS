@@ -2,8 +2,14 @@
 //  Socket.swift
 //  Sunsketcher
 //
-//  Created by Ferguson, Tameka on 2/7/24.
+//  Created by Shikha Sawant on 2/7/24.
 //
+
+/*
+ This file was not used for the SunSketcher app release in March 2024. This file can be used when trying to figure out a more secure
+ way of transferring data to the server.
+ */
+
 
 import Foundation
 import Security

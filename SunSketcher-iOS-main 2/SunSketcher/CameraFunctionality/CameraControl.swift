@@ -2,7 +2,7 @@
 //  CameraControl.swift
 //  Sunsketcher
 //
-//  Created by ADMIN on 9/20/23.
+//  Created by Tameka Ferguson on 9/20/23.
 //
 
 import Foundation

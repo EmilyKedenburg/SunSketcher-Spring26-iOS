@@ -55,6 +55,7 @@ struct LearnMoreScreen3: View {
                     
                 
                     VStack {
+                        // This is for the top white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)
@@ -82,16 +83,6 @@ struct LearnMoreScreen3: View {
                                       .padding(.top, -geo.size.height * 0.01)
                                 }.frame(width: geo.size.width * 1, height: geo.size.height * 0.15, alignment: .top)
                                 
-                                
-                                /*Text("Why capture Bailey's Beads?")
-                                  .font(
-                                    Font.custom("Oswald", size: geo.size.width * 0.11)
-                                      .weight(.bold)
-                                  )
-                                  .multilineTextAlignment(.center)
-                                  .foregroundColor(.white)
-                                  .frame(width: geo.size.width * 1.0, alignment: .top)
-                                  .padding(.top, -geo.size.height * 0)*/
                                 
                                 // For image
                                 Rectangle()
@@ -144,6 +135,8 @@ struct LearnMoreScreen3: View {
                             }// VStack
                         }// ZStack
                         .padding(.top, geo.size.width * 0.01)
+                        
+                        // This is for the bottom white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)

@@ -55,6 +55,7 @@ struct TutorialScreen3: View {
                         )
                         .offset(x: 0, y: geo.size.height * 0.22)
                     VStack {
+                        // This is for the top white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)
@@ -144,6 +145,7 @@ struct TutorialScreen3: View {
                             }// VStack
                             
                         }// Zstack
+                        // This is for the bottom white line of the background overlay
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: geo.size.width, height: geo.size.height * 0.004)

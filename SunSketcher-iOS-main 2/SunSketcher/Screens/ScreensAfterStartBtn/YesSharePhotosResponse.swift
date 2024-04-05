@@ -17,7 +17,9 @@ struct YesSharePhotosResponse: View {
     let prefs = UserDefaults.standard
     @StateObject private var viewModel = AppViewModel()
     
+    // used for switching views
     @State private var transferComplete = false
+    
     @State private var timer: Timer?
     @State private var backgroundTask: BackgroundTask?
     
@@ -63,6 +65,7 @@ struct YesSharePhotosResponse: View {
                         
                         
                         VStack {
+                            // This is for the top white line of the background overlay
                             Rectangle()
                                 .foregroundColor(.clear)
                                 .frame(width: geo.size.width, height: geo.size.height * 0.004)
@@ -138,6 +141,8 @@ struct YesSharePhotosResponse: View {
                                 }// VStack
                             }// ZStack
                             .padding(.top, geo.size.width * 0.01)
+                            
+                            // This is for the bottom white line of the background overlay
                             Rectangle()
                                 .foregroundColor(.clear)
                                 .frame(width: geo.size.width, height: geo.size.height * 0.004)
@@ -155,9 +160,12 @@ struct YesSharePhotosResponse: View {
             }// Navigation stack
             .navigationBarBackButtonHidden()
             .onAppear {
+                // I am setting these so that if the app is closed and reopened it will take the user to the correct screen they
+                // should be on.
                 viewModel.YesShareScreen = true
                 viewModel.SharePhotosScreen = false
                 
+                // make sure to re-enable so that the app can sleep
                 UIApplication.shared.isIdleTimerDisabled = false
                 
                 checkForPermissions()
@@ -168,12 +176,12 @@ struct YesSharePhotosResponse: View {
                         
                         print("Starting transfer")
                         
-                        // Retry logic with exponential backoff
                         var retryCount = 0
                         let maxWaitTime = 15.0 // Maximum wait time between retries (in seconds)
                         
                         // Initial data transfer attempt
                         dataTransfer()
+                        
                         
                         func scheduleNextRetry() {
                             let waitTime = min(pow(10.0, Double(retryCount)), maxWaitTime)
@@ -183,15 +191,17 @@ struct YesSharePhotosResponse: View {
                                     
                                     dataTransferRequest()
                                     
-                                    
+                                    // if the transfer request failed, then recall data transfer to try again
                                     if !prefs.bool(forKey: "Transfer complete") {
                                         print("Retrying data transfer")
                                         dataTransfer()
                                     } else {
                                         print("Data transferred successfully")
                                         task.setTaskCompleted(success: true)
+                                        // make sure to cancel the background task when it's done being used
                                         backgroundTask?.cancel()
                                         
+                                        // This is for signaling the view when the transfer is done to call this function that switches to the next view
                                         DispatchQueue.main.async {
                                             NotificationCenter.default.post(name: .transferComplete, object: nil)
                                         }
@@ -204,6 +214,7 @@ struct YesSharePhotosResponse: View {
                                     task.setTaskCompleted(success: true)
                                     backgroundTask?.cancel()
                                     
+                                    // This is for signaling the view when the transfer is done to call this function that switches to the next view
                                     DispatchQueue.main.async {
                                         NotificationCenter.default.post(name: .transferComplete, object: nil)
                                     }
@@ -247,6 +258,7 @@ struct YesSharePhotosResponse: View {
         
     }
     
+    // Checks if notifications permissions have been given
     func checkForPermissions() {
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.getNotificationSettings { settings in

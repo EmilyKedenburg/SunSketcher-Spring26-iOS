@@ -5,23 +5,14 @@
 //  Created by Travis Peden on 3/1/24.
 //
 
+/*
+ This file is for the data transfer between the client and the server. Here it requests the ID and receives an ID from the server.
+ The ID is saved within the UserDefaults.
+ */
+
 import Foundation
 import CryptoKit
 import Network
-
-extension FixedWidthInteger {
-    var data: Data {
-        var int = self
-        return withUnsafeBytes(of: &int) { Data($0) }
-    }
-}
-
-extension FloatingPoint {
-    var data: Data {
-        var float = self
-        return withUnsafeBytes(of: &float) { Data($0) }
-    }
-}
 
 struct UnsecureTransfer {
     var client: ClientConnection
@@ -50,7 +41,8 @@ struct UnsecureTransfer {
         
         if (clearToSend == "true") {
             print("Sending server the necessary settings for ID the connection settings to the serverRequest.")
-            //send
+            
+            //send the connection settings to the server
             client.send(data: Data("IDRequest\n".utf8))
             client.send(data: Data("uIOS\n".utf8))
             
@@ -87,8 +79,6 @@ struct UnsecureTransfer {
     }
     
     func TransferRequest() -> Bool {
-        //if !prefs.bool(forKey: "Transfer called"){
-            //prefs.set(true, forKey: "Transfer called")
             client.start()
             sleep(1)
             
@@ -117,31 +107,22 @@ struct UnsecureTransfer {
                 client.send(data: Data("\(UserDefaults.standard.integer(forKey: "ClientID"))\n".utf8))
 
                 
-                //loop through database entries
+                // Call the databse to retrieve the entries
                 let metadataArray = MetadataDB.shared.retrieveImageMeta()
                 
-                
+                // Retrieve the amount of entries to send to the server so it knows how much to expect
                 let arrayCount = metadataArray.count
                 client.send(data: Data("\(arrayCount)\n".utf8))
 
-
+                //loop through database entries
                 for metadata in metadataArray {
-                    //client.send(data: Data(metadata.))
-                    
-                    print("ID: \(metadata.id), Latitude: \(metadata.latitude), Longitude: \(metadata.longitude), Altitude: \(metadata.altitude), Filepath: \(metadata.filepath), Capture Time: \(metadata.captureTime), ISO \(metadata.iso), Exposure time: \(metadata.exposureTime), White balance: \(metadata.whiteBalance), Focal distance: \(metadata.focalDistance), isCropped: \(metadata.isCropped)")
-                    
                     
                     let filepath = metadata.filepath
                     let filename = URL(string: filepath)!.lastPathComponent
                     let fileNameData = Data("\(filename)\n".utf8)
-                    //(filename?.data(using: .utf8))!
-                    
-                    //var fileLength = getFileSize(atPath: filepath)
-                    //let fileLengthData = Data(bytes: &fileLength, count: MemoryLayout<Int64>.size)
                     
                     var fileData: Data? = nil
 
-                    //if FileManager.default.fileExists(atPath: filepath) {
                         do {
                             let fileURL = NSURL(fileURLWithPath: filepath)
                             print("Filepath to read from: \(fileURL.absoluteString)")
@@ -152,22 +133,14 @@ struct UnsecureTransfer {
                         } catch {
                             print("Error converting file to Data: \(error.localizedDescription)")
                         }
-                    /*} else {
-                        print("File not found at path: \(filepath)")
-                    }*/
                     
-                    
-
-                    
-                    
-                    // Convert numeric values to Data
-                    
+                       
+                    // For some reason the capture time isn't being returned correctly when retrieving it from the database so
+                    // to ensure the correct capture time of the images are being sent to the server, I retrieve it from the filepath instead.
                     let unixTimeStamp1 = filepath.components(separatedBy: "_")
                     let unixTimeStamp2 = unixTimeStamp1[1].components(separatedBy: ".")
                     
-                    print("Correct capture time: \(unixTimeStamp2[0])")
-                    
-                    
+                    // Convert numeric values to Data
                     let latitudeData = Data("\(metadata.latitude)\n".utf8)
                     let longitudeData = Data("\(metadata.longitude)\n".utf8)
                     let altitudeData = Data("\(metadata.altitude)\n".utf8)
@@ -178,10 +151,8 @@ struct UnsecureTransfer {
                     let focusDistanceData = Data("\(metadata.focalDistance)\n".utf8)
                     let exposureData = Data("\(metadata.exposureTime)\n".utf8)
                     
-                    
+                    // Send the data to the server. It's in this order because this is the order the server expects the data.
                     client.send(data: fileNameData)
-                    //client.send(data: Data("\(String(data: fileLengthData, encoding: .utf8))\n".utf8))
-                    //client.send(data: fileData)
                     client.send(data: fileData?.base64EncodedData() ?? Data())
                     client.send(data: Data("\n".utf8))
                     client.send(data: latitudeData)
@@ -213,11 +184,7 @@ struct UnsecureTransfer {
             }
             
             client.stop()
-            //prefs.set(true, forKey: "Transfer complete")
             return true
-        /*} else {
-            return true
-        }*/
         
     }
     
@@ -227,19 +194,6 @@ struct UnsecureTransfer {
         } else {
             exit(EXIT_FAILURE)
         }
-    }
-    
-    func getFileSize(atPath path: String) -> Int64? {
-        let fileManager = FileManager.default
-        do {
-            let attributes = try fileManager.attributesOfItem(atPath: path)
-            if let fileSize = attributes[FileAttributeKey.size] as? Int64 {
-                return fileSize
-            }
-        } catch {
-            print("Error: \(error.localizedDescription)")
-        }
-        return nil
     }
 
     

@@ -2,8 +2,12 @@
 //  CustomCameraView.swift
 //  Sunsketcher
 //
-//  Created by ADMIN on 10/10/23.
+//  Created by Tameka Ferguson on 10/10/23.
 //
+
+/*
+ This file controls the view of the camera.
+ */
 
 import SwiftUI
 import UIKit
@@ -35,6 +39,9 @@ struct CustomCameraView: View {
                                 // Save photo to photo library in the "SunSketcher" album
                                 cameraService.savePhotoToLibrary(photo)
                                 capturedImage = image
+                                
+                                // I use this so that when this is called and returns true, the view can change from the camera to
+                                // the next view which woud be cropping. 
                                 if cameraService.allPhotosCompleted() {
                                     isTimerCompleted = true
                                 }
