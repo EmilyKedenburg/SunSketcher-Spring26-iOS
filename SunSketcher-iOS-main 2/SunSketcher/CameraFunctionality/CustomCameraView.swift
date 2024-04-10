@@ -19,6 +19,7 @@ struct CustomCameraView: View {
     @Binding var capturedImage: UIImage?
     @Environment(\.dismiss) private var dismiss
     let prefs = UserDefaults.standard
+    @StateObject private var viewModel = AppViewModel()
     
     @State var isTimerCompleted = false
     
@@ -63,6 +64,12 @@ struct CustomCameraView: View {
             
         }.onAppear{
             UIApplication.shared.isIdleTimerDisabled = true
+            
+            // I am setting these so that if the app is closed and reopened it will take the user to the correct screen they
+            // should be on. This is specifically set so if the app crashes when taking photos, it will go to the image scroll screen,
+            // so we don't lose possible important data all together.
+            viewModel.SharePhotosScreen = true
+            
         }
     
     }

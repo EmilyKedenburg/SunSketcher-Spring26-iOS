@@ -353,14 +353,12 @@ struct CameraScreen: View {
     
     @State private var capturedImage: UIImage? = nil
     
-    
     var body: some View {
         
-        //SharePhotos()
         CustomCameraView(capturedImage: $capturedImage)
             .navigationBarBackButtonHidden(true)
-            //.ignoresSafeArea()
     }
+    
 }
 
 struct CountdownScreen_Previews: PreviewProvider {
