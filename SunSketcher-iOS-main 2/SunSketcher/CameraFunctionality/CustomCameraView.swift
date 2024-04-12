@@ -68,7 +68,7 @@ struct CustomCameraView: View {
             // I am setting these so that if the app is closed and reopened it will take the user to the correct screen they
             // should be on. This is specifically set so if the app crashes when taking photos, it will go to the image scroll screen,
             // so we don't lose possible important data all together.
-            viewModel.SharePhotosScreen = true
+            //viewModel.SharePhotosScreen = true
             
         }
     

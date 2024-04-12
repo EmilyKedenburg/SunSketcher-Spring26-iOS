@@ -20,7 +20,6 @@
 		84CDE40D2AB0C8560011ED23 /* LocToTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CDE40C2AB0C8560011ED23 /* LocToTime.swift */; };
 		84D07C7B2AD5A1D4001E1DD4 /* CustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D07C7A2AD5A1D4001E1DD4 /* CustomCameraView.swift */; };
 		D81784892B62B5C200922020 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81784882B62B5C200922020 /* MainScreen.swift */; };
-		D81B211F2B9F637900E21AE2 /* CountdownScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B211E2B9F637900E21AE2 /* CountdownScreen.swift */; };
 		D81B21212B9FAE3A00E21AE2 /* BackgroundTaskHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B21202B9FAE3A00E21AE2 /* BackgroundTaskHandler.swift */; };
 		D81B41DD2B7BCA4E0070A2FF /* CroppingImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B41DC2B7BCA4E0070A2FF /* CroppingImages.swift */; };
 		D81B41DF2B7BCA8D0070A2FF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81B41DE2B7BCA8D0070A2FF /* Launch Screen.storyboard */; };
@@ -65,6 +64,7 @@
 		D89E1F2E2B719BBE00240705 /* TutorialScreen3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89E1F2D2B719BBE00240705 /* TutorialScreen3.swift */; };
 		D8A1B65C2B5EC9C70099B4C6 /* MetadataDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1B65B2B5EC9C70099B4C6 /* MetadataDB.swift */; };
 		D8A1B65F2B5ECCF50099B4C6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D8A1B65E2B5ECCF50099B4C6 /* libsqlite3.tbd */; settings = {ATTRIBUTES = (Required, ); }; };
+		D8A9AB452BC98FDD005CAC1C /* CountdownScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AB442BC98FDD005CAC1C /* CountdownScreen.swift */; };
 		D8B0951E2B73D99B0025FADE /* TutorialScreen5.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0951D2B73D99B0025FADE /* TutorialScreen5.swift */; };
 		D8B281992B6D4BA700D82E48 /* TutorialScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B281982B6D4BA700D82E48 /* TutorialScreen1.swift */; };
 		D8B2819B2B6D4BB600D82E48 /* LearnMoreScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B2819A2B6D4BB600D82E48 /* LearnMoreScreen1.swift */; };
@@ -88,7 +88,6 @@
 		84CDE40C2AB0C8560011ED23 /* LocToTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocToTime.swift; path = Sunsketcher/Location/LocToTime.swift; sourceTree = SOURCE_ROOT; };
 		84D07C7A2AD5A1D4001E1DD4 /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomCameraView.swift; path = Sunsketcher/CameraFunctionality/CustomCameraView.swift; sourceTree = SOURCE_ROOT; };
 		D81784882B62B5C200922020 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainScreen.swift; path = Sunsketcher/Screens/MainScreen.swift; sourceTree = SOURCE_ROOT; };
-		D81B211E2B9F637900E21AE2 /* CountdownScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CountdownScreen.swift; path = SunSketcher/Screens/ScreensAfterStartBtn/CountdownScreen.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.crashreport; };
 		D81B21202B9FAE3A00E21AE2 /* BackgroundTaskHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BackgroundTaskHandler.swift; path = SunSketcher/Models/BackgroundTaskHandler.swift; sourceTree = SOURCE_ROOT; };
 		D81B41DC2B7BCA4E0070A2FF /* CroppingImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CroppingImages.swift; path = SunSketcher/Screens/ScreensAfterStartBtn/CroppingImages.swift; sourceTree = SOURCE_ROOT; };
 		D81B41DE2B7BCA8D0070A2FF /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "SunSketcher/Screens/Launch Screen.storyboard"; sourceTree = SOURCE_ROOT; };
@@ -137,6 +136,7 @@
 		D89E1F2D2B719BBE00240705 /* TutorialScreen3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TutorialScreen3.swift; path = Sunsketcher/Screens/Tutorial/TutorialScreen3.swift; sourceTree = SOURCE_ROOT; };
 		D8A1B65B2B5EC9C70099B4C6 /* MetadataDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MetadataDB.swift; path = SunSketcher/Database/MetadataDB.swift; sourceTree = SOURCE_ROOT; };
 		D8A1B65E2B5ECCF50099B4C6 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		D8A9AB442BC98FDD005CAC1C /* CountdownScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CountdownScreen.swift; path = SunSketcher/Screens/ScreensAfterStartBtn/CountdownScreen.swift; sourceTree = SOURCE_ROOT; };
 		D8B0951D2B73D99B0025FADE /* TutorialScreen5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TutorialScreen5.swift; path = Sunsketcher/Screens/Tutorial/TutorialScreen5.swift; sourceTree = SOURCE_ROOT; };
 		D8B281982B6D4BA700D82E48 /* TutorialScreen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TutorialScreen1.swift; path = Sunsketcher/Screens/Tutorial/TutorialScreen1.swift; sourceTree = SOURCE_ROOT; };
 		D8B2819A2B6D4BB600D82E48 /* LearnMoreScreen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LearnMoreScreen1.swift; path = Sunsketcher/Screens/LearnMore/LearnMoreScreen1.swift; sourceTree = SOURCE_ROOT; };
@@ -308,8 +308,8 @@
 				D88E28B12B767D4B00ABE837 /* SeeOrSkipTutorial.swift */,
 				D88E28B32B767D6700ABE837 /* LocationVerification.swift */,
 				D88E28B52B767D7D00ABE837 /* NotAtLocation.swift */,
-				D81B211E2B9F637900E21AE2 /* CountdownScreen.swift */,
 				D81B41DC2B7BCA4E0070A2FF /* CroppingImages.swift */,
+				D8A9AB442BC98FDD005CAC1C /* CountdownScreen.swift */,
 				D88E28C52B76BE6300ABE837 /* SharePhotos.swift */,
 				D88E28A92B767C5C00ABE837 /* YesSharePhotosResponse.swift */,
 				D88E28AC2B767CE700ABE837 /* ReaffirmNoDecision.swift */,
@@ -452,9 +452,9 @@
 				D88692C52B89016B007CB7C9 /* OpenCVWrapper.mm in Sources */,
 				D88E28AD2B767CE700ABE837 /* ReaffirmNoDecision.swift in Sources */,
 				D88E28C32B76A89E00ABE837 /* LearnMoreScreen5.swift in Sources */,
+				D8A9AB452BC98FDD005CAC1C /* CountdownScreen.swift in Sources */,
 				8434D22C2A99221A0068D985 /* ContentView.swift in Sources */,
 				D8A1B65C2B5EC9C70099B4C6 /* MetadataDB.swift in Sources */,
-				D81B211F2B9F637900E21AE2 /* CountdownScreen.swift in Sources */,
 				D81784892B62B5C200922020 /* MainScreen.swift in Sources */,
 				D88E28BF2B76A86700ABE837 /* LearnMoreScreen3.swift in Sources */,
 				D81B41E12B7BFAA70070A2FF /* TermAndConditions.swift in Sources */,
@@ -613,7 +613,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Sunsketcher/Sunsketcher.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Sunsketcher/Preview Content\"";
 				DEVELOPMENT_TEAM = C6MX229DZ7;
 				ENABLE_PREVIEWS = YES;
@@ -640,7 +640,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.wku.sunsketcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -667,7 +667,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Sunsketcher/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = C6MX229DZ7;
@@ -695,7 +695,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.wku.sunsketcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

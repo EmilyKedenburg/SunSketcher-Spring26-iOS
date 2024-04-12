@@ -165,19 +165,25 @@ struct SharePhotos: View {
             .onAppear {
                 // I am setting these so that if the app is closed and reopened it will take the user to the correct screen they
                 // should be on.
-                viewModel.SharePhotosScreen = true
+                //viewModel.SharePhotosScreen = true
             }
             
         }// Geometry reader
     }
     
     func loadImageFromPath(filepath: String) -> UIImage? {
+        print("Loading image from path: \(filepath)")
         guard let image = UIImage(contentsOfFile: filepath) else {
             print("Image not found at path: \(filepath)")
+            
             return nil
         }
         return image
     }
+
+
+    
+    
 }
 
 
