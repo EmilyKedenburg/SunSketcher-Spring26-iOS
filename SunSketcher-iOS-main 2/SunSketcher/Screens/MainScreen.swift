@@ -153,63 +153,67 @@ struct MainScreen: View {
                     requestPermissions()
                 }
                 
-                backgroundTask = BackgroundTask { task in
-                    
-                    if (!prefs.bool(forKey: "ClientID obtained") && !prefs.bool(forKey: "Requesting")) || (prefs.integer(forKey: "ClientID") < 0) {
+                let arrayCount = metadataArray.count
+                
+                if arrayCount > 0 {
+                    ImageScrollView()
+                } else {
+                    backgroundTask = BackgroundTask { task in
                         
-                        prefs.set(true, forKey: "Requesting")
-                        
-                        // Retry logic with exponential backoff
-                        var retryCount = 0
-                        let maxWaitTime = 20.0 // Maximum wait time between retries (in seconds)
-                        
-                        
-                        retryGetClientID()
-                        
-                        func scheduleNextRetry() {
-                            let waitTime = min(pow(10.0, Double(retryCount)), maxWaitTime)
-                            DispatchQueue.global().asyncAfter(deadline: .now() + waitTime) {
-                                if !prefs.bool(forKey: "ClientID obtained") {
-                                    print("Getting CliendID")
-                                    getClientID()
-                                    
+                        if (!prefs.bool(forKey: "ClientID obtained") && !prefs.bool(forKey: "Requesting")) || (prefs.integer(forKey: "ClientID") < 0) {
+                            
+                            prefs.set(true, forKey: "Requesting")
+                            
+                            // Retry logic with exponential backoff
+                            var retryCount = 0
+                            let maxWaitTime = 20.0 // Maximum wait time between retries (in seconds)
+                            
+                            
+                            retryGetClientID()
+                            
+                            func scheduleNextRetry() {
+                                let waitTime = min(pow(10.0, Double(retryCount)), maxWaitTime)
+                                DispatchQueue.global().asyncAfter(deadline: .now() + waitTime) {
                                     if !prefs.bool(forKey: "ClientID obtained") {
-                                        print("Called")
-                                        retryGetClientID()
+                                        print("Getting CliendID")
+                                        getClientID()
+                                        
+                                        if !prefs.bool(forKey: "ClientID obtained") {
+                                            print("Called")
+                                            retryGetClientID()
+                                        }else {
+                                            print("ID received, cancel background task")
+                                            task.setTaskCompleted(success: true)
+                                            backgroundTask?.cancel()
+                                        }
                                     }else {
                                         print("ID received, cancel background task")
                                         task.setTaskCompleted(success: true)
                                         backgroundTask?.cancel()
                                     }
-                                }else {
-                                    print("ID received, cancel background task")
-                                    task.setTaskCompleted(success: true)
-                                    backgroundTask?.cancel()
                                 }
                             }
+                            
+                            func retryGetClientID() {
+                                retryCount += 1
+                                
+                                print("Get Client ID (Attempt \(retryCount))")
+                                scheduleNextRetry()
+                                
+                            }
+                            
+                        } else {
+                            print("ID received, cancel background task")
+                            task.setTaskCompleted(success: true)
+                            backgroundTask?.cancel()
                         }
                         
-                        func retryGetClientID() {
-                            retryCount += 1
-                            
-                            print("Get Client ID (Attempt \(retryCount))")
-                            scheduleNextRetry()
-                            
-                        }
                         
-                    } else {
-                        print("ID received, cancel background task")
-                        task.setTaskCompleted(success: true)
-                        backgroundTask?.cancel()
                     }
-                    
-                    
+                    self.prefs.set(false, forKey: "Transfer complete")
+                    self.prefs.set(false, forKey: "Transfer called")
+                    self.prefs.set(false, forKey: "Socket open")
                 }
-                
-                
-                self.prefs.set(false, forKey: "Transfer complete")
-                self.prefs.set(false, forKey: "Transfer called")
-                self.prefs.set(false, forKey: "Socket open")
                 
                 
                 
@@ -289,6 +293,12 @@ struct MainScreen: View {
         //}
     }
 
+}
+
+struct ImageScrollView: View {
+    var body: some View {
+        SharePhotos()
+    }
 }
 
 
