@@ -172,14 +172,35 @@ struct SharePhotos: View {
     }
     
     func loadImageFromPath(filepath: String) -> UIImage? {
-        print("Loading image from path: \(filepath)")
-        guard let image = UIImage(contentsOfFile: filepath) else {
-            print("Image not found at path: \(filepath)")
+        print("Loading image from path: \(filepath)\n")
+        
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        print("Documents Directory: \(documentsDirectory)")
+        
+        let appendPath1 = filepath.components(separatedBy: "/Documents/")
+        print("Append path: \(appendPath1[1])")
+        
+        let newFilepath = documentsDirectory.appendingPathComponent(appendPath1[1])
+        print("New filepath: \(newFilepath)\n")
+        
+        let newPathString = "\(newFilepath.relativePath)"
+        print("New filepath as a string: \(newPathString)")
+        
+        MetadataDB.shared.updateImageFilepathOnly(filepath: filepath, newFilepath: newPathString)
+        
+        for metadata in metadataArray {
+            print("ID: \(metadata.id), Filepath: \(metadata.filepath)")
+        }
+        
+        guard let image = UIImage(contentsOfFile: newPathString) else {
+            print("Image not found at path: \(newPathString)")
             
             return nil
         }
         return image
     }
+    
+    
 
 
     

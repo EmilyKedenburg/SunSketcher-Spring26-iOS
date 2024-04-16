@@ -2,8 +2,12 @@
 //  CameraService.swift
 //  Sunsketcher
 //
-//  Created by ADMIN on 10/9/23.
+//  Created by Tameka Ferguson on 10/9/23.
 //
+
+/*
+ This file controls most of the camera function. This is where the photo capture timing is calculated.
+ */
 
 import Foundation
 import AVFoundation
@@ -70,7 +74,7 @@ class CameraService {
                 DispatchQueue.main.async {
                     self?.setUpCamera(completion: completion)
                 }
-                // Make sure the camera function works on the background thread
+                // If you want the camera function to work on the background thread instead of main
                 /*DispatchQueue.global(qos: .background).async {
                     self?.setUpCamera(completion: completion)
                 }*/
@@ -117,7 +121,10 @@ class CameraService {
         }
         
     }
-
+    /*
+     The firstTimerDate, secondTimerDate, etc. are used to create a date variable for when the timers are suppose to start.
+     The timeIntervals are the intervals
+     */
     
     private func scheduleTimerForPhotoCapture() {
         // Configure camera settings
@@ -407,6 +414,7 @@ class CameraService {
     
     
     // Setup the sound file to prepare to play once done
+    // Is not currently being used
     func setupAudio() {
         // Replace your_sound_file with the actual audio file name you want to use
         // Make sure the audio file is within the project

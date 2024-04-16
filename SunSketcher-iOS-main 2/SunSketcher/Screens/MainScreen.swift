@@ -163,7 +163,7 @@ struct MainScreen: View {
                         photoCaptureDone = true
                     } else {
                         /*if (!prefs.bool(forKey: "ClientID obtained") && !prefs.bool(forKey: "Requesting")) || (prefs.integer(forKey: "ClientID") < 0) {
-                            var clientID = 9999991
+                            var clientID = 9999993
                             prefs.set(clientID, forKey: "ClientID")
                             print("ClientID received successfully: \(clientID.description)")
                         }*/

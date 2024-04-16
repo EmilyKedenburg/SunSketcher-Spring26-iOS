@@ -115,6 +115,7 @@ class MetadataDB {
         }
     }
     
+    // Used this one specifically for cropped images
     func updateImageFilepath(rowID: Int, filepath: String, isCropped: Int) {
         let updateSQL = "UPDATE Metadata SET filepath = ?, isCropped = ? WHERE id = ?"
         
@@ -134,6 +135,28 @@ class MetadataDB {
         }
         
     }
+    
+    // Used this one if the app is updated while on SharePhotosScreen it can replace the new directory of the app
+    // with the new one so that images can be found
+    func updateImageFilepathOnly(filepath: String, newFilepath: String) {
+        let updateSQL = "UPDATE Metadata SET filepath = ? WHERE filepath = ?"
+        
+        var statement: OpaquePointer?
+        if sqlite3_prepare_v2(db, updateSQL, -1, &statement, nil) == SQLITE_OK {
+            sqlite3_bind_text(statement, 1, (newFilepath as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(statement, 2, (filepath as NSString).utf8String, -1, nil)
+            
+            if sqlite3_step(statement) != SQLITE_DONE {
+                print("Error updating data in Metadata table: \(String(cString: sqlite3_errmsg(db)))")
+            }
+            
+            sqlite3_finalize(statement)
+        } else {
+            print("Error preparing SQL statement: \(String(cString: sqlite3_errmsg(db)))")
+        }
+        
+    }
+    
     
     func retrieveImageMeta() -> [ImageMetadata] {
         var metadataArray = [ImageMetadata]()
