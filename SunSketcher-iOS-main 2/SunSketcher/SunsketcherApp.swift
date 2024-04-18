@@ -27,7 +27,6 @@ struct SunSketcherApp: App {
     }
     
     // convert `hh:mm:ss` format string to unix time (this version is specifically for Apr. 8, 2024 eclipse)
-    // To change this function to fit with another eclipse
     func convertTimes(data: [String]) -> [Int64] {
         let start = data[0].split(separator: ":").compactMap { Int($0) }
         let end = data[1].split(separator: ":").compactMap { Int($0) }

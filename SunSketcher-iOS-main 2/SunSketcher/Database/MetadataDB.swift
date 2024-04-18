@@ -1,5 +1,5 @@
 //
-//  SQLiteManager.swift
+//  MetadataDB.swift
 //  Sunsketcher
 //
 //  Created by Tameka Ferguson on 1/22/24.

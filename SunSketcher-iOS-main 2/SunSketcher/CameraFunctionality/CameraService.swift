@@ -123,7 +123,7 @@ class CameraService {
     }
     /*
      The firstTimerDate, secondTimerDate, etc. are used to create a date variable for when the timers are suppose to start.
-     The timeIntervals are the intervals
+     The timeIntervals are the intervals between when the timer starts until the seconds before or after the startTime/endTime.
      */
     
     private func scheduleTimerForPhotoCapture() {
@@ -145,6 +145,7 @@ class CameraService {
         let timeInterval = Date(timeIntervalSince1970: Double((startTime - 10000)/1000)).timeIntervalSince(firstTimerDate)
         print("First timer interval: \(timeInterval)")
         
+        // Set a ti
         firstTimer = Timer(fire: firstTimerDate, interval: timeInterval, repeats: false) { [weak self] timer in
             print("1")
             self?.startSlowSequence1()
