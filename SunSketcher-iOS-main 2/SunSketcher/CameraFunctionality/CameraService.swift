@@ -7,6 +7,7 @@
 
 /*
  This file controls most of the camera function. This is where the photo capture timing is calculated.
+ 
  */
 
 import Foundation
@@ -124,7 +125,23 @@ class CameraService {
     /*
      The firstTimerDate, secondTimerDate, etc. are used to create a date variable for when the timers are suppose to start.
      The timeIntervals are the intervals between when the timer starts until the seconds before or after the startTime/endTime.
+     Note we are using milliseconds for the startTime and endTime.
+     
+     How the app captures images is that it starts taking photos 20 seconds before second contact until 20 seconds after. A middle photo is then taken at totality. Then the photo captures start again 20 seconds before third contact until 20 seconds after.
+     
+     How the timer works:
+     - Start timer to take 1 image per 2 seconds at (startTime - 20000) Note I have it at minus 22000 within the code because it waits two seconds before it takes that first image.
+     - Switch to capture rate to 2 images per 1 second at (startTime - 10000)
+     - Switch back to take 1 image per 2 seconds at (startTime + 10000)
+     - Set timer to stop captures at (startTime + 20000)
+     - Set timer to take 1 image at midpoint (midTime)
+     - Start timer to take 1 image per 2 seconds at (endTime - 20000)
+     - Switch to capture rate at 2 images per 1 second at (endTime - 10000)
+     - Switch back to take 1 image per 2 seconds at (endTime + 10000)
+     - Set timer to stop captures at (endTime + 20000)
+     
      */
+    
     
     private func scheduleTimerForPhotoCapture() {
         // Configure camera settings
@@ -145,7 +162,7 @@ class CameraService {
         let timeInterval = Date(timeIntervalSince1970: Double((startTime - 10000)/1000)).timeIntervalSince(firstTimerDate)
         print("First timer interval: \(timeInterval)")
         
-        // Set a ti
+        // Set a timer for the the date in which the timer is suppose to start and interval until the next one starts
         firstTimer = Timer(fire: firstTimerDate, interval: timeInterval, repeats: false) { [weak self] timer in
             print("1")
             self?.startSlowSequence1()
