@@ -4,6 +4,7 @@
 //
 //  Created by Tameka Ferguson on 9/20/23.
 //
+//  This function class isn't used.
 
 import Foundation
 import AVFoundation

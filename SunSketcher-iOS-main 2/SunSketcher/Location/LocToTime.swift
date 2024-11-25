@@ -72,6 +72,9 @@ public class LocToTime {
                                      -0.0102736,    0.0000615, -1.269e-05,                                            //l2
                                       0.0046683,    0.0046450]
     
+    // For August 12, 2026
+    
+    
     //
     // Eclipse circumstances
     //  (0) Event type (C1=-2, C2=-1, Mid=0, C3=1, C4=2)

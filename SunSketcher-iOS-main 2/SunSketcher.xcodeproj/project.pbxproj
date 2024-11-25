@@ -184,7 +184,6 @@
 				D87DAD642B7D5F9400447E40 /* Networking */,
 				848B1B472B3B428700DE9856 /* Location */,
 				848B1B462B3B427A00DE9856 /* CameraFunctionality */,
-				D86AD3332BBF385400BB993C /* Cropping */,
 				849D0FCB2B8E4AB700D4A57A /* Models */,
 				846E32A52ABA28E1004FEF60 /* Info.plist */,
 				8434D2292A99221A0068D985 /* SunsketcherApp.swift */,
@@ -273,13 +272,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		D86AD3332BBF385400BB993C /* Cropping */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cropping;
-			sourceTree = "<group>";
-		};
 		D87DAD642B7D5F9400447E40 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,10 +335,10 @@
 		D8B281952B6D45D500D82E48 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				D88E28AE2B767CF900ABE837 /* ScreensAfterStartBtn */,
 				D88E28AB2B767CAB00ABE837 /* Tutorial */,
 				D88E28BB2B76A7BA00ABE837 /* LearnMore */,
 				D81784882B62B5C200922020 /* MainScreen.swift */,
+				D88E28AE2B767CF900ABE837 /* ScreensAfterStartBtn */,
 				D81B41DE2B7BCA8D0070A2FF /* Launch Screen.storyboard */,
 				D81B41E02B7BFAA70070A2FF /* TermAndConditions.swift */,
 			);
@@ -646,6 +638,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Sunsketcher/Sunsketcher-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -703,6 +696,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Sunsketcher/Sunsketcher-Bridging-Header.h";
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;

@@ -5,7 +5,7 @@
 //  Created by Tameka Ferguson on 2/13/24.
 //
 
-// This view is never seen because the images are cropped instantly.
+// This view is never seen because the images are cropped in seconds.
 
 import SwiftUI
 

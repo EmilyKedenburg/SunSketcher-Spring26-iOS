@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// Handles the backgroud tasks
 class BackgroundTask {
     private var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     

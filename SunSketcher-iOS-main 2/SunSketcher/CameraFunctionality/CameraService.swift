@@ -6,7 +6,7 @@
 //
 
 /*
- This file controls most of the camera function. This is where the photo capture timing is calculated.
+ This file controls most of the camera function. This is where the photo capture timing is calculated, as well as setting camera settings, creating SunSketcher album, saving images to photos, directory and database.
  
  */
 
@@ -29,7 +29,7 @@ class CameraService {
     
     let prefs = UserDefaults.standard
     
-    // for camera capture timers
+    // For camera capture timers
     var firstTimer: Timer?
     var secondTimer: Timer?
     var thirdTimer: Timer?
@@ -76,6 +76,7 @@ class CameraService {
                     self?.setUpCamera(completion: completion)
                 }
                 // If you want the camera function to work on the background thread instead of main
+                // This means that the user would not be able to see the view of CustomCameraView
                 /*DispatchQueue.global(qos: .background).async {
                     self?.setUpCamera(completion: completion)
                 }*/
@@ -432,7 +433,7 @@ class CameraService {
     
     
     // Setup the sound file to prepare to play once done
-    // Is not currently being used
+    // This is not currently being used
     func setupAudio() {
         // Replace your_sound_file with the actual audio file name you want to use
         // Make sure the audio file is within the project
@@ -447,7 +448,7 @@ class CameraService {
     }
     
     
-    // For the flash and sound to play after photos are vtaken
+    // For the flash and sound to play after photos are taken
     func flashTorchAndSound(seconds: Int) {
         guard let device = AVCaptureDevice.default(for: .video) else { return }
         
@@ -468,7 +469,7 @@ class CameraService {
                 device.unlockForConfiguration()
                 flashCounter += 1
                 
-                // Play the sound
+                // Play the sound which is not currently used
                 //self.audioPlayer?.play()
                 
                 // Stop flashing after the specified duration
@@ -535,6 +536,9 @@ class CameraService {
     }
     
     // For camera settings
+    // Setting and getting the camera settings are not accurate and will need to be fixed for future use
+    // What it currently does is it is setting the camera setting with the values we give but we are not completely sure
+    // that it is actually using those exact settings. So it is just saving to the database what we 
     func configureCameraSettings() {
         
         guard let cameraDevice = AVCaptureDevice.default(for: .video) else {
@@ -583,6 +587,7 @@ class CameraService {
             }
             
             // Set focal distance
+            // Some images were not focused correctly for the April 8th, eclipse so this would need fixing for future use.
             if cameraDevice.isFocusModeSupported(.autoFocus) {
                 cameraDevice.focusMode = .autoFocus
                 cameraDevice.setFocusModeLocked(lensPosition: 1.0, completionHandler: nil)
@@ -667,7 +672,7 @@ class CameraService {
     }
     
     
-    
+    // For creating an album folder within the phone's photo library
     func createSunSketcherAlbumIfNeeded(completion: @escaping (PHAssetCollection?) -> Void) {
         // Check if the "SunSketcher" album exists, and if not, create it.
         let fetchOptions = PHFetchOptions()
@@ -695,11 +700,12 @@ class CameraService {
         }
     }
     
+    // For saving the images to the phone's photo library within the SunSketcher album
     func savePhotoToLibrary(_ photo: AVCapturePhoto) {
         createSunSketcherAlbumIfNeeded { album in
             if let album = album {
                 if let photoData = photo.fileDataRepresentation(), let image = UIImage(data: photoData) {
-                    // Save the image with a custom file name to the document director
+                    // Save the image with a custom file name to the document directory
                     
                     PHPhotoLibrary.shared().performChanges {
                         let request = PHAssetChangeRequest.creationRequestForAsset(from: image)
@@ -788,14 +794,16 @@ class CameraService {
                 let imageUrlString = "\(imageURL.relativePath)"
                 let unixTimeStamp1 = imageUrlString.components(separatedBy: "_")
                 let unixTimeStamp2 = unixTimeStamp1[1].components(separatedBy: ".")
+                
                 // Add the metadata to the database
                 MetadataDB.shared.addImageMeta(latitude: Double(lat), longitude: Double(lon), altitude: Double(alt), filepath: imageUrlString, captureTime: Int64(unixTimeStamp2[0])!, aperture: aperture, iso: iso, exposureTime: exposureTime, whiteBalance: 0, focalDistance: focalDistance, isCropped: 0)
+                
                 // Check time accuracy
                 // Record the current date and time
-                let creationDate = Date()
+                /*let creationDate = Date()
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                let formattedCreationDate = dateFormatter.string(from: creationDate)
+                let formattedCreationDate = dateFormatter.string(from: creationDate)*/
                 //print("Creation Date: \(formattedCreationDate)")
                 
                 if photoCount == 51{

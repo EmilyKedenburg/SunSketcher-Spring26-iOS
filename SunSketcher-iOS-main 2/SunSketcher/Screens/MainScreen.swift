@@ -5,6 +5,13 @@
 //  Created by Ferguson, Tameka on 1/25/24.
 //
 
+/*
+ This is the main screen of the app. This is where the client get its client ID from the server.
+ I've implemented a lot of UserDefaults preferences to keep track of the state of the app and of the functions.
+ */
+
+
+
 import SwiftUI
 import AVFoundation
 import Photos
@@ -26,7 +33,7 @@ struct MainScreen: View {
     @State private var clientIDobtained = false
     @State private var backgroundTask: BackgroundTask?
     
-    @State var photoCaptureDone = false
+    @State var photoCaptureDone = false // Keeps the state of photo captures
     
     var body: some View {
         if !photoCaptureDone{
@@ -158,23 +165,21 @@ struct MainScreen: View {
                     let arrayCount = metadataArray.count
                     print(arrayCount)
                     
+                    // This checks if there are any photo entries in the database. If there is and somehow the user got back to the main screen, it will redirect them to the SharePhotos screen.
                     if arrayCount > 0 {
                         print("Array count greater than 0")
                         photoCaptureDone = true
                     } else {
-                        /*if (!prefs.bool(forKey: "ClientID obtained") && !prefs.bool(forKey: "Requesting")) || (prefs.integer(forKey: "ClientID") < 0) {
-                            var clientID = 9999993
-                            prefs.set(clientID, forKey: "ClientID")
-                            print("ClientID received successfully: \(clientID.description)")
-                        }*/
+                        // Create a background task to handle getting client ID
                         backgroundTask = BackgroundTask { task in
-                            
+                            // If the client ID is not obtained yet we want the client to keep trying.
                             if (!prefs.bool(forKey: "ClientID obtained") && !prefs.bool(forKey: "Requesting")) || (prefs.integer(forKey: "ClientID") < 0) {
                                 
                                 prefs.set(true, forKey: "Requesting")
                                 
                                 // Retry logic with exponential backoff
                                 var retryCount = 0
+                                // This was created to make sure that the client would have enough time to get an ID
                                 let maxWaitTime = 20.0 // Maximum wait time between retries (in seconds)
                                 
                                 
@@ -219,13 +224,11 @@ struct MainScreen: View {
                             
                             
                         }
+                        ß
                         self.prefs.set(false, forKey: "Transfer complete")
                         self.prefs.set(false, forKey: "Transfer called")
                         self.prefs.set(false, forKey: "Socket open")
                     }
-                    
-                    
-                    
                     
                 })
                 .onChange(of: shouldRefreshView) { _ in // Refresh view when shouldRefreshView changes

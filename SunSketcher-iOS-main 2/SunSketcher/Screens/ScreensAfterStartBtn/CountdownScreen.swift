@@ -222,19 +222,16 @@ struct CountdownScreen: View {
         let locToTime: LocToTime = LocToTime()
         
         // TODO: for actual release
+        // Gets the start and end times of the eclipse based on the lat, lon and alt
         let eclipseData: [String] = locToTime.calculatefor(lat: lat, lon: lon, alt: alt);
-        
-        // TODO: for testing
-        //let eclipseData: [String] = locToTime.calculatefor(lat: 47.6683, lon: -60.745, alt: alt);
         
         print("Eclipse data \(eclipseData)")
         
         
-        //eclipseData is going to be in an array String
-        // make sure the user is in the eclipse path
+        // The eclipseData is going to be in an array String
+        // Makes sure the user is in the eclipse path
         if eclipseData[0] != "N/A" {
-            //let times: Int = main.convertTimes(data: eclipseData) // for April 8th
-            let times = main.convertTimes(data: eclipseData) // for testing
+            let times = main.convertTimes(data: eclipseData)
             print("Start time: \(times[0]) \n End time: \(times[1])")
             
             // Create a countdown timer here that will be passed to a swiftui view
@@ -269,20 +266,30 @@ struct CountdownScreen: View {
         }
     }
     
+    
+    /* Starts a countdown timer that updates every second and tracks the time remaining.
+     The timer decrements a `countdownTimeDiff` property and updates a formatted string `countdownTimeString`
+     to display the remaining time in the format `HH:mm:ss UNTIL FIRST PHOTO IS TAKEN`.
+     If the countdown reaches zero, the timer is invalidated, and certain actions are performed (e.g., updating a flag and user preferences).
+     */
     private func startTimer() {
-        timer?.invalidate()
-
+        timer?.invalidate() // Invalidate any existing timer to ensure only one timer is running at a time.
+        
+        // Check if there is remaining countdown time.
         if countdownTimeDiff > 0 {
+            // Schedule a repeating timer to fire every second.
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
                 
                 DispatchQueue.global().async {
                     self.countdownTimeDiff -= 1 // Decrement the time difference by 1 second
-
+                    
                     if self.countdownTimeDiff > 0 {
+                        // Calculate hours, minutes, and seconds from the remaining time.
                         let hours = self.countdownTimeDiff / 3600
                         let minutes = (self.countdownTimeDiff % 3600) / 60
                         let seconds = self.countdownTimeDiff % 60
-
+                        
+                        // Update the countdown string on the main thread to reflect the time remaining.
                         DispatchQueue.main.async{
                             self.countdownTimeString = String(format: "%02d:%02d:%02d UNTIL FIRST PHOTO IS TAKEN", hours, minutes, seconds)
                         }

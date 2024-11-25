@@ -21,6 +21,7 @@ struct SunSketcherApp: App {
     
     var body: some Scene {
         WindowGroup {
+            
             ContentView()
                 .environmentObject(locationManager)
         }
@@ -38,30 +39,6 @@ struct SunSketcherApp: App {
 
         return [startUnix, endUnix]
     }
-    
-    /*func testConvertTimes(data: [String]) -> [Int64] {
-        let start = data[0].split(separator: ":").compactMap { Int($0) }
-        let end = data[1].split(separator: ":").compactMap { Int($0) }
-        
-        //get current time in seconds, remove a day if it is past UTC midnight for the date that your timezone is currently in
-        var currentDateUnix = Int64(Date().timeIntervalSince1970)
-        let currentTimeUnix = currentDateUnix % 86400
-        if (currentTimeUnix > 0) && (currentTimeUnix < 5 * 60 * 60) {
-            print("Current time is past UTC midnight; Subtracting a day from time estimate")
-            currentDateUnix -= 86400
-        }
-        let currentDateTimezoneCorrectedUnix = currentDateUnix - (currentDateUnix % (60 * 60 * 24))
-        
-        // Convert the given time to seconds, add it to the start of the day as calculated by
-        let startUnixMult = Int64(start[0]) * 3600 + Int64(start[1]) * 60 + Int64(start[2])
-        let startUnix = currentDateTimezoneCorrectedUnix + startUnixMult
-        
-        let endUnixMult = Int64(end[0]) * 3600 + Int64(end[1]) * 60 + Int64(end[2])
-        let endUnix = currentDateTimezoneCorrectedUnix + endUnixMult
-        
-        return [startUnix, endUnix]
-        
-    }*/
     
 }
 
