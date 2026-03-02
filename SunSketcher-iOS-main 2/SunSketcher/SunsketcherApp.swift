@@ -6,8 +6,7 @@
 //
 
 // This the main .swift file for the app.
-// In the views, GeometryReader is used because we want the app to be optimized for different screen sizes so this adjsuts all of the
-// measurements to accommodate the screen.
+// In the views, GeometryReader is used because we want the app to be optimized for different screen sizes so this adjusts all of the measurements to accommodate the screen.
 
 import SwiftUI
 

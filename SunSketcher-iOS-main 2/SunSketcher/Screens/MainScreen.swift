@@ -22,7 +22,7 @@ import UserNotifications
 struct MainScreen: View {
     let prefs = UserDefaults.standard
     var isTutorialDone = false
-    var socket = Socket()
+//    var socket = Socket()
     
     @ObservedObject var viewModel: MainScreenModel
     @State private var shouldRefreshView = false 
