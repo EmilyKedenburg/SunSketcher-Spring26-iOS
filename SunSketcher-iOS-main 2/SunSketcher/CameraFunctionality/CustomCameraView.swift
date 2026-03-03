@@ -80,6 +80,7 @@ struct NextView: View {
     var body: some View {
         //CroppingImages()
         //SharePhotos()
+        AfterPhotosReceived()
     }
     
 }

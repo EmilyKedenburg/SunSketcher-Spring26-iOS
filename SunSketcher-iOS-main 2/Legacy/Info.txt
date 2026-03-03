@@ -19,8 +19,16 @@ In folder CameraFunctionality, in file CustomCameraView, uncomment:
 CroppingImages()
 
 Comment:
-SharePhotos()
+AfterPhotosReceived()
 
 --For Server--
 In file MainScreen, uncomment:
 var socket = Socket()
+ImageScrollView:View
+func getCLinetID()
+ImageScrollView()
+Line 172 else block
+Comment:
+AfterPhotosRecieved()
+
+In file ContentView, uncomment block.
