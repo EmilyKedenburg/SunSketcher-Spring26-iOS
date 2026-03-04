@@ -30,7 +30,7 @@ struct MainScreen: View {
     @State private var isPermissionRequested = false
     var main = SunSketcherApp()
     
-    @State private var clientIDobtained = false
+    //@State private var clientIDobtained = false
     @State private var backgroundTask: BackgroundTask?
     
     @State var photoCaptureDone = false // Keeps the state of photo captures

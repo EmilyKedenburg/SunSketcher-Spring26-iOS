@@ -7,6 +7,9 @@ the SunSketcher directory.
 None of these files have been updated Spring 2024.
 
 --For OpenCV--
+SunSketcher -> Build Phases -> Link Binary with Libraries
++ add opencv2.framework
+
 In file SunSketcher-Bridging-Header, uncomment:
 #import "OpenCVWrapper.h"
 
@@ -27,8 +30,14 @@ var socket = Socket()
 ImageScrollView:View
 func getCLinetID()
 ImageScrollView()
-Line 172 else block
 Comment:
 AfterPhotosRecieved()
+
+--Client ID Completely Removed--
+Allegedly, not needed even when the server is active.
+You will need to command+f to search for references to clientID,
+uncomment those
+In MainScreen, uncomment:
+Line 172 else block
 
 In file ContentView, uncomment block.
