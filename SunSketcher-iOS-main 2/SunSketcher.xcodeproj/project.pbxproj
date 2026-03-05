@@ -569,13 +569,14 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to capture photos of the eclipse only if you are in the path of totality and the eclipse is about to begin.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app requires access to the device's location to determine the time of the eclipse and whether you are in the path of totality. This data will not be linked to your identity or for tracking purposes. The app will send this data to our secure server to be used when evaluating your images to help us reveal the true shape of the sun if you choose to share your images taken with this app. Note sending your images and data is optional.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires access to the device's location to determine the time of the eclipse and whether you are in the path of totality. This data will not be linked to your identity or for tracking purposes. The app will send this data to our secure server to be used when evaluating your images to help us reveal the true shape of the sun if you choose to share your images taken with this app. Note sending your images and data is optional.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "SunSketcher saves captured eclipse images to your Photos library for later review.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to save and manage photos in the 'SunSketcher' album.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -625,13 +626,14 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to capture photos of the eclipse only if you are in the path of totality and the eclipse is about to begin.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app requires access to the device's location to determine the time of the eclipse and whether you are in the path of totality. This data will not be linked to your identity or for tracking purposes. The app will send this data to our secure server to be used when evaluating your images to help us reveal the true shape of the sun if you choose to share your images taken with this app. Note sending your images and data is optional.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires access to the device's location to determine the time of the eclipse and whether you are in the path of totality. This data will not be linked to your identity or for tracking purposes. The app will send this data to our secure server to be used when evaluating your images to help us reveal the true shape of the sun if you choose to share your images taken with this app. Note sending your images and data is optional.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "SunSketcher saves captured eclipse images to your Photos library for later review.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to save and manage photos in the 'SunSketcher' album.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

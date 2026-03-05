@@ -16,7 +16,7 @@ import MapKit
 import CoreLocation
 
 @MainActor
-class LocationManager: NSObject, ObservableObject {
+class LocationManager: NSObject, ObservableObject, @preconcurrency CLLocationManagerDelegate {
     @Published var location: CLLocation?
     @Published var region = MKCoordinateRegion()
     
@@ -52,23 +52,20 @@ class LocationManager: NSObject, ObservableObject {
     }
 
     
-    
-}
-
-extension LocationManager: CLLocationManagerDelegate {
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if let lastLocation = locations.last {
-            let altitude = lastLocation.altitude
+            //let altitude = lastLocation.altitude // allegedly does nothing
             self.location = lastLocation
             self.region = MKCoordinateRegion(center: lastLocation.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)
             
         }
         
     }
-        
-
-    
-    
 }
+
+/*extension LocationManager: CLLocationManagerDelegate {
+    
+    Moved func locationManager to class
+        
+}*/
