@@ -11,13 +11,13 @@
  */
 
 import Foundation
-import AVFoundation
-import Photos
+@preconcurrency import AVFoundation
+@preconcurrency import Photos
 import UIKit
 import SwiftUI
 import UserNotifications
 
-
+@MainActor
 class CameraService {
     
     
