@@ -166,7 +166,9 @@ class CameraService {
         // Set a timer for the the date in which the timer is suppose to start and interval until the next one starts
         firstTimer = Timer(fire: firstTimerDate, interval: timeInterval, repeats: false) { [weak self] timer in
             print("1")
-            self?.startSlowSequence1()
+            Task { @MainActor in
+                self?.startSlowSequence1()
+            }
         }
         
         // Schedule the timer on the main run loop
@@ -179,23 +181,27 @@ class CameraService {
         let start = startTime
         print("Starting slow sequence 1")
         secondTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
-            // Capture photo
-            self?.capturePhoto()
-            print("Photo taken")
-            self?.photoCount += 1
-            print("Photo count: \(self?.photoCount)")
-            
-            // Check if it's time to stop the timer
-            let stopTime = Date(timeIntervalSince1970: Double((start - 10000)/1000))
-            print("Stop time: \(stopTime)")
-            if Date() >= stopTime {
-                timer.invalidate()
-                print("First timer done.")
-                self?.scheduleSecondTimer()
-                print("All photos taken.")
+            Task { @MainActor in
+                guard let self else { return }
+                
+                // Capture photo
+                self.capturePhoto()
+                print("Photo taken")
+                self.photoCount += 1
+                print("Photo count: \(self.photoCount)")
+                
+                // Check if it's time to stop the timer
+                let stopTime = Date(timeIntervalSince1970: Double((start - 10000)/1000))
+                print("Stop time: \(stopTime)")
+                if Date() >= stopTime {
+                    timer.invalidate()
+                    print("First timer done.")
+                    self.scheduleSecondTimer()
+                    print("All photos taken.")
+                }
             }
         }
-        
+
     }
     
     
@@ -209,7 +215,9 @@ class CameraService {
         
         secondTimer = Timer(fire: secondTimerDate, interval: timeInterval, repeats: false) { [weak self] timer in
             print("2")
-            self?.startFastSequence1()
+            Task { @MainActor in
+                self?.startFastSequence1()
+            }
         }
         
         RunLoop.main.add(secondTimer!, forMode: .common)
@@ -221,18 +229,21 @@ class CameraService {
         let start = startTime
         print("Starting fast sequence 1")
         
-        secondTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) {[weak self] timer in
-            self?.capturePhoto()
-            print("Photo taken")
-            self?.photoCount += 1
-            print("Photo count: \(self?.photoCount)")
-            
-            let stopTime = Date(timeIntervalSince1970: Double((start + 10000)/1000))
-            print("Stop time: \(stopTime)")
-            if Date() >= stopTime {
-                print("Second timer done.")
-                timer.invalidate()
-                self?.scheduleThirdTimer()
+        secondTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] timer in
+            Task { @MainActor in
+                    guard let self else { return }
+                self.capturePhoto()
+                print("Photo taken")
+                self.photoCount += 1
+                print("Photo count: \(self.photoCount)")
+                
+                let stopTime = Date(timeIntervalSince1970: Double((start + 10000)/1000))
+                print("Stop time: \(stopTime)")
+                if Date() >= stopTime {
+                    print("Second timer done.")
+                    timer.invalidate()
+                    self.scheduleThirdTimer()
+                }
             }
         }
         
@@ -248,7 +259,9 @@ class CameraService {
         
         thirdTimer = Timer(fire: thirdTimerDate, interval: timeInterval, repeats: false) { [weak self] timer in
             print("3")
-            self?.startSlowSequence2()
+            Task { @MainActor in
+                self?.startSlowSequence2()
+            }
         }
         
         RunLoop.main.add(thirdTimer!, forMode: .common)
@@ -259,19 +272,22 @@ class CameraService {
         let start = startTime
         print("Starting slow sequence 2")
         thirdTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
-            // Capture photo
-            self?.capturePhoto()
-            print("Photo taken")
-            self?.photoCount += 1
-            print("Photo count: \(self?.photoCount)")
-            
-            // Check if it's time to stop the timer
-            let stopTime = Date(timeIntervalSince1970: Double((start + 20000)/1000))
-            print("Stop time: \(stopTime)")
-            if Date() >= stopTime {
-                timer.invalidate()
-                print("Third timer done.")
-                self?.scheduleMidpointTimer()
+            Task { @MainActor in
+                guard let self else { return }
+                // Capture photo
+                self.capturePhoto()
+                print("Photo taken")
+                self.photoCount += 1
+                print("Photo count: \(self.photoCount)")
+                
+                // Check if it's time to stop the timer
+                let stopTime = Date(timeIntervalSince1970: Double((start + 20000)/1000))
+                print("Stop time: \(stopTime)")
+                if Date() >= stopTime {
+                    timer.invalidate()
+                    print("Third timer done.")
+                    self.scheduleMidpointTimer()
+                }
             }
         }
         
@@ -290,7 +306,9 @@ class CameraService {
         
         midpointTimer = Timer(fire: midpointTimerDate, interval: timeInterval, repeats: false) {[weak self] timer in
             print("mid")
-            self?.takeMidPic()
+            Task { @MainActor in
+                self?.takeMidPic()
+            }
         }
         
         RunLoop.main.add(midpointTimer!, forMode: .common)
@@ -299,14 +317,16 @@ class CameraService {
     func takeMidPic() {
         print("Called takeMidPic")
         midpointTimer = Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { [weak self] timer in
-            self?.capturePhoto()
-            print("Mid photo taken")
-            self?.photoCount += 1
-            print("Photo count: \(self?.photoCount)")
-            
-            timer.invalidate()
-            self?.scheduleFourthTimer()
-            
+            Task { @MainActor in
+                guard let self else { return }
+                self.capturePhoto()
+                print("Mid photo taken")
+                self.photoCount += 1
+                print("Photo count: \(self.photoCount)")
+                
+                timer.invalidate()
+                self.scheduleFourthTimer()
+            }
         }
     }
     
@@ -323,7 +343,9 @@ class CameraService {
         
         fourthTimer = Timer(fire: fourthTimerDate, interval: timeInterval, repeats: false) { [weak self] timer in
             print("4")
-            self?.startSlowSequence3()
+            Task { @MainActor in
+                self?.startSlowSequence3()
+            }
         }
         
         RunLoop.main.add(fourthTimer!, forMode: .common)
@@ -334,19 +356,22 @@ class CameraService {
         let end = endTime
         print("Starting slow sequence 3")
         fourthTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
-            // Capture photo
-            self?.capturePhoto()
-            print("Photo taken")
-            self?.photoCount += 1
-            print("Photo count: \(self?.photoCount)")
-            
-            // Check if it's time to stop the timer
-            let stopTime = Date(timeIntervalSince1970: Double((end - 10000)/1000))
-            print("Stop time: \(stopTime)")
-            if Date() >= stopTime {
-                timer.invalidate()
-                print("Fourth timer done.")
-                self?.scheduleFifthTimer()
+            Task { @MainActor in
+                guard let self else { return }
+                // Capture photo
+                self.capturePhoto()
+                print("Photo taken")
+                self.photoCount += 1
+                print("Photo count: \(self.photoCount)")
+                
+                // Check if it's time to stop the timer
+                let stopTime = Date(timeIntervalSince1970: Double((end - 10000)/1000))
+                print("Stop time: \(stopTime)")
+                if Date() >= stopTime {
+                    timer.invalidate()
+                    print("Fourth timer done.")
+                    self.scheduleFifthTimer()
+                }
             }
         }
         
@@ -362,7 +387,9 @@ class CameraService {
         
         fifthTimer = Timer(fire: fifthTimerDate, interval: timeInterval, repeats: false) { [weak self] timer in
             print("5")
-            self?.startFastSequence2()
+            Task { @MainActor in
+                self?.startFastSequence2()
+            }
         }
         
         RunLoop.main.add(fifthTimer!, forMode: .common)
@@ -373,17 +400,20 @@ class CameraService {
         print("Starting fast sequence 2")
         
         fifthTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) {[weak self] timer in
-            self?.capturePhoto()
-            print("Photo taken")
-            self?.photoCount += 1
-            print("Photo count: \(self?.photoCount)")
-            
-            let stopTime = Date(timeIntervalSince1970: Double((end + 10000)/1000))
-            print("Stop time: \(stopTime)")
-            if Date() >= stopTime {
-                print("Fifth timer done.")
-                timer.invalidate()
-                self?.scheduleSixthTimer()
+            Task { @MainActor in
+                guard let self else { return }
+                self.capturePhoto()
+                print("Photo taken")
+                self.photoCount += 1
+                print("Photo count: \(self.photoCount)")
+                
+                let stopTime = Date(timeIntervalSince1970: Double((end + 10000)/1000))
+                print("Stop time: \(stopTime)")
+                if Date() >= stopTime {
+                    print("Fifth timer done.")
+                    timer.invalidate()
+                    self.scheduleSixthTimer()
+                }
             }
         }
         
@@ -399,7 +429,9 @@ class CameraService {
         
         sixthTimer = Timer(fire: sixthTimerDate, interval: timeInterval, repeats: false) { [weak self] timer in
             print("6")
-            self?.startSlowSequence4()
+            Task { @MainActor in
+                self?.startSlowSequence4()
+            }
         }
         
         RunLoop.main.add(sixthTimer!, forMode: .common)
@@ -410,22 +442,25 @@ class CameraService {
         let end = endTime
         print("Starting slow sequence 4")
         fourthTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
-            // Capture photo
-            self?.capturePhoto()
-            print("Photo taken")
-            self?.photoCount += 1
-            print("Photo count: \(self?.photoCount)")
-            
-            // Check if it's time to stop the timer
-            let stopTime = Date(timeIntervalSince1970: Double((end + 20000)/1000))
-            print("Stop time: \(stopTime)")
-            if Date() >= stopTime {
-                timer.invalidate()
-                print("Sixth timer done.")
-                print("All photos taken.")
-                self?.flashTorchAndSound(seconds: 16)
-                self?.prefs.set(true, forKey: "Photos complete")
+            Task { @MainActor in
+                guard let self else { return }
+                // Capture photo
+                self.capturePhoto()
+                print("Photo taken")
+                self.photoCount += 1
+                print("Photo count: \(self.photoCount)")
                 
+                // Check if it's time to stop the timer
+                let stopTime = Date(timeIntervalSince1970: Double((end + 20000)/1000))
+                print("Stop time: \(stopTime)")
+                if Date() >= stopTime {
+                    timer.invalidate()
+                    print("Sixth timer done.")
+                    print("All photos taken.")
+                    self.flashTorchAndSound(seconds: 16)
+                    self.prefs.set(true, forKey: "Photos complete")
+                    
+                }
             }
         }
         
