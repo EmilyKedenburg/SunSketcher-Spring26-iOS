@@ -615,7 +615,7 @@ class CameraService {
             let desiredExposureTime = CMTimeMake(value: 1, timescale: 8000)
             
             if cameraDevice.isExposureModeSupported(.custom) {
-                try cameraDevice.setExposureModeCustom(duration: desiredExposureTime, iso: prefs.float(forKey: "ISO"), completionHandler: nil)
+                cameraDevice.setExposureModeCustom(duration: desiredExposureTime, iso: prefs.float(forKey: "ISO"), completionHandler: nil)
                 self.prefs.set(cameraDevice.exposureDuration.seconds, forKey: "Exposure time")
             } else {
                 print("Custom exposure is not supported by the camera")
@@ -682,7 +682,7 @@ class CameraService {
                 let desiredExposureTime = CMTimeMake(value: 1, timescale: 200)
                 
                 if cameraDevice.isExposureModeSupported(.custom) {
-                    try cameraDevice.setExposureModeCustom(duration: desiredExposureTime, iso: prefs.float(forKey: "ISO"), completionHandler: nil)
+                    cameraDevice.setExposureModeCustom(duration: desiredExposureTime, iso: prefs.float(forKey: "ISO"), completionHandler: nil)
                     
                     
                     self.prefs.set(cameraDevice.exposureDuration.seconds, forKey: "Exposure time midpoint")
@@ -693,7 +693,7 @@ class CameraService {
                 let desiredExposureTime = CMTimeMake(value: 1, timescale: 8000)
                 
                 if cameraDevice.isExposureModeSupported(.custom) {
-                    try cameraDevice.setExposureModeCustom(duration: desiredExposureTime, iso: prefs.float(forKey: "ISO"), completionHandler: nil)
+                    cameraDevice.setExposureModeCustom(duration: desiredExposureTime, iso: prefs.float(forKey: "ISO"), completionHandler: nil)
                     //self.prefs.set(cameraDevice.exposureDuration.seconds, forKey: "Exposure time")
                 } else {
                     print("Custom exposure is not supported by the camera")
@@ -817,7 +817,7 @@ class CameraService {
                 } else{
                     exposureTime = prefs.float(forKey: "Exposure time")
                 }
-                let whiteBalance = prefs.string(forKey: "White balance")
+                // let whiteBalance = prefs.string(forKey: "White balance")
                 let focalDistance = prefs.float(forKey: "Focal distance")
                 
                 /*print("\(Float(lat))")
