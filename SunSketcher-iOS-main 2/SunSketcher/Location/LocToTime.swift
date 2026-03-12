@@ -54,7 +54,7 @@ public class LocToTime {
     var obsvconst: [Double] = [Double](repeating: 0.0, count: 7)
     
     //Aug. 21, 2017 (for testing)
-    /*public static var elements: [Double] = [2457987.268521,  18.0, -4.0, 4.0, 70.3, 70.3,
+    /*public var elements: [Double] = [2457987.268521,  18.0, -4.0, 4.0, 70.3, 70.3,
                                      -0.1295710,   0.5406426, -2.940e-05, -8.100e-06,
                                      0.4854160,  -0.1416400, -9.050e-05,  2.050e-06,
                                      11.8669596,  -0.0136220, -2.000e-06,
@@ -886,14 +886,15 @@ public class LocToTime {
         ////print("calculatefor called")
         var info = ["",""]
         
-        //print("Lat: \(lat), lon: \(lon), alt: \(alt)")
+        print("Lat: \(lat), lon: \(lon), alt: \(alt)")
         
         calcObsv(lat: lat, lon: lon, alt: alt)
         //calcObsv(25.122, -104.2252, alt)
 
         getall()
+        print("Eclipse type:", mid[39])
         //print("Mid[39]: \(mid[39])")
-        if(mid[39] > 1){
+        if(mid[39] >= 1){ // added = for testing
             info[0] = gettime(&c2)
             info[1] = gettime(&c3)
             //print("LocationTiming \(info[0]);   \(info[1])")

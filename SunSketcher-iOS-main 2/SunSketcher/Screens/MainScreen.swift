@@ -27,8 +27,9 @@ struct MainScreen: View {
     @ObservedObject var viewModel: MainScreenModel
     @State private var shouldRefreshView = false 
     
+    @StateObject private var locationManager = LocationManager()
     @State private var isPermissionRequested = false
-    var main = SunSketcherApp()
+    //var main = SunSketcherApp()
     
     //@State private var clientIDobtained = false
     @State private var backgroundTask: BackgroundTask?
@@ -245,7 +246,7 @@ struct MainScreen: View {
     
     private func requestPermissions() {
         // Request location permission
-        main.locationManager.requestLocationPermission()
+        locationManager.requestLocationPermission()
         
         // Request camera permission
         AVCaptureDevice.requestAccess(for: .video) { granted in
