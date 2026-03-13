@@ -247,6 +247,7 @@ struct MainScreen: View {
     private func requestPermissions() {
         // Request location permission
         locationManager.requestLocationPermission()
+            // Request result printed in LocationManager
         
         // Request camera permission
         AVCaptureDevice.requestAccess(for: .video) { granted in

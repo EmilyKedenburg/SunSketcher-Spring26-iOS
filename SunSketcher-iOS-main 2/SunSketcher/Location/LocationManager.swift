@@ -29,16 +29,12 @@ class LocationManager: NSObject, ObservableObject, @preconcurrency CLLocationMan
     
     override init() {
         super.init()
+        locationManager.delegate = self
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest // chooses how accurate you want the location to be
         locationManager.distanceFilter = kCLDistanceFilterNone // this is used to track all movements of the phone.
         //Note: that within the app the location is only saved in the database once so it doesn't keep changing.
         //The lat | lon keeps updating on the countdown screen but that does not alter what is recorded.
-        
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation() // Remember to update Info.plist
-        locationManager.delegate = self
-        
     }
     
     func requestLocationUpdate(callback: @escaping (CLLocation) -> Void) {
@@ -48,19 +44,48 @@ class LocationManager: NSObject, ObservableObject, @preconcurrency CLLocationMan
     
 
     func requestLocationPermission() {
-        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestAlwaysAuthorization()
     }
 
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if let lastLocation = locations.last {
-            //let altitude = lastLocation.altitude // allegedly does nothing
+            //print("Latitude:", lastLocation.coordinate.latitude)
+            //print("Longitude:", lastLocation.coordinate.longitude)
+            
             self.location = lastLocation
-            self.region = MKCoordinateRegion(center: lastLocation.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)
+            
+            self.region = MKCoordinateRegion(
+                center: lastLocation.coordinate,
+                latitudinalMeters: 5000,
+                longitudinalMeters: 5000)
             
         }
-        
+    }
+    
+    /* relays authorization status
+       & ensures the phone starts sending coordiantes only
+       after permission is granted */
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+            
+        case .authorizedWhenInUse, .authorizedAlways:
+            print("Location permission granted")
+            manager.startUpdatingLocation() // Remember to update Info.plist
+            
+        case .denied:
+            print("Location permission denied")
+                  
+        case .restricted:
+            print("Location restricted")
+                  
+        case .notDetermined:
+            print ("Location permission not determined")
+                  
+        @unknown default:
+            break
+        }
     }
 }
 
