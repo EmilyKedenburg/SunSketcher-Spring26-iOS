@@ -33,7 +33,7 @@ struct SeeOrSkipTutorial: View {
                 if fromSeeTutorial || closeSkipTutorial {
                     fromSeeTutorial = false
                     closeSkipTutorial = false
-                    dismiss()
+                    // dismiss()
                 }
             }
         }
