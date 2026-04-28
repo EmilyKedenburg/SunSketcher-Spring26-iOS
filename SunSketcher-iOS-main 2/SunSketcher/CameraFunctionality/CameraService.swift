@@ -3,6 +3,7 @@
 //  Sunsketcher
 //
 //  Created by Tameka Ferguson on 10/9/23.
+//  Edited by Emily Kedenburg on 4/23/26.
 //
 
 /*
@@ -475,6 +476,7 @@ class CameraService {
                     print("Sixth timer done.")
                     print("All photos taken.")
                     print("[CameraRun] Completed. Total photos captured=\(self.photoCount)")
+                    self.exportMetadataToJSON()
                     self.flashTorchAndSound(seconds: 16)
                     self.prefs.set(true, forKey: "Photos complete")
                     
@@ -592,7 +594,7 @@ class CameraService {
     // For camera settings
     // Setting and getting the camera settings are not accurate and will need to be fixed for future use
     // What it currently does is it is setting the camera setting with the values we give but we are not completely sure
-    // that it is actually using those exact settings. So it is just saving to the database what we 
+    // that it is actually using those exact settings. So it is just saving to the database what we
     func configureCameraSettings() {
         
         guard let cameraDevice = AVCaptureDevice.default(for: .video) else {
@@ -765,7 +767,12 @@ class CameraService {
                         let request = PHAssetChangeRequest.creationRequestForAsset(from: image)
                         
                         request.creationDate = Date()
-                        request.location = CLLocation()
+                        if let currentLocation = self.locationManager.location {
+                            request.location = currentLocation
+                        } else {
+                            print("Warning: Location not available, using nil")
+                        }
+
                         // Add the photo to the "SunSketcher" album.
                         if let albumChangeRequest = PHAssetCollectionChangeRequest(for: album) {
                             albumChangeRequest.addAssets([request.placeholderForCreatedAsset!] as NSFastEnumeration)
@@ -870,6 +877,44 @@ class CameraService {
         }
     }
         
-       
-}
+    func exportMetadataToJSON() {
+        let metadataArray = MetadataDB.shared.retrieveImageMeta()
+        
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileURL = documentsDirectory.appendingPathComponent("SunSketcher/metadata.json")
+        
+        // Convert to dictionary format
+        let jsonArray: [[String: Any]] = metadataArray.map { meta in
+            return [
+                "id": meta.id,
+                "latitude": meta.latitude,
+                "longitude": meta.longitude,
+                "altitude": meta.altitude,
+                "filepath": meta.filepath,
+                "captureTime": meta.captureTime,
+                "aperture": meta.aperture,
+                "iso": meta.iso,
+                "exposureTime": meta.exposureTime,
+                "whiteBalance": meta.whiteBalance,
+                "focalDistance": meta.focalDistance,
+                "isCropped": meta.isCropped
+            ]
+        }
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: jsonArray, options: .prettyPrinted)
+            
+            try FileManager.default.createDirectory(
+                at: fileURL.deletingLastPathComponent(),
+                withIntermediateDirectories: true
+            )
+            
+            try jsonData.write(to: fileURL)
+            
+            print("[CameraRun] Metadata exported to \(fileURL.path)")
+        } catch {
+            print("Error exporting metadata: \(error.localizedDescription)")
+        }
+    }
 
+}
