@@ -22,7 +22,7 @@ import UserNotifications
 class CameraService {
     
     init() {
-        print("[CameraRun] CameraService initialized")
+        // print("[CameraRun] CameraService initialized")
     }
     
     var session: AVCaptureSession?
@@ -65,7 +65,7 @@ class CameraService {
         self.delegate = delegate
         // Reset photo counter at the start of a camera run
         self.photoCount = 0
-        print("[CameraRun] Starting camera run. Photo count reset to 0")
+        // print("[CameraRun] Starting camera run. Photo count reset to 0")
         checkPermissions(completion: completion)
         
         // Schedule a timer to check and start capturing photos at the specified time
@@ -117,13 +117,13 @@ class CameraService {
                 previewLayer.session = session
                 
                 DispatchQueue.global(qos: .background).async {
-                    print("[CameraRun] setUpCamera about to startRunning()")
+                    // print("[CameraRun] setUpCamera about to startRunning()")
                     session.startRunning()
-                    print("[CameraRun] setUpCamera did call startRunning()")
+                    // print("[CameraRun] setUpCamera did call startRunning()")
                 }
                 
                 self.session = session
-                print("[CameraRun] setUpCamera configured session and previewLayer")
+                // print("[CameraRun] setUpCamera configured session and previewLayer")
                 
             } catch {
                 completion(error)
@@ -153,7 +153,7 @@ class CameraService {
     
     
     private func scheduleTimerForPhotoCapture() {
-        print("[CameraRun] Entered scheduleTimerForPhotoCapture()")
+        // print("[CameraRun] Entered scheduleTimerForPhotoCapture()")
         // Configure camera settings
         configureCameraSettings()
         
@@ -162,21 +162,21 @@ class CameraService {
         endTime = prefs.integer(forKey: "endTime")
         midTime = (endTime + startTime) / 2
         
-        print("[CameraRun] Scheduling capture timers. startTime(ms): \(startTime) endTime(ms): \(endTime) midTime(ms): \(midTime)")
+        // print("[CameraRun] Scheduling capture timers. startTime(ms): \(startTime) endTime(ms): \(endTime) midTime(ms): \(midTime)")
         
-        print("Start Time: \(startTime), End Time: \(endTime)")
+        // print("Start Time: \(startTime), End Time: \(endTime)")
         
-        print("Schedule first timer.")
+        // print("Schedule first timer.")
         
         let firstTimerDate = Date(timeIntervalSince1970: Double((startTime - 20000)/1000))
-        print("First Timer Time: \(firstTimerDate)")
+        // print("First Timer Time: \(firstTimerDate)")
         
         let timeInterval = Date(timeIntervalSince1970: Double((startTime - 10000)/1000)).timeIntervalSince(firstTimerDate)
-        print("First timer interval: \(timeInterval)")
+        // print("First timer interval: \(timeInterval)")
         
         // Set a timer for the the date in which the timer is suppose to start and interval until the next one starts
         firstTimer = Timer(fire: firstTimerDate, interval: timeInterval, repeats: false) { [weak self] timer in
-            print("1")
+            // print("1")
             Task { @MainActor in
                 self?.startSlowSequence1()
             }
@@ -190,8 +190,7 @@ class CameraService {
     
     func startSlowSequence1() {
         let start = startTime
-        print("Starting slow sequence 1")
-        print("[CameraRun] Sequence slow-1 started")
+        // print("Starting slow sequence 1")
         secondTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
             Task { @MainActor in
                 guard let self else { return }
@@ -199,17 +198,16 @@ class CameraService {
                 // Capture photo
                 self.capturePhoto()
                 self.photoCount += 1
-                print("[CameraRun] Photo captured. total=\(self.photoCount)")
+                // print("[CameraRun] Photo captured. total=\(self.photoCount)")
                 
                 // Check if it's time to stop the timer
                 let stopTime = Date(timeIntervalSince1970: Double((start - 10000)/1000))
-                print("Stop time: \(stopTime)")
+                // print("Stop time: \(stopTime)")
                 if Date() >= stopTime {
-                    print("[CameraRun] Sequence slow-1 finished with total=\(self.photoCount)")
+                    print("Slow Sequence 1: \(self.photoCount)")
                     timer.invalidate()
-                    print("First timer done.")
                     self.scheduleSecondTimer()
-                    print("All photos taken.")
+                    // print("All photos taken.")
                 }
             }
         }
@@ -219,14 +217,14 @@ class CameraService {
     
     func scheduleSecondTimer() {
         let start = startTime
-        print("Called second timer")
+        // print("Called second timer")
         let secondTimerDate = Date(timeIntervalSince1970: Double((start - 10000)/1000))
-        print("Second Timer Time: \(secondTimerDate)")
+        // print("Second Timer Time: \(secondTimerDate)")
         
         let timeInterval = Date(timeIntervalSince1970: Double((start + 10000)/1000)).timeIntervalSince(secondTimerDate)
         
         secondTimer = Timer(fire: secondTimerDate, interval: timeInterval, repeats: false) { [weak self] timer in
-            print("2")
+            // print("2")
             Task { @MainActor in
                 self?.startFastSequence1()
             }
@@ -239,21 +237,19 @@ class CameraService {
     
     func startFastSequence1() {
         let start = startTime
-        print("Starting fast sequence 1")
-        print("[CameraRun] Sequence fast-1 started")
+        // print("Starting fast sequence 1")
         
         secondTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] timer in
             Task { @MainActor in
                     guard let self else { return }
                 self.capturePhoto()
                 self.photoCount += 1
-                print("[CameraRun] Photo captured. total=\(self.photoCount)")
+                // print("[CameraRun] Photo captured. total=\(self.photoCount)")
                 
                 let stopTime = Date(timeIntervalSince1970: Double((start + 10000)/1000))
-                print("Stop time: \(stopTime)")
+                // print("Stop time: \(stopTime)")
                 if Date() >= stopTime {
-                    print("[CameraRun] Sequence fast-1 finished with total=\(self.photoCount)")
-                    print("Second timer done.")
+                    print("Fast Sequence 1: \(self.photoCount)")
                     timer.invalidate()
                     self.scheduleThirdTimer()
                 }
@@ -264,14 +260,14 @@ class CameraService {
     
     func scheduleThirdTimer() {
         let start = startTime
-        print("Called third timer")
+        // print("Called third timer")
         let thirdTimerDate = Date(timeIntervalSince1970: Double((start + 10000)/1000))
-        print("Third Timer Time: \(thirdTimerDate)")
+        // print("Third Timer Time: \(thirdTimerDate)")
         
         let timeInterval = Date(timeIntervalSince1970: Double((start + 20000)/1000)).timeIntervalSince(thirdTimerDate)
         
         thirdTimer = Timer(fire: thirdTimerDate, interval: timeInterval, repeats: false) { [weak self] timer in
-            print("3")
+            // print("3")
             Task { @MainActor in
                 self?.startSlowSequence2()
             }
@@ -283,23 +279,22 @@ class CameraService {
     }
     func startSlowSequence2() {
         let start = startTime
-        print("Starting slow sequence 2")
-        print("[CameraRun] Sequence slow-2 started")
+        // print("Starting slow sequence 2")
         thirdTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
             Task { @MainActor in
                 guard let self else { return }
                 // Capture photo
                 self.capturePhoto()
                 self.photoCount += 1
-                print("[CameraRun] Photo captured. total=\(self.photoCount)")
+                // print("[CameraRun] Photo captured. total=\(self.photoCount)")
                 
                 // Check if it's time to stop the timer
                 let stopTime = Date(timeIntervalSince1970: Double((start + 20000)/1000))
-                print("Stop time: \(stopTime)")
+                // print("Stop time: \(stopTime)")
                 if Date() >= stopTime {
-                    print("[CameraRun] Sequence slow-2 finished with total=\(self.photoCount)")
+                    print("Slow Sequence 2: \(self.photoCount)")
                     timer.invalidate()
-                    print("Third timer done.")
+                    // print("Third timer done.")
                     self.scheduleMidpointTimer()
                 }
             }
@@ -308,19 +303,19 @@ class CameraService {
     }
     
     func scheduleMidpointTimer() {
-        print("Called midpoint timer")
-        print("[CameraRun] Midpoint capture scheduled at midTime(ms): \(midTime)")
+        // print("Called midpoint timer")
+        // print("[CameraRun] Midpoint capture scheduled at midTime(ms): \(midTime)")
         
         // Configure midpoit exposure
         configureExposure()
         
         let midpointTimerDate = Date(timeIntervalSince1970: Double(midTime/1000))
-        print("Midpoint Timer Date: \(midpointTimerDate)")
+        // print("Midpoint Timer Date: \(midpointTimerDate)")
         
         let timeInterval = 0.0
         
         midpointTimer = Timer(fire: midpointTimerDate, interval: timeInterval, repeats: false) {[weak self] timer in
-            print("mid")
+            // print("mid")
             Task { @MainActor in
                 self?.takeMidPic()
             }
@@ -330,14 +325,14 @@ class CameraService {
     }
     
     func takeMidPic() {
-        print("Called takeMidPic")
-        print("[CameraRun] Midpoint capture executing")
+        // print("Called takeMidPic")
         midpointTimer = Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { [weak self] timer in
             Task { @MainActor in
                 guard let self else { return }
                 self.capturePhoto()
                 self.photoCount += 1
-                print("[CameraRun] Midpoint photo captured. total=\(self.photoCount)")
+                
+                print("Midpoint: \(self.photoCount)")
                 
                 timer.invalidate()
                 self.scheduleFourthTimer()
@@ -350,14 +345,14 @@ class CameraService {
         configureExposure()
         
         let end = endTime
-        print("Called fourth timer")
+        // print("Called fourth timer")
         let fourthTimerDate = Date(timeIntervalSince1970: Double((end - 20000)/1000))
-        print("Fourth Timer Time: \(fourthTimerDate)")
+        // print("Fourth Timer Time: \(fourthTimerDate)")
         
         let timeInterval = Date(timeIntervalSince1970: Double((end - 10000)/1000)).timeIntervalSince(fourthTimerDate)
         
         fourthTimer = Timer(fire: fourthTimerDate, interval: timeInterval, repeats: false) { [weak self] timer in
-            print("4")
+            // print("4")
             Task { @MainActor in
                 self?.startSlowSequence3()
             }
@@ -369,23 +364,21 @@ class CameraService {
     }
     func startSlowSequence3() {
         let end = endTime
-        print("Starting slow sequence 3")
-        print("[CameraRun] Sequence slow-3 started")
+        // print("Starting slow sequence 3")
         fourthTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
             Task { @MainActor in
                 guard let self else { return }
                 // Capture photo
                 self.capturePhoto()
                 self.photoCount += 1
-                print("[CameraRun] Photo captured. total=\(self.photoCount)")
+                // print("[CameraRun] Photo captured. total=\(self.photoCount)")
                 
                 // Check if it's time to stop the timer
                 let stopTime = Date(timeIntervalSince1970: Double((end - 10000)/1000))
-                print("Stop time: \(stopTime)")
+                // print("Stop time: \(stopTime)")
                 if Date() >= stopTime {
-                    print("[CameraRun] Sequence slow-3 finished with total=\(self.photoCount)")
+                    print("Slow Sequence 4: \(self.photoCount)")
                     timer.invalidate()
-                    print("Fourth timer done.")
                     self.scheduleFifthTimer()
                 }
             }
@@ -395,14 +388,14 @@ class CameraService {
     
     func scheduleFifthTimer() {
         let end = endTime
-        print("Called fifth timer")
+        // print("Called fifth timer")
         let fifthTimerDate = Date(timeIntervalSince1970: Double((end - 10000)/1000))
-        print("Fifth Timer Time: \(fifthTimerDate)")
+        // print("Fifth Timer Time: \(fifthTimerDate)")
         
         let timeInterval = Date(timeIntervalSince1970: Double((end + 10000)/1000)).timeIntervalSince(fifthTimerDate)
         
         fifthTimer = Timer(fire: fifthTimerDate, interval: timeInterval, repeats: false) { [weak self] timer in
-            print("5")
+            // print("5")
             Task { @MainActor in
                 self?.startFastSequence2()
             }
@@ -413,21 +406,19 @@ class CameraService {
     
     func startFastSequence2() {
         let end = endTime
-        print("Starting fast sequence 2")
-        print("[CameraRun] Sequence fast-2 started")
+        // print("Starting fast sequence 2")
         
         fifthTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) {[weak self] timer in
             Task { @MainActor in
                 guard let self else { return }
                 self.capturePhoto()
                 self.photoCount += 1
-                print("[CameraRun] Photo captured. total=\(self.photoCount)")
+                // print("[CameraRun] Photo captured. total=\(self.photoCount)")
                 
                 let stopTime = Date(timeIntervalSince1970: Double((end + 10000)/1000))
-                print("Stop time: \(stopTime)")
+                // print("Stop time: \(stopTime)")
                 if Date() >= stopTime {
-                    print("[CameraRun] Sequence fast-2 finished with total=\(self.photoCount)")
-                    print("Fifth timer done.")
+                    print("Fast Sequence 2: \(self.photoCount)")
                     timer.invalidate()
                     self.scheduleSixthTimer()
                 }
@@ -438,14 +429,14 @@ class CameraService {
     
     func scheduleSixthTimer() {
         let end = endTime
-        print("Called sixth timer")
+        // print("Called sixth timer")
         let sixthTimerDate = Date(timeIntervalSince1970: Double((end + 10000)/1000))
-        print("Sixth Timer Time: \(sixthTimerDate)")
+        // print("Sixth Timer Time: \(sixthTimerDate)")
         
         let timeInterval = Date(timeIntervalSince1970: Double((end + 20000)/1000)).timeIntervalSince(sixthTimerDate)
         
         sixthTimer = Timer(fire: sixthTimerDate, interval: timeInterval, repeats: false) { [weak self] timer in
-            print("6")
+            // print("6")
             Task { @MainActor in
                 self?.startSlowSequence4()
             }
@@ -457,25 +448,23 @@ class CameraService {
     }
     func startSlowSequence4() {
         let end = endTime
-        print("Starting slow sequence 4")
-        print("[CameraRun] Sequence slow-4 started")
+        // print("Starting slow sequence 4")
         fourthTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
             Task { @MainActor in
                 guard let self else { return }
                 // Capture photo
                 self.capturePhoto()
                 self.photoCount += 1
-                print("[CameraRun] Photo captured. total=\(self.photoCount)")
+                // print("[CameraRun] Photo captured. total=\(self.photoCount)")
                 
                 // Check if it's time to stop the timer
                 let stopTime = Date(timeIntervalSince1970: Double((end + 20000)/1000))
-                print("Stop time: \(stopTime)")
+                // print("Stop time: \(stopTime)")
                 if Date() >= stopTime {
-                    print("[CameraRun] Sequence slow-4 finished with total=\(self.photoCount)")
+                    print("Slow Sequence 4: \(self.photoCount)")
                     timer.invalidate()
-                    print("Sixth timer done.")
-                    print("All photos taken.")
-                    print("[CameraRun] Completed. Total photos captured=\(self.photoCount)")
+                    // print("All photos taken.")
+                    print("Completed. Total photos captured=\(self.photoCount)")
                     self.exportMetadataToJSON()
                     self.flashTorchAndSound(seconds: 16)
                     self.prefs.set(true, forKey: "Photos complete")
@@ -497,7 +486,7 @@ class CameraService {
                 audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
                 audioPlayer?.prepareToPlay()
             } catch {
-                print("Error initializing audio player: \(error.localizedDescription)")
+                // print("Error initializing audio player: \(error.localizedDescription)")
             }
         }
     }
@@ -509,7 +498,7 @@ class CameraService {
         
         // Check if the device has a torch
         guard device.hasTorch else {
-            print("Torch is not available on this device.")
+            // print("Torch is not available on this device.")
             return
         }
         
@@ -530,12 +519,12 @@ class CameraService {
                 // Stop flashing after the specified duration
                 if flashCounter >= seconds {
                     timer.invalidate()
-                    print("Flash complete.")
-                    print("[CameraRun] Flash sequence complete. Final photo total=\(self.photoCount)")
+                    // print("Flash complete.")
+                    // print("[CameraRun] Flash sequence complete. Final photo total=\(self.photoCount)")
                     return
                 }
             } catch {
-                print("Error toggling torch during flash: \(error.localizedDescription)")
+                // print("Error toggling torch during flash: \(error.localizedDescription)")
             }
         }
         
@@ -546,10 +535,10 @@ class CameraService {
     
     func allPhotosCompleted() -> Bool {
         if(prefs.bool(forKey: "Photos complete")) {
-            print("[CameraRun] allPhotosCompleted() -> true. total=\(photoCount)")
+            // print("[CameraRun] allPhotosCompleted() -> true. total=\(photoCount)")
             return true
         } else {
-            print("[CameraRun] allPhotosCompleted() -> false. total=\(photoCount)")
+            // print("[CameraRun] allPhotosCompleted() -> false. total=\(photoCount)")
             return false
         }
     }
@@ -560,7 +549,7 @@ class CameraService {
         let metadataArray = MetadataDB.shared.retrieveImageMeta()
 
         for metadata in metadataArray {
-            print("ID: \(metadata.id), Latitude: \(metadata.latitude), Longitude: \(metadata.longitude), Altitude: \(metadata.altitude), Filepath: \(metadata.filepath), Capture Time: \(metadata.captureTime), ISO \(metadata.iso), Exposure time: \(metadata.exposureTime), White balance: \(metadata.whiteBalance), Focal distance: \(metadata.focalDistance), isCropped: \(metadata.isCropped)")
+            // print("ID: \(metadata.id), Latitude: \(metadata.latitude), Longitude: \(metadata.longitude), Altitude: \(metadata.altitude), Filepath: \(metadata.filepath), Capture Time: \(metadata.captureTime), ISO \(metadata.iso), Exposure time: \(metadata.exposureTime), White balance: \(metadata.whiteBalance), Focal distance: \(metadata.focalDistance), isCropped: \(metadata.isCropped)")
         }
     }
     //=========================testing============================
@@ -568,7 +557,7 @@ class CameraService {
     
     func capturePhoto(with settings: AVCapturePhotoSettings = AVCapturePhotoSettings()) {
         guard let cameraDevice = AVCaptureDevice.default(for: .video) else {
-            print("No video device found")
+            // print("No video device found")
             return
         }
         
@@ -581,11 +570,11 @@ class CameraService {
         
         
         // Print current settings
-        print("Current ISO: \(cameraDevice.iso)")
-        print("Current White Balance: \(cameraDevice.whiteBalanceMode)")
-        print("Current Exposure Time: \(cameraDevice.exposureDuration.seconds)")
-        print("Current Lens Position: \(cameraDevice.lensPosition)")
-        print("Current aperture: \(aperture)")
+        // print("Current ISO: \(cameraDevice.iso)")
+        // print("Current White Balance: \(cameraDevice.whiteBalanceMode)")
+        // print("Current Exposure Time: \(cameraDevice.exposureDuration.seconds)")
+        // print("Current Lens Position: \(cameraDevice.lensPosition)")
+        // print("Current aperture: \(aperture)")
         
         
         output.capturePhoto(with: settings, delegate: delegate!)
@@ -598,7 +587,7 @@ class CameraService {
     func configureCameraSettings() {
         
         guard let cameraDevice = AVCaptureDevice.default(for: .video) else {
-            print("No video device found")
+            // print("No video device found")
             return
         }
         
@@ -606,10 +595,10 @@ class CameraService {
             try cameraDevice.lockForConfiguration()
             
             // Print current settings
-            print("Current ISO: \(cameraDevice.iso)")
-            print("Current White Balance: \(cameraDevice.whiteBalanceMode)")
-            print("Current Exposure Time: \(cameraDevice.exposureDuration.seconds)")
-            print("Current Lens Position: \(cameraDevice.lensPosition)")
+            // print("Current ISO: \(cameraDevice.iso)")
+            // print("Current White Balance: \(cameraDevice.whiteBalanceMode)")
+            // print("Current Exposure Time: \(cameraDevice.exposureDuration.seconds)")
+            // print("Current Lens Position: \(cameraDevice.lensPosition)")
             
             // Set camera ISO to 63
             if cameraDevice.activeFormat.minISO <= 63 && cameraDevice.activeFormat.maxISO >= 63 {
@@ -618,7 +607,7 @@ class CameraService {
                 self.prefs.set(cameraDevice.iso, forKey: "ISO")
                 
             } else {
-                print("ISO 63 is not supported by the camera")
+                // print("ISO 63 is not supported by the camera")
             }
             
             // Set the white balance
@@ -629,7 +618,7 @@ class CameraService {
                 
                 self.prefs.set("6600K", forKey: "White balance")
             } else {
-                print("Custom white balance is not supported by the camera")
+                // print("Custom white balance is not supported by the camera")
             }
             
             // Set exposure time
@@ -639,7 +628,7 @@ class CameraService {
                 cameraDevice.setExposureModeCustom(duration: desiredExposureTime, iso: prefs.float(forKey: "ISO"), completionHandler: nil)
                 self.prefs.set(cameraDevice.exposureDuration.seconds, forKey: "Exposure time")
             } else {
-                print("Custom exposure is not supported by the camera")
+                // print("Custom exposure is not supported by the camera")
             }
             
             // Set focal distance
@@ -649,25 +638,25 @@ class CameraService {
                 cameraDevice.setFocusModeLocked(lensPosition: 1.0, completionHandler: nil)
                 self.prefs.set(cameraDevice.lensPosition, forKey: "Focal distance")
             } else {
-                print("Setting focus to infinity is not supported by the camera")
+                // print("Setting focus to infinity is not supported by the camera")
             }
             
             // Print current settings
-            print("Set ISO: \(cameraDevice.iso)")
-            print("Set White Balance: \(cameraDevice.whiteBalanceMode)")
-            print("Set Exposure Time: \(cameraDevice.exposureDuration.seconds)")
-            print("Set Lens Position: \(cameraDevice.lensPosition)")
+            // print("Set ISO: \(cameraDevice.iso)")
+            // print("Set White Balance: \(cameraDevice.whiteBalanceMode)")
+            // print("Set Exposure Time: \(cameraDevice.exposureDuration.seconds)")
+            // print("Set Lens Position: \(cameraDevice.lensPosition)")
             
             cameraDevice.unlockForConfiguration()
         } catch {
-            print("Error configuring camera settings: \(error.localizedDescription)")
+            // print("Error configuring camera settings: \(error.localizedDescription)")
         }
         
     }
     
     func getSetCameraSettings() {
         guard let cameraDevice = AVCaptureDevice.default(for: .video) else {
-            print("No video device found")
+            // print("No video device found")
             return
         }
         
@@ -679,19 +668,19 @@ class CameraService {
             self.prefs.set(cameraDevice.lensPosition, forKey: "Focal distance")
             
             // Print current settings
-            print("Set ISO: \(cameraDevice.iso)")
-            print("Set Exposure Time: \(cameraDevice.exposureDuration.seconds)")
-            print("Set Lens Position: \(cameraDevice.lensPosition)")
+            // print("Set ISO: \(cameraDevice.iso)")
+            // print("Set Exposure Time: \(cameraDevice.exposureDuration.seconds)")
+            // print("Set Lens Position: \(cameraDevice.lensPosition)")
             
             cameraDevice.unlockForConfiguration()
         } catch {
-            print("Error configuring camera settings: \(error.localizedDescription)")
+            // print("Error configuring camera settings: \(error.localizedDescription)")
         }
     }
     
     func configureExposure() {
         guard let cameraDevice = AVCaptureDevice.default(for: .video) else {
-            print("No video device found")
+            // print("No video device found")
             return
         }
         
@@ -708,7 +697,7 @@ class CameraService {
                     
                     self.prefs.set(cameraDevice.exposureDuration.seconds, forKey: "Exposure time midpoint")
                 } else {
-                    print("Custom exposure is not supported by the camera")
+                    // print("Custom exposure is not supported by the camera")
                 }
             } else {
                 let desiredExposureTime = CMTimeMake(value: 1, timescale: 8000)
@@ -717,13 +706,13 @@ class CameraService {
                     cameraDevice.setExposureModeCustom(duration: desiredExposureTime, iso: prefs.float(forKey: "ISO"), completionHandler: nil)
                     //self.prefs.set(cameraDevice.exposureDuration.seconds, forKey: "Exposure time")
                 } else {
-                    print("Custom exposure is not supported by the camera")
+                    // print("Custom exposure is not supported by the camera")
                 }
             }
             
             cameraDevice.unlockForConfiguration()
         } catch {
-            print("Error configuring camera settings: \(error.localizedDescription)")
+            // print("Error configuring camera settings: \(error.localizedDescription)")
         }
     }
     
@@ -770,7 +759,7 @@ class CameraService {
                         if let currentLocation = self.locationManager.location {
                             request.location = currentLocation
                         } else {
-                            print("Warning: Location not available, using nil")
+                            // print("Warning: Location not available, using nil")
                         }
 
                         // Add the photo to the "SunSketcher" album.
@@ -781,14 +770,14 @@ class CameraService {
                         if success {
                             //print("Photo saved to the 'SunSketcher' album")
                         } else if let error = error {
-                            print("Error saving photo to the library: \(error.localizedDescription)")
+                            // print("Error saving photo to the library: \(error.localizedDescription)")
                         }
                     }
                 } else {
-                    print("Error: Unable to create UIImage from photo data")
+                    // print("Error: Unable to create UIImage from photo data")
                 }
             } else {
-                print("Error creating 'SunSketcher' album")
+                // print("Error creating 'SunSketcher' album")
             }
         }
     }
@@ -809,7 +798,7 @@ class CameraService {
             prefs.set(imageSaveDirectory, forKey: "imageFolderDirectory")
             
         } catch {
-            print("Error creating directory: \(error.localizedDescription)")
+            // print("Error creating directory: \(error.localizedDescription)")
             return
         }
         //print("Image Directory: \(imageSaveDirectory)")
@@ -828,7 +817,7 @@ class CameraService {
             
             do {
                 try imageData.write(to: imageURL)
-                print("[CameraRun] Saved image to disk: \(imageURL.lastPathComponent) total=\(self.photoCount)")
+                // print("[CameraRun] Saved image to disk: \(imageURL.lastPathComponent) total=\(self.photoCount)")
                 
                 let lat = prefs.float(forKey: "lat")
                 let lon = prefs.float(forKey: "lon")
@@ -872,7 +861,7 @@ class CameraService {
                 }
                 
             } catch {
-                print("Error saving image to file: \(error.localizedDescription)")
+                // print("Error saving image to file: \(error.localizedDescription)")
             }
         }
     }
@@ -911,10 +900,11 @@ class CameraService {
             
             try jsonData.write(to: fileURL)
             
-            print("[CameraRun] Metadata exported to \(fileURL.path)")
+            // print("[CameraRun] Metadata exported to \(fileURL.path)")
         } catch {
-            print("Error exporting metadata: \(error.localizedDescription)")
+            // print("Error exporting metadata: \(error.localizedDescription)")
         }
     }
 
 }
+
