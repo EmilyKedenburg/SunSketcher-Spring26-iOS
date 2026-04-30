@@ -239,7 +239,7 @@ class CameraService {
         let start = startTime
         // print("Starting fast sequence 1")
         
-        secondTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] timer in
+        secondTimer = Timer.scheduledTimer(withTimeInterval: 0.33, repeats: true) { [weak self] timer in
             Task { @MainActor in
                     guard let self else { return }
                 self.capturePhoto()
@@ -408,7 +408,7 @@ class CameraService {
         let end = endTime
         // print("Starting fast sequence 2")
         
-        fifthTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) {[weak self] timer in
+        fifthTimer = Timer.scheduledTimer(withTimeInterval: 0.33, repeats: true) {[weak self] timer in
             Task { @MainActor in
                 guard let self else { return }
                 self.capturePhoto()
@@ -465,7 +465,10 @@ class CameraService {
                     timer.invalidate()
                     // print("All photos taken.")
                     print("Completed. Total photos captured=\(self.photoCount)")
-                    self.exportMetadataToJSON()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        self.exportMetadataToJSON()
+                        self.exportMetadataToCSV()
+                    }
                     self.flashTorchAndSound(seconds: 16)
                     self.prefs.set(true, forKey: "Photos complete")
                     
@@ -903,6 +906,67 @@ class CameraService {
             // print("[CameraRun] Metadata exported to \(fileURL.path)")
         } catch {
             // print("Error exporting metadata: \(error.localizedDescription)")
+        }
+    }
+    
+    func exportMetadataToCSV() {
+        let metadataArray = MetadataDB.shared.retrieveImageMeta()
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileURL = documentsDirectory.appendingPathComponent("SunSketcher/metadata.csv")
+
+        // CSV Header
+        let headers = [
+            "id",
+            "latitude",
+            "longitude",
+            "altitude",
+            "filepath",
+            "captureTime",
+            "aperture",
+            "iso",
+            "exposureTime",
+            "whiteBalance",
+            "focalDistance",
+            "isCropped"
+        ]
+
+        // Helper to escape CSV fields
+        func csvEscape(_ value: String) -> String {
+            var v = value
+            if v.contains("\"") { v = v.replacingOccurrences(of: "\"", with: "\"\"") }
+            if v.contains(",") || v.contains("\n") || v.contains("\r") || v.contains("\"") { v = "\"" + v + "\"" }
+            return v
+        }
+
+        var csv = headers.joined(separator: ",") + "\n"
+
+        for meta in metadataArray {
+            let row: [String] = [
+                String(meta.id),
+                String(meta.latitude),
+                String(meta.longitude),
+                String(meta.altitude),
+                csvEscape(meta.filepath),
+                String(meta.captureTime),
+                String(meta.aperture),
+                String(meta.iso),
+                String(meta.exposureTime),
+                String(meta.whiteBalance),
+                String(meta.focalDistance),
+                String(meta.isCropped)
+            ]
+            csv += row.joined(separator: ",") + "\n"
+        }
+
+        do {
+            try FileManager.default.createDirectory(
+                at: fileURL.deletingLastPathComponent(),
+                withIntermediateDirectories: true
+            )
+            try csv.data(using: .utf8)?.write(to: fileURL)
+            // print("[CameraRun] Metadata exported to CSV at \(fileURL.path)")
+        } catch {
+            // print("Error exporting metadata CSV: \(error.localizedDescription)")
         }
     }
 
