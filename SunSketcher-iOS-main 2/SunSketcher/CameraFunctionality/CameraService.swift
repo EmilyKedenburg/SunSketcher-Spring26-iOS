@@ -239,7 +239,7 @@ class CameraService {
         let start = startTime
         // print("Starting fast sequence 1")
         
-        secondTimer = Timer.scheduledTimer(withTimeInterval: 0.33, repeats: true) { [weak self] timer in
+        secondTimer = Timer.scheduledTimer(withTimeInterval: 0.19, repeats: true) { [weak self] timer in
             Task { @MainActor in
                     guard let self else { return }
                 self.capturePhoto()
@@ -408,7 +408,7 @@ class CameraService {
         let end = endTime
         // print("Starting fast sequence 2")
         
-        fifthTimer = Timer.scheduledTimer(withTimeInterval: 0.33, repeats: true) {[weak self] timer in
+        fifthTimer = Timer.scheduledTimer(withTimeInterval: 0.19, repeats: true) {[weak self] timer in
             Task { @MainActor in
                 guard let self else { return }
                 self.capturePhoto()
