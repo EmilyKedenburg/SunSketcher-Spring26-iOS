@@ -59,7 +59,8 @@ class CameraService {
     var audioPlayer: AVAudioPlayer?
     var notificationSent = false
    
-    
+    // Trigger sequence for Spain 26 eclipse
+    let useSpainSchedule = true
     
     func start(delegate: AVCapturePhotoCaptureDelegate, completion: @escaping (Error?) -> ()) {
         self.delegate = delegate
@@ -163,9 +164,7 @@ class CameraService {
         midTime = (endTime + startTime) / 2
         
         // print("[CameraRun] Scheduling capture timers. startTime(ms): \(startTime) endTime(ms): \(endTime) midTime(ms): \(midTime)")
-        
         // print("Start Time: \(startTime), End Time: \(endTime)")
-        
         // print("Schedule first timer.")
         
         let firstTimerDate = Date(timeIntervalSince1970: Double((startTime - 20000)/1000))
@@ -184,14 +183,13 @@ class CameraService {
         
         // Schedule the timer on the main run loop
         RunLoop.main.add(firstTimer!, forMode: .common)
-        
     }
-    
-    
+
     func startSlowSequence1() {
         let start = startTime
         // print("Starting slow sequence 1")
-        secondTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
+
+        secondTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
             Task { @MainActor in
                 guard let self else { return }
                 
@@ -251,7 +249,13 @@ class CameraService {
                 if Date() >= stopTime {
                     print("Fast Sequence 1: \(self.photoCount)")
                     timer.invalidate()
-                    self.scheduleThirdTimer()
+
+                    if self.useSpainSchedule {
+                        self.scheduleMidpointTimer()
+                    } else {
+                        self.scheduleThirdTimer()
+                    }
+
                 }
             }
         }
@@ -307,7 +311,7 @@ class CameraService {
         // print("[CameraRun] Midpoint capture scheduled at midTime(ms): \(midTime)")
         
         // Configure midpoit exposure
-        configureExposure()
+        configureExposure(midpoint: true)
         
         let midpointTimerDate = Date(timeIntervalSince1970: Double(midTime/1000))
         // print("Midpoint Timer Date: \(midpointTimerDate)")
@@ -335,7 +339,13 @@ class CameraService {
                 print("Midpoint: \(self.photoCount)")
                 
                 timer.invalidate()
-                self.scheduleFourthTimer()
+                
+                if self.useSpainSchedule {
+                    self.scheduleFifthTimer()
+                } else {
+                    self.scheduleFourthTimer()
+                }
+
             }
         }
     }
@@ -365,7 +375,7 @@ class CameraService {
     func startSlowSequence3() {
         let end = endTime
         // print("Starting slow sequence 3")
-        fourthTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
+        fourthTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
             Task { @MainActor in
                 guard let self else { return }
                 // Capture photo
@@ -377,7 +387,7 @@ class CameraService {
                 let stopTime = Date(timeIntervalSince1970: Double((end - 10000)/1000))
                 // print("Stop time: \(stopTime)")
                 if Date() >= stopTime {
-                    print("Slow Sequence 4: \(self.photoCount)")
+                    print("Slow Sequence 3: \(self.photoCount)")
                     timer.invalidate()
                     self.scheduleFifthTimer()
                 }
@@ -387,6 +397,8 @@ class CameraService {
     }
     
     func scheduleFifthTimer() {
+        configureExposure(midpoint: false)
+        
         let end = endTime
         // print("Called fifth timer")
         let fifthTimerDate = Date(timeIntervalSince1970: Double((end - 10000)/1000))
@@ -449,7 +461,7 @@ class CameraService {
     func startSlowSequence4() {
         let end = endTime
         // print("Starting slow sequence 4")
-        fourthTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
+        fourthTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
             Task { @MainActor in
                 guard let self else { return }
                 // Capture photo
@@ -681,44 +693,49 @@ class CameraService {
         }
     }
     
-    func configureExposure() {
+    func configureExposure(midpoint: Bool = false) {
         guard let cameraDevice = AVCaptureDevice.default(for: .video) else {
-            // print("No video device found")
             return
         }
-        
+
         do {
             try cameraDevice.lockForConfiguration()
-            
-            // Set exposure time
-            if photoCount == 50{
-                let desiredExposureTime = CMTimeMake(value: 1, timescale: 200)
-                
-                if cameraDevice.isExposureModeSupported(.custom) {
-                    cameraDevice.setExposureModeCustom(duration: desiredExposureTime, iso: prefs.float(forKey: "ISO"), completionHandler: nil)
-                    
-                    
-                    self.prefs.set(cameraDevice.exposureDuration.seconds, forKey: "Exposure time midpoint")
+
+            let desiredExposureTime: CMTime
+
+            if midpoint {
+                desiredExposureTime = CMTimeMake(value: 1, timescale: 200)
+            } else {
+                desiredExposureTime = CMTimeMake(value: 1, timescale: 8000)
+            }
+
+            if cameraDevice.isExposureModeSupported(.custom) {
+                cameraDevice.setExposureModeCustom(
+                    duration: desiredExposureTime,
+                    iso: prefs.float(forKey: "ISO"),
+                    completionHandler: nil
+                )
+
+                if midpoint {
+                    self.prefs.set(
+                        cameraDevice.exposureDuration.seconds,
+                        forKey: "Exposure time midpoint"
+                    )
                 } else {
-                    // print("Custom exposure is not supported by the camera")
+                    self.prefs.set(
+                        cameraDevice.exposureDuration.seconds,
+                        forKey: "Exposure time"
+                    )
                 }
             } else {
-                let desiredExposureTime = CMTimeMake(value: 1, timescale: 8000)
-                
-                if cameraDevice.isExposureModeSupported(.custom) {
-                    cameraDevice.setExposureModeCustom(duration: desiredExposureTime, iso: prefs.float(forKey: "ISO"), completionHandler: nil)
-                    //self.prefs.set(cameraDevice.exposureDuration.seconds, forKey: "Exposure time")
-                } else {
-                    // print("Custom exposure is not supported by the camera")
-                }
+                // print("Custom exposure is not supported by the camera")
             }
-            
+
             cameraDevice.unlockForConfiguration()
         } catch {
             // print("Error configuring camera settings: \(error.localizedDescription)")
         }
     }
-    
     
     // For creating an album folder within the phone's photo library
     func createSunSketcherAlbumIfNeeded(completion: @escaping (PHAssetCollection?) -> Void) {
