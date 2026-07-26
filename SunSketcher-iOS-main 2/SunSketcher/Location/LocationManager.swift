@@ -3,6 +3,7 @@
 //  Sunsketcher
 //
 //  Created by Tameka Ferguson on 9/6/23.
+//  Edited by Emily Kedenburg on 7/26/26.
 //
 
 
@@ -26,6 +27,7 @@ class LocationManager: NSObject, ObservableObject, @preconcurrency CLLocationMan
     
     private var locationCallback: ((CLLocation) -> Void)?
     private let locationManager = CLLocationManager()
+    private let useSpoofedLocation = true
     
     override init() {
         super.init()
@@ -39,6 +41,32 @@ class LocationManager: NSObject, ObservableObject, @preconcurrency CLLocationMan
     
     func requestLocationUpdate(callback: @escaping (CLLocation) -> Void) {
         locationCallback = callback
+    
+        if useSpoofedLocation {
+            let spoofedLocation = CLLocation(
+                coordinate: CLLocationCoordinate2D(
+                    latitude: 40.53766,
+                    longitude: -3.61249
+                ),
+                altitude: 0.0,
+                horizontalAccuracy: 1.0,
+                verticalAccuracy: 1.0,
+                timestamp: Date()
+            )
+    
+            self.location = spoofedLocation
+            self.region = MKCoordinateRegion(
+                center: spoofedLocation.coordinate,
+                latitudinalMeters: 5000,
+                longitudinalMeters: 5000
+            )
+    
+            callback(spoofedLocation)
+            locationCallback = nil
+            return
+        }
+    
+        locationCallback = callback
         locationManager.startUpdatingLocation()
     }
     
@@ -49,18 +77,22 @@ class LocationManager: NSObject, ObservableObject, @preconcurrency CLLocationMan
 
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+
+        if useSpoofedLocation {
+            return
+        }
+    
         if let lastLocation = locations.last {
-            //print("Latitude:", lastLocation.coordinate.latitude)
-            //print("Longitude:", lastLocation.coordinate.longitude)
-            
+    
             self.location = lastLocation
-            
+    
             self.region = MKCoordinateRegion(
                 center: lastLocation.coordinate,
                 latitudinalMeters: 5000,
                 longitudinalMeters: 5000)
-            
+    
+            locationCallback?(lastLocation)
+            locationCallback = nil
         }
     }
     
@@ -72,7 +104,10 @@ class LocationManager: NSObject, ObservableObject, @preconcurrency CLLocationMan
             
         case .authorizedWhenInUse, .authorizedAlways:
             print("Location permission granted")
-            manager.startUpdatingLocation() // Remember to update Info.plist
+        
+            if !useSpoofedLocation {
+                manager.startUpdatingLocation()
+            }
             
         case .denied:
             print("Location permission denied")
