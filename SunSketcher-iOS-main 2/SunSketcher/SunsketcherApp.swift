@@ -26,8 +26,20 @@ struct SunSketcherApp: App {
         }
     }
     
-    // convert `hh:mm:ss` format string to unix time (this version is specifically for Aug. 21, 2017 eclipse)
         func convertTimes(data: [String]) -> [Int64] {
+            let start = data[0].split(separator: ":").compactMap { Int($0) }
+            let end = data[1].split(separator: ":").compactMap { Int($0) }
+
+            // Add the actual time to the Unix time of UTC midnight for the start of that day
+            // For August 12, 2026
+            let startUnix = 1786528800-36000 + (Int64(start[0]) * 3600) + (Int64(start[1]) * 60) + Int64(start[2]) // Noon Spain + Start Time - 10 Hours
+            let endUnix = 1786528800-36000 + (Int64(end[0]) * 3600) + (Int64(end[1]) * 60) + Int64(end[2])
+
+            return [startUnix, endUnix]
+        }
+    
+    // convert `hh:mm:ss` format string to unix time (this version is specifically for Aug. 21, 2017 eclipse)
+        /*func convertTimes(data: [String]) -> [Int64] {
             let start = data[0].split(separator: ":").compactMap { Int($0) }
             let end = data[1].split(separator: ":").compactMap { Int($0) }
 
@@ -37,7 +49,7 @@ struct SunSketcherApp: App {
             let endUnix = 1503273600 + (Int64(end[0]) * 3600) + (Int64(end[1]) * 60) + Int64(end[2])
 
             return [startUnix, endUnix]
-        }
+        }*/
         
     
     // convert `hh:mm:ss` format string to unix time (this version is specifically for Apr. 8, 2024 eclipse)

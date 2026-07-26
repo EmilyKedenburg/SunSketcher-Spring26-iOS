@@ -3,7 +3,6 @@
 //  Sunsketcher
 //
 //  Created by Tameka Ferguson on 9/6/23.
-//  Edited by Emily Kedenburg on 7/26/26.
 //
 
 
@@ -17,7 +16,7 @@ import MapKit
 import CoreLocation
 
 @MainActor
-class LocationManager: NSObject, ObservableObject, @preconcurrency CLLocationManagerDelegate {
+class LocationManager: NSObject, ObservableObject {
     @Published var location: CLLocation?
     @Published var region = MKCoordinateRegion()
     
@@ -27,105 +26,64 @@ class LocationManager: NSObject, ObservableObject, @preconcurrency CLLocationMan
     
     private var locationCallback: ((CLLocation) -> Void)?
     private let locationManager = CLLocationManager()
-    private let useSpoofedLocation = true
+    private let spoofedLocation = CLLocation(
+                    coordinate: CLLocationCoordinate2D(
+                        latitude: 40.53766,
+                        longitude: -3.61249
+                    ),
+                    altitude: 0.0,
+                    horizontalAccuracy: 1.0,
+                    verticalAccuracy: 1.0,
+                    timestamp: Date()
+                )
     
     override init() {
         super.init()
-        locationManager.delegate = self
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest // chooses how accurate you want the location to be
         locationManager.distanceFilter = kCLDistanceFilterNone // this is used to track all movements of the phone.
         //Note: that within the app the location is only saved in the database once so it doesn't keep changing.
         //The lat | lon keeps updating on the countdown screen but that does not alter what is recorded.
+        
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation() // Remember to update Info.plist
+        locationManager.delegate = self
+        
     }
     
     func requestLocationUpdate(callback: @escaping (CLLocation) -> Void) {
-        locationCallback = callback
-    
-        if useSpoofedLocation {
-            let spoofedLocation = CLLocation(
-                coordinate: CLLocationCoordinate2D(
-                    latitude: 40.53766,
-                    longitude: -3.61249
-                ),
-                altitude: 0.0,
-                horizontalAccuracy: 1.0,
-                verticalAccuracy: 1.0,
-                timestamp: Date()
-            )
-    
-            self.location = spoofedLocation
-            self.region = MKCoordinateRegion(
-                center: spoofedLocation.coordinate,
-                latitudinalMeters: 5000,
-                longitudinalMeters: 5000
-            )
-    
-            callback(spoofedLocation)
-            locationCallback = nil
-            return
-        }
-    
         locationCallback = callback
         locationManager.startUpdatingLocation()
     }
     
 
     func requestLocationPermission() {
-        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
     }
 
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
-        if useSpoofedLocation {
-            return
-        }
     
-        if let lastLocation = locations.last {
-    
-            self.location = lastLocation
-    
-            self.region = MKCoordinateRegion(
-                center: lastLocation.coordinate,
-                latitudinalMeters: 5000,
-                longitudinalMeters: 5000)
-    
-            locationCallback?(lastLocation)
-            locationCallback = nil
-        }
-    }
-    
-    /* relays authorization status
-       & ensures the phone starts sending coordiantes only
-       after permission is granted */
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-            
-        case .authorizedWhenInUse, .authorizedAlways:
-            print("Location permission granted")
-        
-            if !useSpoofedLocation {
-                manager.startUpdatingLocation()
-            }
-            
-        case .denied:
-            print("Location permission denied")
-                  
-        case .restricted:
-            print("Location restricted")
-                  
-        case .notDetermined:
-            print ("Location permission not determined")
-                  
-        @unknown default:
-            break
-        }
-    }
 }
 
-/*extension LocationManager: CLLocationManagerDelegate {
+extension LocationManager: CLLocationManagerDelegate {
     
-    Moved func locationManager to class
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.location = spoofedLocation
+                    self.region = MKCoordinateRegion(
+                        center: spoofedLocation.coordinate,
+                        latitudinalMeters: 5000,
+                        longitudinalMeters: 5000
+                    )
         
-}*/
+        
+        /*
+        if let lastLocation = locations.last {
+            let altitude = lastLocation.altitude
+            self.location = lastLocation
+            self.region = MKCoordinateRegion(center: lastLocation.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)
+        }
+        */
+        
+    }
+    
+}

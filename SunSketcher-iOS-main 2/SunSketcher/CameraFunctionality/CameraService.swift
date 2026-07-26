@@ -168,10 +168,10 @@ class CameraService {
         // print("Schedule first timer.")
         
         let firstTimerDate = Date(timeIntervalSince1970: Double((startTime - 20000)/1000))
-        // print("First Timer Time: \(firstTimerDate)")
+        print("First Timer Time: \(firstTimerDate)")
         
         let timeInterval = Date(timeIntervalSince1970: Double((startTime - 10000)/1000)).timeIntervalSince(firstTimerDate)
-        // print("First timer interval: \(timeInterval)")
+        print("First timer interval: \(timeInterval)")
         
         // Set a timer for the the date in which the timer is suppose to start and interval until the next one starts
         firstTimer = Timer(fire: firstTimerDate, interval: timeInterval, repeats: false) { [weak self] timer in
@@ -311,7 +311,7 @@ class CameraService {
         // print("[CameraRun] Midpoint capture scheduled at midTime(ms): \(midTime)")
         
         // Configure midpoit exposure
-        configureExposure(midpoint: true)
+        //configureExposure(midpoint: true)
         
         let midpointTimerDate = Date(timeIntervalSince1970: Double(midTime/1000))
         // print("Midpoint Timer Date: \(midpointTimerDate)")
@@ -397,7 +397,7 @@ class CameraService {
     }
     
     func scheduleFifthTimer() {
-        configureExposure(midpoint: false)
+        //ßconfigureExposure(midpoint: false)
         
         let end = endTime
         // print("Called fifth timer")
