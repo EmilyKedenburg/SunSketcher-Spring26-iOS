@@ -585,7 +585,7 @@ class CameraService {
         
         
         // Print current settings
-        // print("Current ISO: \(cameraDevice.iso)")
+        print("Current ISO: \(cameraDevice.iso)")
         // print("Current White Balance: \(cameraDevice.whiteBalanceMode)")
         // print("Current Exposure Time: \(cameraDevice.exposureDuration.seconds)")
         // print("Current Lens Position: \(cameraDevice.lensPosition)")
@@ -610,20 +610,21 @@ class CameraService {
             try cameraDevice.lockForConfiguration()
             
             // Print current settings
-            // print("Current ISO: \(cameraDevice.iso)")
+            print("Current ISO: \(cameraDevice.iso)")
             // print("Current White Balance: \(cameraDevice.whiteBalanceMode)")
             // print("Current Exposure Time: \(cameraDevice.exposureDuration.seconds)")
             // print("Current Lens Position: \(cameraDevice.lensPosition)")
             
-            // Set camera ISO to 63
-            if cameraDevice.activeFormat.minISO <= 63 && cameraDevice.activeFormat.maxISO >= 63 {
-                cameraDevice.setExposureModeCustom(duration: AVCaptureDevice.currentExposureDuration, iso: 63, completionHandler: nil)
-                
-                self.prefs.set(cameraDevice.iso, forKey: "ISO")
-                
-            } else {
-                // print("ISO 63 is not supported by the camera")
+            // Replace original ISO setting block with clamping logic
+            let minISO = cameraDevice.activeFormat.minISO
+            let maxISO = cameraDevice.activeFormat.maxISO
+            let requestedISO: Float = 63
+            let clampedISO = max(minISO, min(requestedISO, maxISO))
+            if requestedISO != clampedISO {
+                print("Requested ISO \(requestedISO) is not supported. Clamped to \(clampedISO) (range: \(minISO)-\(maxISO))")
             }
+            cameraDevice.setExposureModeCustom(duration: AVCaptureDevice.currentExposureDuration, iso: clampedISO, completionHandler: nil)
+            self.prefs.set(clampedISO, forKey: "ISO")
             
             // Set the white balance
             if cameraDevice.isWhiteBalanceModeSupported(.locked) {
@@ -639,11 +640,17 @@ class CameraService {
             // Set exposure time
             let desiredExposureTime = CMTimeMake(value: 1, timescale: 8000)
             
+            // Replace original exposure setting block with clamping logic for ISO
             if cameraDevice.isExposureModeSupported(.custom) {
-                cameraDevice.setExposureModeCustom(duration: desiredExposureTime, iso: prefs.float(forKey: "ISO"), completionHandler: nil)
+                let requestedISO = prefs.float(forKey: "ISO")
+                let clampedISO = max(minISO, min(requestedISO, maxISO))
+                if requestedISO != clampedISO {
+                    print("Requested ISO \(requestedISO) is not supported. Clamped to \(clampedISO) (range: \(minISO)-\(maxISO))")
+                }
+                cameraDevice.setExposureModeCustom(duration: desiredExposureTime, iso: clampedISO, completionHandler: nil)
                 self.prefs.set(cameraDevice.exposureDuration.seconds, forKey: "Exposure time")
             } else {
-                // print("Custom exposure is not supported by the camera")
+                print("Custom exposure is not supported by the camera")
             }
             
             // Set focal distance
@@ -657,7 +664,7 @@ class CameraService {
             }
             
             // Print current settings
-            // print("Set ISO: \(cameraDevice.iso)")
+            print("Set ISO: \(cameraDevice.iso)")
             // print("Set White Balance: \(cameraDevice.whiteBalanceMode)")
             // print("Set Exposure Time: \(cameraDevice.exposureDuration.seconds)")
             // print("Set Lens Position: \(cameraDevice.lensPosition)")
@@ -683,7 +690,7 @@ class CameraService {
             self.prefs.set(cameraDevice.lensPosition, forKey: "Focal distance")
             
             // Print current settings
-            // print("Set ISO: \(cameraDevice.iso)")
+            print("Set ISO: \(cameraDevice.iso)")
             // print("Set Exposure Time: \(cameraDevice.exposureDuration.seconds)")
             // print("Set Lens Position: \(cameraDevice.lensPosition)")
             
@@ -709,10 +716,18 @@ class CameraService {
                 desiredExposureTime = CMTimeMake(value: 1, timescale: 8000)
             }
 
+            // Replace original block with clamping ISO logic
             if cameraDevice.isExposureModeSupported(.custom) {
+                let minISO = cameraDevice.activeFormat.minISO
+                let maxISO = cameraDevice.activeFormat.maxISO
+                let requestedISO = prefs.float(forKey: "ISO")
+                let clampedISO = max(minISO, min(requestedISO, maxISO))
+                if requestedISO != clampedISO {
+                    print("Requested ISO \(requestedISO) is not supported. Clamped to \(clampedISO) (range: \(minISO)-\(maxISO))")
+                }
                 cameraDevice.setExposureModeCustom(
                     duration: desiredExposureTime,
-                    iso: prefs.float(forKey: "ISO"),
+                    iso: clampedISO,
                     completionHandler: nil
                 )
 
